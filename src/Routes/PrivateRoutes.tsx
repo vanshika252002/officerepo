@@ -12,12 +12,7 @@ export const PRIVATE_ROUTES: Array<CustomRouter> = [
     path: ROUTES_CONFIG.HOMEPAGE.path,
     element: <Dashboard />,
     title: ROUTES_CONFIG.HOMEPAGE.title,
-    children: [
-      {
-        path: ROUTES_CONFIG.WEATHER.path,
-        element: <Weather />,
-      },
-    ],
+  
   },
   {
     path: ROUTES_CONFIG.ABOUT.path,
@@ -29,7 +24,12 @@ export const PRIVATE_ROUTES: Array<CustomRouter> = [
     element: <Logout />,
     title: ROUTES_CONFIG.LOGOUT.title,
   },
-
+  {
+    path: ROUTES_CONFIG.WEATHER.path,
+    element: <Weather />,
+    title: ROUTES_CONFIG.WEATHER.title,
+  }
+,
   {
     path: '*',
     element: <Navigate to={WILDCARD_ROUTES.PRIVATE} />,

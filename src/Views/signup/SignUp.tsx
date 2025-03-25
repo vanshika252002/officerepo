@@ -19,7 +19,8 @@ const SignUp: React.FC = () => {
   const { handleGoogleSignIn } = useSignUp();
   const navigate = useNavigate();
   return (
-    <div className={DATA.FormContainer}>
+   <div className='signup-wrapper-component'>
+     <div className={DATA.FormContainer}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -63,6 +64,8 @@ const SignUp: React.FC = () => {
         </Form>
       </Formik>
     </div>
+
+   </div>
   );
 };
 export default SignUp;

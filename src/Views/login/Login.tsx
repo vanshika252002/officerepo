@@ -18,7 +18,8 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={DATA.FormContainer}>
+    <div className='login-wrapper-component'>
+      <div className={DATA.FormContainer}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -67,6 +68,8 @@ const Login: React.FC = () => {
           </p>
         </Form>
       </Formik>
+    </div>
+
     </div>
   );
 };

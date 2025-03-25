@@ -8,6 +8,7 @@ import {
 } from 'react-leaflet';
 import { useGetWeatherByCoordsQuery } from '../../Services/Api/weather/index';
 
+
 import 'leaflet/dist/leaflet.css';
 import './body.css';
 
@@ -22,6 +23,8 @@ function Body() {
     { lat, lon },
     { skip: !lat || !lon }
   );
+  
+  
   function MapClickHandler() {
     useMapEvents({
       click(e) {

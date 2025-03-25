@@ -7,7 +7,8 @@ function Forgot() {
   // console.log("forgot password");
   const [email, setEmail] = useState<string>('');
   return (
-    <div className="forgot-container">
+    <div className='forgot-page-wrapper'>
+       <div className="forgot-container">
       <div className="forgot-form">
         <h2>Reset your Password</h2>
       </div>
@@ -28,6 +29,8 @@ function Forgot() {
         />
       </div>
     </div>
+    </div>
+   
   );
 }
 export default Forgot;

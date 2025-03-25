@@ -1,15 +1,12 @@
 /* Full page styles */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: url("your-background-image.jpg") no-repeat center center/cover;
+.forgot-page-wrapper {
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    background: url("your-background-image.jpg") no-repeat center center/cover;
 }
-
 /* Centered Forgot Password Container */
 .forgot-container {
     width: 320px;

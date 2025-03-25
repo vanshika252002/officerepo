@@ -22,7 +22,7 @@ const router = createBrowserRouter(
 function App() {
   // const [count, setCount] = useState<number>(0);
   return (
-    <div>
+    <div className='app.tsx'>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <HelmetProvider>
