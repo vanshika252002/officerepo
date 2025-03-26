@@ -5,10 +5,13 @@ import {
   TileLayer,
   ZoomControl,
   Popup,
+  Marker,
 } from 'react-leaflet';
+import { Icon } from 'leaflet';
 import { useGetWeatherByCoordsQuery } from '../../Services/Api/weather/index';
+import { useGetGeolocationByCoordsQuery } from '../../Services/Api/geolocation';
 
-
+import {ICONS} from '../../assets/index';
 import 'leaflet/dist/leaflet.css';
 import './body.css';
 
@@ -23,6 +26,13 @@ function Body() {
     { lat, lon },
     { skip: !lat || !lon }
   );
+  const {data:geolocationData} =useGetGeolocationByCoordsQuery("airport");
+  console.log("geolocation data is",geolocationData);
+
+  const airportIcon=new Icon({
+    iconUrl:ICONS.symbolforairport,
+    iconSize:[30,30]
+  })
   
   
   function MapClickHandler() {
@@ -33,6 +43,8 @@ function Body() {
     });
     return null;
   }
+  
+
 
   return (
     <MapContainer
@@ -41,10 +53,25 @@ function Body() {
       style={{ height: '100%', width: '100%' }}
       zoomControl={false}
     >
+      
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy;<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
+
+{geolocationData?.results?.map((airport: any, index: number) => (
+        <Marker key={index} position={[airport.geometry.lat, airport.geometry.lng]} icon={airportIcon}>
+          <Popup>
+            <div>
+              <h2>{airport.components._category === "airport" ? "Airport" : "Transport"}</h2>
+              <p>{airport.components.flag}</p>
+              <p><strong>Country:</strong> {airport.components.country}</p>
+              <p><strong>Latitude:</strong> {airport.geometry.lat}</p>
+              <p><strong>Longitude:</strong> {airport.geometry.lng}</p>
+            </div>
+          </Popup>
+        </Marker>
+      ))}
       <ZoomControl position="bottomleft" />
       <MapClickHandler />
       {clickedLocation !== null && (

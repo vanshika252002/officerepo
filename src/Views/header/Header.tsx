@@ -48,8 +48,7 @@ const Header: React.FC<HeaderProps> = () => {
         >
           <img src={ICONS.searchLogo} alt={DATA.Logo} />
           <Input type={DATA.TypeText as any} />
-
-          {searchBar && <SearchOptions />}
+          {searchBar && <SearchOptions setSearchBar={setSearchBar}/>}
         </div>
       </div>
       <div className="user-profile">

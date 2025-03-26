@@ -5,7 +5,7 @@ import { CustomRouter } from './RootRoutes';
 // import SignUp from '../Views/signup/SignUp';
 import Dashboard from '../Views/Dashboard';
 import Logout from '../Views/logout/Logout';
-import Weather from '../Views/weatger/Weather';
+import Weather from '../Views/weather/Weather';
 // eslint-disable-next-line import/prefer-default-export
 export const PRIVATE_ROUTES: Array<CustomRouter> = [
   {

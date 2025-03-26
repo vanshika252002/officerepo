@@ -1,10 +1,16 @@
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 // import { Button } from "../../Components/Common";
+import Weather from '../weather/Weather';
 import './searchoptions.css';
 import { ICONS } from '../../assets';
-
-function SearchBar() {
+type SearchbarProps={
+  setSearchBar:(value:boolean)=>void;
+}
+function SearchBar({setSearchBar}:SearchbarProps) {
   const navigate = useNavigate();
+  const [weather,setWeather]=useState(false);
+
   return (
     <div className="searchbar-wrapper">
       <div className="search_shortcuts">
@@ -12,7 +18,7 @@ function SearchBar() {
       </div>
       <div className="searchbar-options">
         <ul>
-          <li onClick={() => navigate('/weather')}>
+          <li onClick={() =>{setWeather(true);setSearchBar(false)}}>
             <img src={ICONS.weather} />
             Weather
           </li>
@@ -35,7 +41,14 @@ function SearchBar() {
           </li>
         </ul>
       </div>
+      {weather && (
+  <div className="weather-overlay">
+    <button className="close-btn" onClick={() =>{ setWeather(false);setSearchBar(true)}}>✖</button>
+    <Weather />
+  </div>
+)}
     </div>
+    
   );
 }
 export default SearchBar;
