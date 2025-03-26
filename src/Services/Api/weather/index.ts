@@ -1,16 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { API_BASE_URLS, API_KEYS } from '../constantvalue';
+const BASE_URL = import.meta.env.VITE_WEATHER_URL;
+const API_KEY=import.meta.env.VITE_WEATHER_API_KEY;
 
 export const weatherApi = createApi({
   reducerPath: 'weatherApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: API_BASE_URLS.WEATHER_API_URL,
+    baseUrl: BASE_URL,
   }),
   endpoints: (builder) => ({
     getWeatherByCoords: builder.query({
       query: ({ lat, lon }) =>
-        `weather?lat=${lat}&lon=${lon}&appid=${API_KEYS.WEATHER_API_KEY}&units=metric`,
+        `weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`,
     }),
   }),
 });

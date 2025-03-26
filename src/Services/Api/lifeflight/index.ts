@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const API_KEY = '1a29a46de4fbe4eb606e317064608b4a';  // Replace this with your new API key
+const API_KEY = ''
 const BASE_URL = 'https://api.aviationstack.com/v1';
 
 export const liveflightApi = createApi({

@@ -1,22 +1,21 @@
 import { useEffect, useState } from 'react';
-import { Input } from '../../Components/Common';
+import { Input ,Button} from '../../Components/Common';
 import { useGetGeolocationByCoordsQuery } from "../../Services/Api/geolocation";
 import { useGetWeatherByCoordsQuery } from "../../Services/Api/weather";
 import './weather.css'
-function Weather() {
+type weatherprops={
+  setSearchBar:(value:boolean)=>void;
+  setWeatherVisible:(value:boolean)=>void;
+}
+function Weather({setWeatherVisible,setSearchBar}:weatherprops) {
   const [place, setPlace] = useState(""); 
   const [locations, setLocations] = useState([]); 
   const [selectedLocation, setSelectedLocation] = useState<{ lat: number; lon: number } | null>(null);
-
-
   const { data } = useGetGeolocationByCoordsQuery(place, { skip: !place || place.length < 3 });
-
   const { data: weatherData, isLoading } = useGetWeatherByCoordsQuery(
     { lat: selectedLocation?.lat, lon: selectedLocation?.lon },
     { skip: !selectedLocation }
   );
-
- 
   useEffect(() => {
     if (data?.results) {
       setLocations(data.results);
@@ -27,10 +26,10 @@ function Weather() {
   console.log("Weather Data: ", weatherData);
 
   return (
-    <div className="weather-container-wrapper">
-
+    <div className="weather-container-wrapper" onClick={(e)=>e.stopPropagation()}>
+      <div><Button onClick={()=>{setWeatherVisible(false);setSearchBar(true)}} label="x"/></div>
       <div>
-        <Input placeholder="Enter a place" onChange={(e) => setPlace(e.target.value)} />
+        <Input placeholder="Enter a place" onChange={(e) => {setPlace(e.target.value)}} />
       </div>
 
 
@@ -38,6 +37,7 @@ function Weather() {
         {locations.length > 0 && (
           <div><h3>Select a Location:</h3> </div>
         )}
+        <div className='scroll-weather'>
         {locations.map((location: any, index: number) => (
           <div 
             key={index} 
@@ -47,6 +47,8 @@ function Weather() {
             <strong>{location.formatted}</strong> - ({location.geometry.lat}, {location.geometry.lng})
           </div>
         ))}
+        </div>
+        
       </div>
       <div className="weather-details">
         {isLoading && <p>Loading weather data...</p>}

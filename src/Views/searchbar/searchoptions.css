@@ -86,7 +86,7 @@
 
 
 /* Close Button */
-.weather-overlay .close-btn {
+/* .weather-overlay .close-btn {
   position: absolute;
   top: 8px;
   right: 10px;
@@ -103,6 +103,7 @@
 }
 
 /* Fade-in Animation */
+/*
 @keyframes fadeIn {
   from {
       opacity: 0;
@@ -116,4 +117,4 @@
 
 .weather-overlay {
   animation: fadeIn 0.3s ease-in-out;
-}
+} */
