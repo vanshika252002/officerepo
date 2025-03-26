@@ -9,7 +9,7 @@ export const geoLocationApi = createApi({
   }),
   endpoints: (builder) => ({
     getGeolocationByCoords: builder.query({
-      query: (query) => `?q=${query}&limit=200&page=10&key=ba72c616258849d18b2bea955a2b32a3`,
+      query: (query) => `?q=${query}&limit=50&key=${API_KEYS.GEOLOCATION_API_KEY}`,
     }),
   }),
 });

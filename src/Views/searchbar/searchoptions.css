@@ -64,22 +64,26 @@
 
 /* Weather Component - Modal Style */
 .weather-overlay {
-  position: absolute;
-  top: 0; /* Same as searchbar-wrapper */
-  right: 0; /* Same as searchbar-wrapper */
-  width: 260px; /* Same as searchbar-wrapper */
-  height: 324px; /* Same as searchbar-wrapper */
-  background-color: rgb(209, 208, 208);
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-  padding: 10px;
-  font-family: Arial, sans-serif;
-  z-index: 2000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 260px;
+    min-height: 100px;  /* Minimum height to prevent collapsing */
+    max-height: 90vh;  /* Prevent it from growing too large */
+    background-color: rgb(209, 208, 208);
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    padding: 10px;
+    padding-top:55px;
+    font-family: Arial, sans-serif;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;  /* Enables scrolling if content overflows */
 }
+
 
 /* Close Button */
 .weather-overlay .close-btn {

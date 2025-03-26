@@ -43,7 +43,7 @@ function SearchBar({setSearchBar}:SearchbarProps) {
       </div>
       {weather && (
   <div className="weather-overlay">
-    <button className="close-btn" onClick={() =>{ setWeather(false);setSearchBar(true)}}>✖</button>
+    <div><button className="close-btn" onClick={() =>{ setWeather(false);setSearchBar(true)}}>✖</button></div>
     <Weather />
   </div>
 )}
