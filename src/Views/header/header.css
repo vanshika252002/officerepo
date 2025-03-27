@@ -10,7 +10,7 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  
+
 }
 
 .header-container img {
@@ -72,3 +72,15 @@
 }
 
 /* Show search options when input is focused */
+.weather-details{
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 280px;
+  background-color: rgb(209, 208, 208);
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  padding: 12px;
+  font-family: Arial, sans-serif;
+  z-index: 1000;
+}

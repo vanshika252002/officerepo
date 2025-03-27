@@ -16,7 +16,7 @@ import api from '../Services/Api/api';
 import common from './Common';
 import loader from './Loader';
 import { weatherApi } from '../Services/Api/weather/index';
-import { liveflightApi } from '../Services/Api/lifeflight';
+import {openSkyApi } from '../Services/Api/liveflight';
 import { geoLocationApi } from '../Services/Api/geolocation/index';
 
 const rootPersistConfig = {
@@ -28,9 +28,10 @@ const reducers = combineReducers({
   common,
   loader,
   [weatherApi.reducerPath]: weatherApi.reducer,
-  [liveflightApi.reducerPath]:liveflightApi.reducer,
+  [openSkyApi.reducerPath]:openSkyApi.reducer,
   [geoLocationApi.reducerPath]:geoLocationApi.reducer,
   [api.reducerPath]: api.reducer,
+
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, reducers);
@@ -42,7 +43,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(api.middleware, weatherApi.middleware,liveflightApi.middleware,geoLocationApi.middleware);
+    }).concat(api.middleware, weatherApi.middleware,openSkyApi.middleware,geoLocationApi.middleware);
     return middlewares;
   },
 });

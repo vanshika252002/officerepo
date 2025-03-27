@@ -5,12 +5,24 @@ import {
   TileLayer,
   ZoomControl,
   Popup,
+  Marker,
 } from 'react-leaflet';
+import "leaflet-rotatedmarker";
+import MarkerClusterGroup from 'react-leaflet-cluster';
 import { useGetWeatherByCoordsQuery } from '../../Services/Api/weather/index';
-import { useGetGeolocationByCoordsQuery } from '../../Services/Api/geolocation';
-
+//import { useGetGeolocationByCoordsQuery } from '../../Services/Api/geolocation';
+import {useGetAllFlightsQuery} from '../../Services/Api/liveflight';
+import { ICONS } from '../../assets';
+import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './body.css';
+import L from 'leaflet';
+
+
+const FlightIcon=new Icon({
+  iconUrl:ICONS.flightLogo,
+  iconSize:[38,38],
+})
 
 function Body() {
   const [clickedLocation, setClickedLocation] = useState<
@@ -23,8 +35,12 @@ function Body() {
     { lat, lon },
     { skip: !lat || !lon }
   );
-  const {data:geolocationData} =useGetGeolocationByCoordsQuery({query:"airports"});
-  console.log("geolocation data is",geolocationData);
+  //const {data:geolocationData} =useGetGeolocationByCoordsQuery({query:"airports"});
+  const {data:liveflight}=useGetAllFlightsQuery(null); 
+  const FlightDetails=liveflight?.states||null;
+  //console.log("data of live flight ",liveflight?.states)
+ // FlightDetails?.map((data)=>console.log("facing" , data[10]));
+//console.log("excess data",FlightDetails , FlightDetails.length)
   function MapClickHandler() {
     useMapEvents({
       click(e) {
@@ -40,6 +56,9 @@ function Body() {
       zoom={5}
       style={{ height: '100%', width: '100%' }}
       zoomControl={false}
+      minZoom={3} 
+  maxBounds={[[85, -180], [-85, 180]]}
+  maxBoundsViscosity={1.0} 
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -47,6 +66,34 @@ function Body() {
       />
       <ZoomControl position="bottomleft" />
       <MapClickHandler />
+     <MarkerClusterGroup chukedLoading
+     >
+     {FlightDetails?.map((details) =>
+        details[5] !== null && details[6]!== null && (
+          <Marker
+            key={details[0]}
+            position={[details[5],details[6]]}
+            icon={FlightIcon}
+            rotationAngle={details[10]}
+            rotationOrigin="center center"
+          
+          >
+            <Popup>
+              <h2><strong>Origin : {details[2]}</strong></h2>
+              <strong>Flight ID:</strong> {details[0]} <br />
+              <strong>Latitude:</strong> {details[5]} <br />
+              <strong>Longitude:</strong> {details[6]}
+            </Popup>
+          </Marker>
+        )
+      )
+}
+     </MarkerClusterGroup>
+     
+
+     
+
+
       {clickedLocation !== null && (
         <Popup position={clickedLocation}>
           <div>
