@@ -10,7 +10,8 @@ import flighthistory from './icons/flighthistory.svg';
 import nearby from './icons/nearby.svg';
 import weather from './icons/weather.svg';
 import symbolforairport from './icons/symbolforairport.png';
-
+import crossSymbol from './icons/crossSymbol.svg';
+import map from './icons/map.png';
 export const ICONS = {
   headerLogo,
   searchLogo,
@@ -23,5 +24,8 @@ export const ICONS = {
   nearby,
   flighthistory,
   weather,
-  symbolforairport
+  symbolforairport,
+  crossSymbol,
+  map
+
 };

@@ -1,0 +1,37 @@
+.footer{
+  width:8vw;
+position:fixed;
+bottom:0;
+background-color:  rgb(57 57 57);
+display: flex;
+justify-content: center;
+align-items: center;
+box-sizing: border-box;
+
+padding:9px 20px 9px 20px;
+left: 50%;
+border-radius:33px;
+z-index: 5000;
+
+}
+.mini-map-option{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  padding:5px;
+}
+.mini-map-option button{
+  background-color:  rgb(57 57 57);
+  border:none;
+  display: flex;
+  flex-direction: column;
+}
+.mini-map-option img{
+  width:2vw;
+  height:4vh;
+}
+.mini-map-option span{
+  color:white;
+  align-self: center;
+}

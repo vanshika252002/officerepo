@@ -6,7 +6,14 @@
 } */
 
 /* Make the MapContainer fill the screen */
-.leaflet-container {
+.map-view{
+    height:calc(100%-5vh);
+    bottom:0;
+    
+}
+.leaf1 {
     height: 100vh !important;
     width: 100vw !important;
+    position:relative;
+    z-index:1;
 }
