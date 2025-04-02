@@ -9,7 +9,7 @@ const MiniMapView=({setFooterVisible,setMiniMapVisible,lat,lon})=>{
     const map=useMap();
     useEffect(()=>{
       if(lat && lon){
-        map.flyTo([lat,lon],12);
+        map.flyTo([lat,lon],12,{duration:0.7});
       }
     },[lat,lon])
     return null;
@@ -25,7 +25,6 @@ const MiniMapView=({setFooterVisible,setMiniMapVisible,lat,lon})=>{
             {lat && lon && <MapContainer 
                     center={[lat,lon] as [number, number]}
                     zoom={5} 
-                    scrollWheelZoom={false}
                     className="leaf2"
                 >
                     <TileLayer

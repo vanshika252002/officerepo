@@ -12,6 +12,7 @@ import weather from './icons/weather.svg';
 import symbolforairport from './icons/symbolforairport.png';
 import crossSymbol from './icons/crossSymbol.svg';
 import map from './icons/map.png';
+import earthquakealert from './icons/earthquakealert.png';
 export const ICONS = {
   headerLogo,
   searchLogo,
@@ -26,6 +27,7 @@ export const ICONS = {
   weather,
   symbolforairport,
   crossSymbol,
-  map
+  map,
+  earthquakealert
 
 };

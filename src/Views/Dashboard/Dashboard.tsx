@@ -1,15 +1,16 @@
 import Header from "../header/Header";
 import Body from "../body/Body";
-import MiniMapView from "../minimapview/MiniMapView";
+//import Earthquake from "../earthquake/Earthquake";
 export default function Dashboard() {
  
   return (
     <div>
      
-      Dashboard
+     Dashboard
       <Header />
       <Body /> 
-     
+      
+      
     
     </div>
   );

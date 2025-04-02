@@ -18,7 +18,7 @@ import loader from './Loader';
 import { weatherApi } from '../Services/Api/weather/index';
 import {openSkyApi } from '../Services/Api/liveflight';
 import { geoLocationApi } from '../Services/Api/geolocation/index';
-
+import { earthquakeApi } from '../Services/Api/earthquake';
 const rootPersistConfig = {
   key: 'root',
   storage,
@@ -30,6 +30,7 @@ const reducers = combineReducers({
   [weatherApi.reducerPath]: weatherApi.reducer,
   [openSkyApi.reducerPath]:openSkyApi.reducer,
   [geoLocationApi.reducerPath]:geoLocationApi.reducer,
+  [earthquakeApi.reducerPath]:earthquakeApi.reducer,
   [api.reducerPath]: api.reducer,
 
 });
@@ -43,7 +44,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(api.middleware, weatherApi.middleware,openSkyApi.middleware,geoLocationApi.middleware);
+    }).concat(api.middleware, weatherApi.middleware,openSkyApi.middleware,geoLocationApi.middleware,earthquakeApi.middleware);
     return middlewares;
   },
 });

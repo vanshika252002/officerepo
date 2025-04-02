@@ -1,0 +1,112 @@
+.earthquake-wrapper{
+    width:18vw;
+    height: auto;
+    background-color:#444;
+    display:flex;
+    flex-direction:column;
+    box-sizing:border-box;
+    z-index:999;
+    margin-top:107px;
+    box-shadow: 5px 5px 10px black; 
+    position:absolute;
+
+}
+.earthquake-header{
+    width:100%;
+    height:4vh;
+    display :flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position:relative;
+    overflow:hidden;
+    color: white;
+    margin-top:9px;
+    
+   
+}
+.earthquake-timer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing:border-box;
+    color:white
+
+}
+.start{
+    box-sizing: border-box;
+     display:flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+}
+.start input{
+    width:70%;
+    margin-bottom:14px ;
+    
+}
+.start h3{
+    margin:2px 0px 2px 0px ;
+}
+.end{
+    box-sizing: border-box;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.end input{
+    width:70%;
+    margin-bottom:14px ;
+}
+.end h3{
+    margin:2px 0px 2px 0px ;;
+}
+
+.earthquake-list{
+    height:75vh;
+    width:100%;
+    background-color:rgb(209, 208, 208);
+    display: flex;
+    flex-direction: column;
+    flex-shrink:2;
+    overflow:scroll;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+}
+.items{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom:2px solid black;
+}
+
+.earthquake-magnitude{
+display: flex;
+justify-content: center;
+align-items:center;
+width:33px;
+
+}
+.earthquake-properties{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:start;
+    box-sizing: border-box;
+    width:120px;
+ 
+
+}
+.place h4{
+    margin-bottom: 0;
+}
+.time{
+    display: flex;
+    justify-content:start;
+    margin-left:0%;
+}
+.time h5{
+    margin-top: 0;
+}
+.items:hover{
+    background-color:aqua;
+}

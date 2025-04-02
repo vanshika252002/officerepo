@@ -9,6 +9,7 @@
   padding: 12px;
   font-family: Arial, sans-serif;
   z-index: 1000;
+  box-shadow: 5px 5px 10px black;
 }
 
 
@@ -53,7 +54,7 @@
 
 
 .custom-item:hover {
-  background-color: rgb(248, 192, 35);
+  background-color:aqua;
 }
 
 .weather-details {

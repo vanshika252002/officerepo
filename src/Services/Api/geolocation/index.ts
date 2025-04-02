@@ -14,3 +14,4 @@ export const geoLocationApi = createApi({
   }),
 });
 export const { useGetGeolocationByCoordsQuery } = geoLocationApi;
+ 
