@@ -1,0 +1,114 @@
+.earthquake-details-wrapper{
+    width:18vw;
+    right:0;
+    height: auto;
+    background-color:#fff;
+    display:flex;
+    flex-direction:column;
+    box-sizing:border-box;
+    z-index:999;
+    margin-top:107px;
+    position:absolute;
+    background-color:blue;
+    overflow: hidden;
+    z-index:2000;
+
+}
+.earthquake-content-header{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: pink;
+    height:auto;
+    width:100%;
+    padding:6px;
+}
+.details-in-body{
+ display:flex;
+ flex-direction: column;
+ background-color: beige;
+
+}
+.time-detail{
+    margin-top:7%;
+    display: flex;
+    align-items: center;
+    justify-content:left;
+    background-color: pink;
+    
+}
+.time{
+    height:auto;
+    width:40%;
+    background-color: azure;
+    display:flex;
+    justify-content: center;
+   
+}
+.time h5{
+    margin:0;
+    
+    
+}
+.time-content{
+    width:60%;
+    height:auto;
+    display:flex;
+    
+    background-color:grey;
+}
+.time-content h5{
+    margin:0;
+}
+.location-detail{
+    margin-top:4%;
+    background-color: pink;
+    justify-content:left;
+    display: flex;
+     
+}
+.location{
+    height:auto;
+    width:40%;
+    display:flex;
+    justify-content: center;
+}
+.location-content h5{
+    margin:0;  
+}
+.location h5{
+    margin:0;
+}
+.location-content{
+    width:60%;
+}
+
+
+.depth-detail{
+    margin-top:4%;
+    background-color: pink;
+    justify-content:left;
+    display: flex;
+    
+}
+.depth{
+    height:auto;
+    width:40%;
+    background-color: azure;
+    display:flex;
+    justify-content: center;
+ 
+}
+.depth-content h5{
+    margin:0;
+    width:60%
+    
+}
+.depth h5{
+    margin:0;
+}
+.close{
+    margin-top:10px;
+    display:flex;
+    justify-content: end;
+}

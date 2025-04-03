@@ -3,9 +3,19 @@ import { MapContainer, TileLayer,Marker, useMap } from "react-leaflet";
 import { ICONS } from "../../assets";
 import './minimapview.css';
 import 'leaflet/dist/leaflet.css';
-const MiniMapView=({setFooterVisible,setMiniMapVisible,lat,lon})=>{
+interface MinimapViewProps {
+  lat:number;
+  lon:number;
+  setFooterVisible:(value:boolean)=>void;
+  setMiniMapVisible:(value:boolean)=>void;
+}
+type Mapupdater={
+  lat:number;
+  lon:number;
+}
+const MiniMapView=({setFooterVisible,setMiniMapVisible,lat,lon}:MinimapViewProps)=>{
   console.log("clciked location",lat,lon);
-  const MapUpdater=({lat,lon})=>{
+  const MapUpdater=({lat,lon}:Mapupdater)=>{
     const map=useMap();
     useEffect(()=>{
       if(lat && lon){

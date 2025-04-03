@@ -22,7 +22,10 @@ import Footer from '../footer/Footer';
 import Earthquake from '../earthquake/Earthquake';
 import { useGetEarthquakesQuery } from '../../Services/Api/earthquake';
 
-
+// interface RotatedMarkerProps extends MarkerProps {
+//   rotationAngle?: number;
+//   rotationOrigin?: string;
+// }
 
 const FlightIcon=new Icon({
   iconUrl:ICONS.flightLogo,
@@ -50,10 +53,10 @@ function Body() {
   
   const {data:liveflight}=useGetAllFlightsQuery(null); 
   const FlightDetails=liveflight?.states||null;
- 
-   const [startTime,setStartTime]=useState<string|null>("2024-03-01");
-   const [endTime,setEndTime]=useState<string|null>("2024-04-01")
-    const {data:earthquakeData} = useGetEarthquakesQuery(startTime && endTime ?{startTime :startTime,endTime:endTime}:skipToken);
+ console.log("flight dtaild param",FlightDetails);
+   const [startTime,setStartTime]=useState<string>("2024-03-01");
+   const [endTime,setEndTime]=useState<string>("2024-04-01")
+    const {data:earthquakeData} = useGetEarthquakesQuery({startTime :startTime,endTime:endTime});
  //earthquakeData?.features?.map((item)=>{console.log("lat and lon ",item.geometry.coordinates[0],item.geometry.coordinates[1])})
 
 
@@ -71,7 +74,7 @@ function Body() {
 
   return (
     <div>
-       <Earthquake/>
+       <Earthquake startTime={startTime} endTime={endTime} setStartTime={setStartTime} setEndTime={setEndTime} />
       <MapContainer className='leaf1'
     center={[20.5937, 78.9629] as [number, number]}
     zoom={5}
@@ -91,7 +94,7 @@ maxBoundsViscosity={1.0}
    <MarkerClusterGroup chukedLoading
    showCoverageOnHover={false}
    >
-   {FlightDetails?.map((details) =>
+   {FlightDetails?.map((details:[string,string,string,number,number,number,number,number,boolean,number,number,number,number[],number,string,boolean,number,number]) =>
       details[5] !== null && details[6]!== null && (
         <Marker
           key={details[0]}
@@ -114,7 +117,8 @@ maxBoundsViscosity={1.0}
 </MarkerClusterGroup>
 
 
- { earthquakeData && earthquakeData.features?.map((item)=>(
+ { earthquakeData && earthquakeData.features?.map((item:{geometry:{coordinates:[number,number]},properties:{place:string,alert:string}})=>(
+  item.properties.alert &&
   <Marker position={[item.geometry.coordinates[0],item.geometry.coordinates[1]]} icon={EarthquakeAlert}>
     <Popup>
        <h2><strong>{item.properties.place}</strong></h2>
@@ -149,7 +153,7 @@ maxBoundsViscosity={1.0}
   </MapContainer>
  
   {footerVisible && <Footer   setFooterVisible={setFooterVisible} setMiniMapVisible={setMiniMapVisible}/>}
-    {miniMapVisible && <MiniMapView setFooterVisible={setFooterVisible} setMiniMapVisible={setMiniMapVisible} lat={lat} lon={lon}/>}
+    {miniMapVisible && <MiniMapView setFooterVisible={setFooterVisible} setMiniMapVisible={setMiniMapVisible} lat={lat??0} lon={lon??0}/>}
   
   
   </div>

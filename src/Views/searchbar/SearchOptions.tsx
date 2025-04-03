@@ -32,9 +32,6 @@ console.log("weather visible",weatherVisible)
             LIVE flight by airplane
           </li>
           <li>
-            <img src={ICONS.flighthistory} /> Flight history
-          </li>
-          <li>
             <img src={ICONS.airports} /> Airports
           </li>
           <li>

@@ -96,17 +96,30 @@ width:33px;
  
 
 }
-.place h4{
-    margin-bottom: 0;
+.place-earthquake{
+    display:flex;
+    justify-content:start;
 }
-.time{
+.place-earthquake h4{
+    margin-bottom: 0;
+    margin-left:0;
+    align-self: start;
+}
+.time-earthquake{
     display: flex;
     justify-content:start;
     margin-left:0%;
 }
-.time h5{
+.time-earthquake h5{
     margin-top: 0;
 }
-.items:hover{
+.earthquake-click-option:hover{
     background-color:aqua;
+}
+.earthquake-click-option{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: space-evenly;
+   align-items: center;
 }

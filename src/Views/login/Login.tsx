@@ -19,6 +19,7 @@ const Login: React.FC = () => {
 
   return (
     <div className='login-wrapper-component'>
+      
       <div className={DATA.FormContainer}>
       <Formik
         initialValues={initialValues}
@@ -29,11 +30,11 @@ const Login: React.FC = () => {
       >
         <Form className={DATA.Form}>
           <h1>Login</h1>
-          <FormInput type={DATA.Email} name={DATA.Email} label={DATA.Email} />
+          <FormInput type={DATA.Email} name={DATA.Email} label="Email" />
           <FormInput
             type={DATA.Password}
             name={DATA.Password}
-            label={DATA.Password}
+            label="Password"
           />
           <Button
             label={DATA.Login}
@@ -58,19 +59,19 @@ const Login: React.FC = () => {
             </span>
           </p>
           <p>
-            FORGOT PASSWORD
+            
             <span
               onClick={() => navigate(ROUTES.FORGOT)}
               style={{ color: '#007bff' }}
             >
-              CLICK
+              Forgot Password?
             </span>
           </p>
         </Form>
       </Formik>
     </div>
 
-    </div>
+</div>
   );
 };
 export default Login;
