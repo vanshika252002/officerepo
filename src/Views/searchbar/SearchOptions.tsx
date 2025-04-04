@@ -7,8 +7,9 @@ type SearchbarProps={
   setSearchBar:(value:boolean)=>void;
   setWeatherVisible:(value:boolean)=>void;
   weatherVisible:boolean;
+  chooseOption:any
 }
-function SearchBar({setSearchBar,setWeatherVisible,weatherVisible}:SearchbarProps) {
+function SearchBar({setSearchBar,setWeatherVisible,weatherVisible,chooseOption}:SearchbarProps) {
   const navigate = useNavigate();
   
 console.log("weather visible",weatherVisible)
@@ -23,7 +24,7 @@ console.log("weather visible",weatherVisible)
             <img src={ICONS.weather} />
             Weather
           </li>
-          <li onClick={() => navigate('')}>
+          <li onClick={(e) =>{e.stopPropagation();setSearchBar(false);chooseOption.flight.setFlightByRouteVisible(true);}}>
             <img src={ICONS.flightroute} />
             Flight by route
           </li>

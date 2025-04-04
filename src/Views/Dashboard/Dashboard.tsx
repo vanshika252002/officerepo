@@ -1,14 +1,5 @@
- //import Header from "../header/Header";
-//import Body from "../body/Body";
-// import EarthquakeDetails from "../earthquakeDetails";
-//import Earthquake from "../earthquake/Earthquake";
-
-//import FlightByRoute from "../flightbyroute";
-import FlightInformation from "../flightInformation";
-
-//import FlightByRoute from "../flightbyroute";
-
-//import Earthquake from "../earthquake/Earthquake";
+import LiveFlight from "../liveflight";
+ import FlightByRoute from "../flightbyroute";
 export default function Dashboard() {
  
   return (
@@ -18,9 +9,9 @@ export default function Dashboard() {
       <Header />
       <Body /> 
         */}
-       {/* <FlightByRoute/> */}
-     <FlightInformation/>
-    
+        <FlightByRoute/>
+    {/* <ToCheck/> */}
+  <LiveFlight/>
     </div>
   );
 }

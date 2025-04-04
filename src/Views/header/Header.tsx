@@ -10,6 +10,8 @@ import { ICONS } from '../../assets';
 import { DATA } from '..';
 import './header.css';
 import SearchOptions from '../searchbar/SearchOptions';
+import FlightInformation from '../flightInformation';
+import FlightByRoute from '../flightbyroute';
 const API_KEY = import.meta.env.VITE_GEOLOCATION_API_KEY;
 type HeaderProps = {
   children?: ReactNode;
@@ -17,10 +19,19 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = () => {
   console.log("key",API_KEY);
   const dispatch = useDispatch();
-  const [weatherVisible,setWeatherVisible]=useState<boolean>(false);
+ 
   const inputRef = useRef<HTMLDivElement>(null);
   const [searchBar, setSearchBar] = useState<boolean>(false);
-  const [weatherDetails, setWeatherDetails] = useState<boolean>(false);
+  const [weatherDetails, setWeatherDetails] = useState<boolean>(false);  //weather 
+  const [weatherVisible,setWeatherVisible]=useState<boolean>(false);
+
+
+  const [flightInformation,setFlightInformation]=useState<boolean>(false);  //flight by route 
+const [flightByRouteVisible,setFlightByRouteVisible]=useState<boolean>(false);
+
+
+const chooseOption={flight:{flightByRouteVisible,setFlightByRouteVisible}};
+
   const [selectedLocation, setSelectedLocation] = useState<{ lat: number; lon: number } | null>(null);
   const { data: weatherData } = useGetWeatherByCoordsQuery(
       { lat: selectedLocation?.lat, lon: selectedLocation?.lon },
@@ -62,9 +73,9 @@ return ()=>{
         >
 <img src={ICONS.searchLogo} alt={DATA.Logo} />
           <Input type={DATA.TypeText as any}  />
-          {searchBar && <SearchOptions setSearchBar={setSearchBar} setWeatherVisible={setWeatherVisible} weatherVisible={weatherVisible}/>}
+          {searchBar && <SearchOptions setSearchBar={setSearchBar} setWeatherVisible={setWeatherVisible} weatherVisible={weatherVisible} chooseOption={chooseOption}/>}
           {weatherVisible && <Weather setSearchBar={setSearchBar} setWeatherVisible={setWeatherVisible} setSelectedLocation={setSelectedLocation} setWeatherDetails={setWeatherDetails}/>}
-
+          
 
         {selectedLocation && weatherData && weatherData.weather && weatherDetails && (
 
@@ -77,6 +88,8 @@ return ()=>{
   <p><strong>Wind Speed:</strong> {weatherData.wind.speed} m/s</p>
 </div>
 )}
+  
+  {flightInformation && <FlightInformation origin={origin}/>}
 
         </div>
       </div>

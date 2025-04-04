@@ -13,7 +13,8 @@ type Mapupdater={
   lat:number;
   lon:number;
 }
-const MiniMapView=({setFooterVisible,setMiniMapVisible,lat,lon}:MinimapViewProps)=>{
+const MiniMapView=({setFooterVisible,setMiniMapVisible,lat,lon
+}:MinimapViewProps)=>{
   console.log("clciked location",lat,lon);
   const MapUpdater=({lat,lon}:Mapupdater)=>{
     const map=useMap();

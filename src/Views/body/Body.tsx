@@ -153,7 +153,7 @@ maxBoundsViscosity={1.0}
   </MapContainer>
  
   {footerVisible && <Footer   setFooterVisible={setFooterVisible} setMiniMapVisible={setMiniMapVisible}/>}
-    {miniMapVisible && <MiniMapView setFooterVisible={setFooterVisible} setMiniMapVisible={setMiniMapVisible} lat={lat??0} lon={lon??0}/>}
+    {miniMapVisible && <MiniMapView setFooterVisible={setFooterVisible} setMiniMapVisible={setMiniMapVisible} lat={lat??28.644800} lon={lon??77.216721}/>}
   
   
   </div>

@@ -1,8 +1,8 @@
 /* Search Bar Wrapper */
 .searchbar-wrapper {
   position: absolute;
-  top: 50px; /* Adjust as needed */
-  right: 0;
+  top: 100px; /* Adjust as needed */
+  right:180px;
   width: 260px; /* Fixed width */
   height: auto; /* Fixed height */
   background-color: rgb(209, 208, 208);
