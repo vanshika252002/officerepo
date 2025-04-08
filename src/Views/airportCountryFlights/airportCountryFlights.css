@@ -1,0 +1,176 @@
+.country-flight-wrappper{
+    flex: 1 1 0%;
+    display:flex;
+    flex-direction: column;
+    top: 60px;
+  right:140px;
+    height:auto;
+    width:17vw;
+    border-radius:8px;
+   background-color: white;
+   position:absolute;
+   box-shadow: 5px 5px  10px  black;
+  
+}
+.country-flight-header{
+    
+  width:100% ;
+  height:3rem;
+    display: flex;
+    justify-content: start;
+    
+    background-color:#303030;
+   color:white;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius:8px;
+}
+.country-flight-f1{
+    background-color:red;
+    border-radius:8px;
+    width:9%;
+    height:100%;
+    display:flex;
+    justify-content: start;
+    
+}
+.country-flight-f1 button{
+    border-top-left-radius: 8px;
+    border:none;
+    width:100%;
+    height:100%;
+    background-color:#303030;
+    color:white;
+    border-top-left-radius: 7px;
+}
+.country-flight-f2{
+    background-color:#303030;
+
+    height:100%;
+    width:80%; 
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    border-top-right-radius:7px;
+   
+}
+.country-flight-f2 span{
+    font-size:20px;
+    font-family:'Open Sans';
+}
+
+.country-flight-search{
+    display:flex;
+    justify-content:center;
+}
+
+.country-flight-search input{
+    font-size: 1rem;
+    margin-bottom:6%;
+    width:100%;
+    margin-left:3%;
+    margin-right:3%;
+    margin-top:1%;
+    border-radius: .375rem;
+    background-color:white;
+    padding:3%;
+    color:black;
+    border:#D1D0D0 1px solid;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.country-flight-search input:focus {
+    border: 2px solid rgb(248, 192, 35);
+  
+    outline:none;
+    
+}
+.country-flight-search input:hover{
+    
+    border: 2px solid rgb(248, 192, 35);
+    outline:none;
+}
+
+.airport-list-wrapper{
+    background-color: #D1D0D0;
+    height:30vh;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    border-bottom-left-radius:8px;
+    border-bottom-right-radius:8px;
+}
+.airport-n1{
+    margin-left:10px;
+    margin-right:10px;
+margin-bottom: 3px;
+margin-top:5px;
+    height:3vh;
+    width:95%;
+    display: flex;
+    align-items: center;
+    
+    background-color: white;
+    border-radius: 8px;
+   border:none
+}
+.airport-n1:hover{
+    background-color: rgb(248, 192, 35);
+}
+
+.country-flight-list-wrapper{
+    background-color: #D1D0D0;
+    height:50vh;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    border-bottom-left-radius:8px;
+    border-bottom-right-radius:8px;
+}
+.airport-country-n1{
+    margin-left:10px;
+    margin-right:10px;
+margin-bottom: 3px;
+margin-top:20px;
+    height:7vh;
+    width:95%;
+    display: flex;
+    align-items: center;
+    
+    background-color: white;
+    border-radius: 8px;
+   border:none
+}
+.airport-country-n1:hover{
+    background-color: rgb(248, 192, 35);
+}
+.logo{
+    left:0;
+  
+    height:100%;
+    width:20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.logo img{
+   height:50%;
+   width:100%;
+
+}
+.formatted{
+   
+    height:auto;
+    width:60%;
+    display: flex;
+    justify-content:start;
+    align-items: center;
+
+}
+.formatted span{
+    padding-left: 0px;
+    font-size: .9375rem;
+  line-height: 1.25rem;
+    align-self: start;
+}

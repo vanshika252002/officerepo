@@ -1,8 +1,9 @@
 import { useGetGeolocationByCoordsQuery } from '../../Services/Api/geolocation';
+import Loading from '../loading/Loading';
 import './airports.css';
 const Airports=({chooseOption,setSearchBar})=>{
 
-    const {data:airports}= useGetGeolocationByCoordsQuery("airport");
+    const {data:airports,isLoading}= useGetGeolocationByCoordsQuery("airport");
    
     airports?.results?.map((item)=>{
         console.log(item.components.country)
@@ -10,6 +11,7 @@ const Airports=({chooseOption,setSearchBar})=>{
     })
      return (
    <div className='airport-wrappper'>
+    {isLoading && <Loading/>}
     <div className="airport-header">  
                 <div className='airport-f1'><button onClick={()=>{chooseOption.airport.setAirportByCountry(false),setSearchBar(true)}}>x</button></div>
                 <div className='airport-f2'><span>Airport By Country</span></div>

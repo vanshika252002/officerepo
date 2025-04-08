@@ -1,10 +1,11 @@
 
-
+import AirportCountryFlights from "../airportCountryFlights";
  import Body from "../body/Body";
 
-//import Airports from "../airports";
+import Airports from "../airports";
 
   import ToCheck from "../tocheck/ToCheck";
+
 
 export default function Dashboard() {
  
@@ -14,10 +15,10 @@ export default function Dashboard() {
 {/*   
    <Airports/> */}
      {/* <Nearby/> */}
-      
+      {/* <AirportCountryFlights/> */}
        
-        {/* <ToCheck/>
-        <Body />  */}
+        <ToCheck/>
+        <Body /> 
        {/* <FlightByRoute/> */}
      {/* <FlightInformation/> */}
      {/* <FlightByRoute/> */}
