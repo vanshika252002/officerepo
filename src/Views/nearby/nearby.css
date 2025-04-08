@@ -1,0 +1,137 @@
+.near-by-wrappper{
+    flex: 1 1 0%;
+    display:flex;
+    flex-direction: column;
+    top: 60px;
+  right:140px;
+    height:auto;
+    width:17vw;
+    border-radius:8px;
+   background-color: white;
+   position:absolute;
+   box-shadow: 5px 5px  10px  black;
+  
+}
+.near-by-header{
+    
+  width:100% ;
+  height:3rem;
+    display: flex;
+    justify-content: start;
+    
+    background-color:#303030;
+   color:white;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius:8px;
+}
+.near-by-f1{
+    background-color:red;
+    border-radius:8px;
+    width:9%;
+    height:100%;
+    display:flex;
+    justify-content: start;
+    
+}
+.near-by-f1 button{
+    border-top-left-radius: 8px;
+    border:none;
+    width:100%;
+    height:100%;
+    background-color:#303030;
+    color:white;
+    border-top-left-radius: 7px;
+}
+.near-by-f2{
+    background-color:#303030;
+
+    height:100%;
+    width:80%; 
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    border-top-right-radius:7px;
+   
+}
+.near-by-f2 span{
+    font-size:20px;
+    font-family:'Open Sans';
+}
+.near-by-loading{
+    background-color: rgb(245, 242, 243);
+    height:158px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
+  .near-by-data{
+    background-color: pink;
+    height:500px;
+    width:100%;
+    overflow: scroll;
+    
+  }
+  .near-by-list-wrapper{
+
+    background-color: #D1D0D0;
+    height:30vh;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    border-bottom-left-radius:8px;
+    border-bottom-right-radius:8px;
+  }
+  .nearby{
+    background-color:white;
+    margin:10px;
+    border-radius:8px;
+    display: flex;
+    flex-direction: column;
+    
+    
+}
+.n1{
+    
+    display: flex;
+    align-items: center;
+    margin-bottom:5px;;
+    background-color: white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.n2{
+    border-top-left-radius: 8px;
+    margin-top: 10px;
+    width:48%;
+    background-color:white;
+    display: flex;
+    justify-content:start;
+    align-items: center;
+}
+.n2 span{
+    margin-left:8px;
+    background-color:white;
+    width:100%;
+}
+.n3{
+    margin-top: 10px;
+    display: flex;
+    justify-content: start;
+}
+.n11{
+    margin:0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.n11 h2{
+    margin-bottom:0px;
+    align-self: center;
+}

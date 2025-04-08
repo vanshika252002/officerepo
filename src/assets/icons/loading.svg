@@ -1,0 +1,26 @@
+<svg viewBox="0 0 98 98" fill="none" xmlns="http://www.w3.org/2000/svg" class="radar-svg">
+  <!-- Transparent background: no <rect> element -->
+
+  <!-- Concentric radar circles (static) -->
+  <circle cx="49" cy="49" r="10" stroke="white" stroke-width="1" />
+  <circle cx="49" cy="49" r="20" stroke="white" stroke-width="1" />
+  <circle cx="49" cy="49" r="30" stroke="white" stroke-width="1" />
+  <circle cx="49" cy="49" r="40" stroke="white" stroke-width="1" />
+
+  <!-- Center dot -->
+  <circle cx="49" cy="49" r="2" fill="white" />
+
+  <!-- Rotating sweep path -->
+  <g class="sweep">
+    <path d="M38.6473 87.637C32.3793 85.9575 26.6141 82.7784 21.8489 78.3738C17.0837 73.9691 13.4617 68.4713 11.2952 62.3546L49 49L38.6473 87.637Z"
+      fill="url(#radar_linear_gradient_701333)" />
+  </g>
+
+  <!-- Gradient definition -->
+  <defs>
+    <linearGradient id="radar_linear_gradient_701333" x1="27" y1="56.5" x2="42.5" y2="67" gradientUnits="userSpaceOnUse">
+      <stop stop-color="white" />
+      <stop offset="1" stop-color="#C4C4C4" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,127 @@
+// import { useState, useEffect, useRef } from "react";
+// import {
+//   MapContainer,
+//   useMapEvents,
+//   TileLayer,
+//   ZoomControl,
+//   Popup,
+//   Marker,
+// } from "react-leaflet";
+// import { useGetWeatherByCoordsQuery } from "../../Services/Api/weather/index";
+// import { useGetAllFlightsQuery } from "../../Services/Api/liveflight";
+// import { ICONS } from "../../assets";
+// import { Icon } from "leaflet";
+// import "leaflet/dist/leaflet.css";
+// import "./body.css";
+
+// const FlightIcon = new Icon({
+//   iconUrl: ICONS.flightLogo,
+//   iconSize: [38, 38],
+// });
+
+// function Body() {
+//   const [clickedLocation, setClickedLocation] = useState<[number, number] | null>(null);
+//   const [flights, setFlights] = useState<Record<string, { lat: number; lon: number }>>({});
+//   const markersRef = useRef<Record<string, any>>({});
+
+//   const lat = clickedLocation ? clickedLocation[0] : null;
+//   const lon = clickedLocation ? clickedLocation[1] : null;
+
+//   const { data, isLoading } = useGetWeatherByCoordsQuery(
+//     { lat, lon },
+//     { skip: !lat || !lon }
+//   );
+
+//   const { data: liveflight } = useGetAllFlightsQuery(null);
+//   const FlightDetails = liveflight?.states || [];
+
+//   useEffect(() => {
+//     if (FlightDetails.length > 0) {
+//       setFlights((prevFlights) => {
+//         const updatedFlights = { ...prevFlights };
+
+//         FlightDetails.forEach((flight) => {
+//           const [icao24, , , , , lon, lat] = flight;
+
+//           if (lat !== null && lon !== null) {
+//             updatedFlights[icao24] = { lat, lon };
+//           }
+//         });
+
+//         return updatedFlights;
+//       });
+//     }
+//   }, [FlightDetails]);
+
+//   useEffect(() => {
+//     Object.entries(flights).forEach(([icao24, flight]) => {
+//       if (markersRef.current[icao24] && flight.lat !== null && flight.lon !== null) {
+//         markersRef.current[icao24].setLatLng([flight.lat, flight.lon]);
+//       }
+//     });
+//   }, [flights]);
+
+//   function MapClickHandler() {
+//     useMapEvents({
+//       click(e) {
+//         setClickedLocation([e.latlng.lat, e.latlng.lng]);
+//       },
+//     });
+//     return null;
+//   }
+
+//   return (
+//     <MapContainer
+//       center={[20.5937, 78.9629]}
+//       zoom={5}
+//       style={{ height: "100%", width: "100%" }}
+//       zoomControl={false}
+//     >
+//       <TileLayer
+//         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+//         attribution='&copy;<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+//       />
+//       <ZoomControl position="bottomleft" />
+//       <MapClickHandler />
+
+//       {Object.entries(flights).map(([icao24, flight]) =>
+//         flight.lat !== null && flight.lon !== null ? (
+//           <Marker
+//             key={icao24}
+//             position={[flight.lat, flight.lon]}
+//             icon={FlightIcon}
+//             ref={(el) => (markersRef.current[icao24] = el)}
+//           >
+//             <Popup>
+//               <strong>Flight ID:</strong> {icao24} <br />
+//               <strong>Latitude:</strong> {flight.lat} <br />
+//               <strong>Longitude:</strong> {flight.lon}
+//             </Popup>
+//           </Marker>
+//         ) : null
+//       )}
+
+//       {clickedLocation !== null && (
+//         <Popup position={clickedLocation}>
+//           <div>
+//             {isLoading && <p>Loading Weather...</p>}
+//             {data && (
+//               <p>
+//                 <strong>Weather : </strong>
+//                 {data.weather[0].description}
+//                 <br />
+//                 <strong>Temperature :</strong> {data.main.temp}°C
+//                 <br />
+//                 <strong>Humidity :</strong> {data.main.humidity}%
+//                 <br />
+//                 <strong>Wind Speed :</strong> {data.wind.speed}
+//               </p>
+//             )}
+//           </div>
+//         </Popup>
+//       )}
+//     </MapContainer>
+//   );
+// }
+
+// export default Body;

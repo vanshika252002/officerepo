@@ -1,0 +1,139 @@
+.earthquake-wrapper {
+    position: fixed; /* keep fixed if you want it to stay while scrolling */
+    top: 107px;       /* instead of margin-top */
+    left: 10px;           /* or wherever you want it */
+    width: 18vw;
+    height: auto;
+    background-color: #444;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    z-index: 10000; /* increase to make sure it's on top */
+    box-shadow: 5px 5px 10px black;
+}
+
+.earthquake-header{
+    width:100%;
+    height:8vh;
+    display :flex;
+    justify-content:start;
+    align-items: center;
+    z-index: 1;
+    position:relative;
+   
+    color: white;
+    
+    gap : 20%;
+   
+}
+.earthquake-header button{
+    width:13%;
+    height:100%;
+    align-self: start;
+    border:none;
+    background-color:#444 ;
+    color: white;
+    font-size: 20px;
+
+}
+.earthquake-header span{
+    width:60;
+}
+.earthquake-timer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing:border-box;
+    color:white
+
+}
+.start{
+    box-sizing: border-box;
+     display:flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+}
+.start input{
+    width:70%;
+    margin-bottom:14px ;
+    
+}
+.start h3{
+    margin:2px 0px 2px 0px ;
+}
+.end{
+    box-sizing: border-box;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.end input{
+    width:70%;
+    margin-bottom:14px ;
+}
+.end h3{
+    margin:2px 0px 2px 0px ;;
+}
+
+.earthquake-list{
+    height:57vh;
+    width:100%;
+    background-color:rgb(209, 208, 208);
+    display: flex;
+    flex-direction: column;
+    flex-shrink:2;
+    overflow:scroll;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+}
+.items{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom:2px solid black;
+}
+
+.earthquake-magnitude{
+display: flex;
+justify-content: center;
+align-items:center;
+width:33px;
+
+}
+.earthquake-properties{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:start;
+    box-sizing: border-box;
+    width:120px;
+ 
+
+}
+.place-earthquake{
+    display:flex;
+    justify-content:start;
+}
+.place-earthquake h4{
+    margin-bottom: 0;
+    margin-left:0;
+    align-self: start;
+}
+.time-earthquake{
+    display: flex;
+    justify-content:start;
+    margin-left:0%;
+}
+.time-earthquake h5{
+    margin-top: 0;
+}
+.earthquake-click-option:hover{
+    background-color:aqua;
+}
+.earthquake-click-option{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: space-evenly;
+   align-items: center;
+}

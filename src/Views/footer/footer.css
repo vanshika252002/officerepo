@@ -1,0 +1,60 @@
+.footer{
+  width:auto;
+position:fixed;
+bottom:6px;
+background-color:  rgb(57 57 57);
+display: flex;
+justify-content: center;
+align-items: center;
+box-sizing: border-box;
+
+padding:7px 20px 7px 20px;
+left: 45%;
+border-radius:50px;
+z-index: 5000;
+
+}
+.mini-map-option1{
+  display: flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+  padding:5px;
+}
+.mini-map-option1 button{
+  background-color:  rgb(57 57 57);
+  border:none;
+  display: flex;
+  flex-direction: column;
+}
+.mini-map-option1 img{
+  width:2vw;
+  height:4vh;
+  align-self: center;
+}
+.mini-map-option1 span{
+  color:white;
+  align-self: center;
+}
+.mini-map-option2{
+  display: flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+  padding:5px;
+}
+.mini-map-option2 button{
+  background-color:  rgb(57 57 57);
+  border:none;
+  display: flex;
+  flex-direction: column;
+}
+.mini-map-option2 img{
+  width:2vw;
+  height:5vh;
+  align-self: center;
+}
+.mini-map-option2 span{
+  color:white;
+  align-self: center;
+}
