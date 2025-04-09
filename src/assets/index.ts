@@ -15,7 +15,11 @@ import map from './icons/map.png';
 import earthquakealert from './icons/earthquakealert.png';
 import loading from './icons/loading.svg';
 import earthquake from './icons/earthquake.png';
+import accordianLogo  from './icons/download.svg';
+import arrow from './icons/arrow.svg';
 export const ICONS = {
+  arrow,
+  accordianLogo,
   earthquake,
   loading,
   headerLogo,

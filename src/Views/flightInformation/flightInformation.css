@@ -1,7 +1,7 @@
 .flightInformation-wrapper {
      /* This makes .loading position relative to this */
-     top: 60px;
-     right:100px;
+     top: 75px;
+     right:170px;
      position: absolute;
     display: flex;
     flex-direction: column;

@@ -71,6 +71,3 @@ const debouncedEndTime=useDebounce(endTime,600);
     )
 }
 export default Earthquake;
-
-
-

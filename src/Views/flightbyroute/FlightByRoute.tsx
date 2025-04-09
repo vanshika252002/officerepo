@@ -1,10 +1,16 @@
-// import { useState } from 'react';
-// import FlightInformation from '../flightInformation';
+
 
 import './flightbyroute.css'
-//import { useGetAllFlightsQuery } from '../../Services/Api/liveflight';
+interface routeProps{
+    chooseOption:{flight:{setFlightVisible:(value:boolean)=>void,
+        setFlightData:(value:boolean)=>void,origin:{setOrigin:(value:string)=>void}
 
-const FlightByRoute=({chooseOption,setSearchBar})=>{
+    }};
+    setSearchBar:(value:boolean)=>void;
+
+}
+
+const FlightByRoute=({chooseOption,setSearchBar}:routeProps)=>{
    //const [flight,setFlight]=useState<boolean>(false);
    // const [origin ,setOrigin]=useState<string>("");
 

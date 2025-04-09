@@ -13,9 +13,17 @@ import FlightByRoute from '../flightbyroute';
 import FlightInformation from '../flightInformation';
 import Nearby from '../nearby';
 import Airports from '../airports';
+import AirportCountryFlights from '../airportCountryFlights';
+import Searching from '../searching';
 
 const ToCheck=()=>{
     const dispatch = useDispatch();
+
+
+         const [searchingVisible,setSearchingVisible]=useState<boolean>(false);                                         //searching
+        const [searchedData,setSearchedData]=useState<string>("");
+
+
     const [searchBar, setSearchBar] = useState<boolean>(false);
     const [weatherDetails, setWeatherDetails] = useState<boolean>(false);  //weather 
   const [weatherVisible,setWeatherVisible]=useState<boolean>(false);
@@ -29,15 +37,18 @@ const ToCheck=()=>{
 const [nearbyVisible ,setNearByVisible]=useState<boolean>(false);     //nearby
 
 const [airportByCountry ,setAirportByCountry]=useState<boolean>(false);   //airport by country
+const [airportByCode ,setAirportByCode]=useState<boolean>(false);
 const [country,setCountry]=useState<string>("");
+const [icaoCode ,setIcaoCode]=useState<string>("");
 
 
     const [selectedLocation, setSelectedLocation] = useState<{ lat: number; lon: number } | null>(null);
  
-    const chooseOption={weather:{weatherDetails,setWeatherDetails,weatherVisible,setWeatherVisible,setSelectedLocation,place:{place,setPlace}},
+    const chooseOption={ searching:{searchedData,setSearchingVisible,},
+      weather:{weatherDetails,setWeatherDetails,weatherVisible,setWeatherVisible,setSelectedLocation,place:{place,setPlace}},
   flight:{flightVisible,setFlightVisible,flightData,setFlightData,origin:{origin,setOrigin}}
      , nearby:{nearbyVisible,setNearByVisible},
-     airport:{airportByCountry,setAirportByCountry,country:{country,setCountry}}
+     airport:{airportByCountry,setAirportByCountry,airportByCode,setAirportByCode,country:{country,setCountry},code:{icaoCode,setIcaoCode}}
 };  //chooseOption 
 
 
@@ -56,8 +67,9 @@ dispatch(updateAuthTokenRedux({ token: null }));
   };
 
     const inputRef = useRef<HTMLDivElement>(null);
+    const inputRef1 = useRef<HTMLDivElement>(null);
     useEffect(() => {
-       // console.log('input refrence ', inputRef.current);
+  
         function handleClickOutside(event: MouseEvent) {
           if (!inputRef.current?.contains(event.target as Node)) {
             setSearchBar(false);
@@ -67,11 +79,24 @@ dispatch(updateAuthTokenRedux({ token: null }));
     return ()=>{
       document.removeEventListener('mousedown', handleClickOutside);
     }}, []);
-  console.log("weather visisble",weatherVisible)
-   
 
-console.log("country selected",country);
 
+
+  //   useEffect(() => {
+  
+  //     function handleClickOutside(event: MouseEvent) {
+  //       if (!inputRef1.current?.contains(event.target as Node)) {
+  //         setSearchingVisible(false);
+  //       }
+  //     }
+  // document.addEventListener('mousedown', handleClickOutside);
+  // return ()=>{
+  //   document.removeEventListener('mousedown', handleClickOutside);
+  // }}, []);
+
+
+ 
+ //console.log("set searching visible",searchingVisible);
 
     return(
         <div  className="h1">
@@ -80,7 +105,7 @@ console.log("country selected",country);
 
             <div className='refrence-to-options' ref={inputRef}>
             <div className="h7" onClick={()=>setSearchBar(true)}>
-                <div className='h3'><img src={ICONS.searchLogo}/><input type="text" /></div>
+                <div className='h3' ref={inputRef1}><img src={ICONS.searchLogo}/><input type="text"  placeholder='Search Country' onChange={(e)=>{setSearchedData(e.target.value);setSearchBar(false);setSearchingVisible(true)}}/></div>
             </div>
                 {searchBar && <SearchBar chooseOption={chooseOption} setSearchBar={setSearchBar} />}
                {weatherVisible && <Weather chooseOption={chooseOption} setSearchBar={setSearchBar}/>}
@@ -98,7 +123,9 @@ console.log("country selected",country);
 
 
    {nearbyVisible && <Nearby chooseOption={chooseOption} setSearchBar={setSearchBar}/>}     
-   {airportByCountry && <Airports chooseOption={chooseOption} setSearchBar={setSearchBar}/>}   
+   {airportByCountry && <Airports chooseOption={chooseOption} setSearchBar={setSearchBar} />}   
+    {airportByCode && <AirportCountryFlights chooseOption={chooseOption}  />}
+         {searchingVisible && <Searching chooseOption={chooseOption}/>}
             </div>
             <div className="h4"><button onClick={handleLogout}>Logout</button></div>
             </div>

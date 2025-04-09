@@ -4,9 +4,15 @@ import './nearby.css';
 import {useGetAllFlightsQuery} from '../../Services/Api/liveflight';
 import Loading from '../loading/Loading';
 
+type details=[string,string,string,number,number,number,number,number,boolean,number]
+interface nearbyProps{
+  chooseOption:{
+    nearby:{setNearByVisible:(value:boolean)=>void}
+  };
+  setSearchBar:(value:boolean)=>void;
+}
 
-
-const Nearby=({chooseOption,setSearchBar})=>{
+const Nearby=({chooseOption,setSearchBar}:nearbyProps)=>{
     const [lat,setLat]=useState<number|null>(null);
     const [lon,setLon]=useState<number |null>(null);
     const {data:liveflight,isLoading}=useGetAllFlightsQuery(null);
@@ -28,7 +34,7 @@ const Nearby=({chooseOption,setSearchBar})=>{
     }
    },[])
       
-      function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+      function getDistanceFromLatLonInKm(lat1:number, lon1:number, lat2:number, lon2:number) {
         console.log("2")
         const R = 6371;
         const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -44,10 +50,10 @@ const Nearby=({chooseOption,setSearchBar})=>{
         return d; 
       }
       const nearbyFlights = useMemo(() => {
-        return FlightDetails?.filter((details) => {
+        return FlightDetails?.filter((details:details) => {
           const flightLat = details[6]; 
           const flightLon = details[5]; 
-          if (flightLat && flightLon) {
+          if (flightLat && flightLon && lat!==null && lon!==null) {
             const distance = getDistanceFromLatLonInKm(lat, lon, flightLat, flightLon);
             return distance <= 500; 
           }
@@ -67,7 +73,7 @@ const Nearby=({chooseOption,setSearchBar})=>{
              {/* {isLoading  && <div className='near-by-loading'> Loading....</div>} */}
                  
                  {<div className='near-by-list-wrapper'>
-                  {  nearbyFlights?.map((details)=>(
+                  {  nearbyFlights?.map((details:details)=>(
                 <div className='nearby'>
                     <div className='n11'>
                         <h2>{details[2]}</h2>

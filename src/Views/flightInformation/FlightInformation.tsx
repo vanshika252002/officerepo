@@ -1,9 +1,16 @@
 import { useGetAllFlightsQuery } from '../../Services/Api/liveflight';
 import Loading from '../loading/Loading';
 import './flightInformation.css';
-interface FlightInformationProps{
-    origin:string}
-const FlightInformation=({chooseOption})=>{
+type details=[string,string,string,number,number,number,number,number,boolean,number];
+interface FlightInformationprops{
+    chooseOption:{flight:{setFlightData:(value:boolean)=>void,setFlightVisible:(value:boolean)=>void;
+    origin:{origin:string,setOrigin:(value:string)=>void}
+    }
+
+}
+}
+
+const FlightInformation=({chooseOption}:FlightInformationprops)=>{
     const {data:liveflight,isLoading}=useGetAllFlightsQuery(null);
     const FlightDetails=liveflight?.states||null;
    const origin=chooseOption.flight.origin.origin;
@@ -23,7 +30,7 @@ const FlightInformation=({chooseOption})=>{
            { isLoading && <Loading/> }
           {isLoading &&   <div className='fi-loading'> Loading....</div>}
       {FlightDetails && <div className='fd'>
-             {FlightDetails?.map((details)=>(
+             {FlightDetails?.map((details:details)=>(
            details[5]&& details[6] &&  (origin.charAt(0).toUpperCase()+origin.slice(1).toLowerCase()==details[2])   &&   <div key={details[0]} className='wrapper-for-flight-information'>
                      <div className="flightInformation-origin">
                 <div className='fi-o1'><span>Origin</span></div>

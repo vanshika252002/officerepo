@@ -1,28 +1,30 @@
 
-import AirportCountryFlights from "../airportCountryFlights";
+
  import Body from "../body/Body";
 
-import Airports from "../airports";
+// import Live from "../live";
 
-  import ToCheck from "../tocheck/ToCheck";
+// import AirportCountryFlights from "../airportCountryFlights";
+
+import ToCheck from "../tocheck/ToCheck";
 
 
 export default function Dashboard() {
- 
-  return (
-    <div>
-     
+
+return (
+  <div>
+   {/* <Live/> */}
 {/*   
-   <Airports/> */}
-     {/* <Nearby/> */}
-      {/* <AirportCountryFlights/> */}
-       
-        <ToCheck/>
-        <Body /> 
-       {/* <FlightByRoute/> */}
-     {/* <FlightInformation/> */}
+ <Airports/> */}
+   {/* <Nearby/> */}
+    {/* <AirportCountryFlights/> */}
+     
+      <ToCheck/>
+      <Body /> 
      {/* <FlightByRoute/> */}
-   {/* <Loading/> */}
-    </div>
-  );
+   {/* <FlightInformation/> */}
+   {/* <FlightByRoute/> */}
+ {/* <Loading/> */}
+  </div>
+);
 }

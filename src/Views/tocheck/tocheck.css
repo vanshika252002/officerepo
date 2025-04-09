@@ -1,6 +1,6 @@
 .h1 {
  
-    height:4rem;
+    height:5.5rem;
     width: 100vw;
     align-items: center;
     display: flex;
@@ -28,7 +28,7 @@
     overflow: hidden;
 }
 .h2 img{
-   height:142px;
+   height:165px;
    
 
 }
@@ -43,11 +43,12 @@
     gap:5%;
 }
 .h3{
+    height:3rem;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: white;
-    border-radius:8px;
+    border-radius:10px;
 }
 .h3 img{
    height:3vh; 
@@ -91,8 +92,8 @@
     .weather-details{
         box-shadow: 5px 5px 10px black;
         position: absolute;
-        top: 45px;
-  right:100px;
+        top: 75px;
+        right:170px;
         width: 280px;
         background-color: rgb(209, 208, 208);
         border-radius: 10px;
