@@ -85,11 +85,11 @@ const Nearby=({chooseOption,setSearchBar}:nearbyProps)=>{
                         </div>
                         <div className='n1'>
                         <div className='n2'><span>Latitude :</span></div>
-                        <div className='n3'><span>{details[5]}</span></div>
+                        <div className='n3'><span>{details[6]}</span></div>
                         </div>
                         <div className='n1'>
                         <div className='n2'><span>Longitude :</span></div>
-                        <div className='n3'><span>{details[6]}</span></div>
+                        <div className='n3'><span>{details[5]}</span></div>
                         </div>
                         <div className='n1'>
                         <div className='n2'><span>Velocity :</span></div>

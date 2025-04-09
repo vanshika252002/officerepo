@@ -11,7 +11,10 @@ export const geoLocationApi = createApi({
     getGeolocationByCoords: builder.query({
       query: (query) => `?q=${query}&limit=50&key=ba72c616258849d18b2bea955a2b32a3`,
     }),
+    getGeolocationByLatLng:builder.query({
+       query: ({ lat, lng }) => `?q=${lat},${lng}&key=ba72c616258849d18b2bea955a2b32a3`
+    })
   }),
 });
-export const { useGetGeolocationByCoordsQuery } = geoLocationApi;
+export const { useGetGeolocationByCoordsQuery ,useGetGeolocationByLatLngQuery} = geoLocationApi;
  

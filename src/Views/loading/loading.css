@@ -1,11 +1,11 @@
 .loading {
-  position: absolute; /* Sticks inside the wrapper */
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
 
-  background-color: rgba(22, 21, 21, 0.5); /* Dark semi-transparent */
+  background-color: rgba(22, 21, 21, 0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,8 +16,8 @@
   font-family: 'Open Sans', sans-serif;
   gap: 10px;
 
-  border-radius: 7px; /* Optional: matches the wrapper */
-  z-index: 1; /* Keeps it above child content */
+  border-radius: 7px; 
+  z-index:99999; 
 }
 
 .loading img {

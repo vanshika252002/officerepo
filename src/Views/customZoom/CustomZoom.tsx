@@ -4,15 +4,16 @@ import L from 'leaflet';
 import { ICONS } from '../../assets';
 import './customZoom.css';
 
-const CustomZoom = () => {
+const CustomZoom = ({chooseOption}) => {
   const map = useMap();
   const zoomControlRef = useRef<HTMLDivElement>(null);
+   
+  const {earthquake,flight}=chooseOption;
 
+  
   useEffect(() => {
     const el = zoomControlRef.current;
     if (!el) return;
-
-    // Prevent Leaflet map click on zoom button clicks
     L.DomEvent.disableClickPropagation(el);
     L.DomEvent.disableScrollPropagation(el);
   }, []);
@@ -21,8 +22,8 @@ const CustomZoom = () => {
     <div className="custom-zoom" ref={zoomControlRef}>
       <button title="Zoom In" onClick={() => map.zoomIn()}>+</button>
       <button title="Zoom out" onClick={() => map.zoomOut()}>−</button>
-      <div title='Earthquake alert' className='alert1'><img src={ICONS.earthquakealert}/></div>
-      <div title='LIVE flight' className='alert2'><img src={ICONS.flightLogo}/></div>
+      <button title='Earthquake alert' className='alert1' onClick={()=>{earthquake.setAlert(!earthquake.alert)}}><img src={ICONS.earthquakealert}/></button>
+      <button title='LIVE flight' className='alert2' onClick={()=>{flight.setFlight(!flight.flight)}}><img src={ICONS.flightLogo}/></button>
     </div>
   );
 };
