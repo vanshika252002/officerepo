@@ -45,3 +45,6 @@
 .popup h1{
 margin:0px;
 }
+.leaflet-marker-icon.custom-flight-icon {
+  transform: rotate(-90deg); /* Rotate from east to north */
+}

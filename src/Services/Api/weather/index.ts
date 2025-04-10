@@ -15,4 +15,4 @@ export const weatherApi = createApi({
     }),
   }),
 });
-export const { useGetWeatherByCoordsQuery } = weatherApi;
+export const { useGetWeatherByCoordsQuery, useLazyGetWeatherByCoordsQuery } = weatherApi;

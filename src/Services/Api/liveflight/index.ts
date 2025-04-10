@@ -17,4 +17,5 @@ export const openSkyApi = createApi({
 
 export const {
   useGetAllFlightsQuery,
+  useLazyGetAllFlightsQuery
 } = openSkyApi;

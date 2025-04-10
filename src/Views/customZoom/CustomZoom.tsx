@@ -3,8 +3,10 @@ import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { ICONS } from '../../assets';
 import './customZoom.css';
-
-const CustomZoom = ({chooseOption}) => {
+interface Props{
+  chooseOption:{flight:{setFlight:(value:boolean)=>void},earthquake:{setAlert:(value:boolean)=>void}}
+}
+const CustomZoom = ({chooseOption}:Props) => {
   const map = useMap();
   const zoomControlRef = useRef<HTMLDivElement>(null);
    

@@ -2,7 +2,11 @@ import './live.css';
 import { ICONS } from '../../assets';
 import { useMemo } from 'react';
 import { useGetAllFlightsQuery } from '../../Services/Api/liveflight';
-const Live=()=>{
+interface Props{
+  chooseOption:{live:{setLive:(value:boolean)=>void}};
+  setSearchBar:(value:boolean)=>void
+}
+const Live=({chooseOption,setSearchBar}:Props)=>{
     const { data: LiveFlights } = useGetAllFlightsQuery(null);
 
     const flightsByOrigin = useMemo(() => {
@@ -39,10 +43,10 @@ const Live=()=>{
         <div className='airport-wrappper'>
        
            <div className="airport-header">  
-                          <div className='airport-f1'><button onClick={()=>{chooseOption.airport.setAirportByCountry(false),setSearchBar(true)}}><img src={ICONS.arrow} /></button></div>
+                          <div className='airport-f1'><button onClick={()=>{chooseOption.live.setLive(false),setSearchBar(true)}}><img src={ICONS.arrow} /></button></div>
                           <div className='airport-f2'><span>Live Flights</span></div>
                       </div>
-                      <div>
+                      <div className='f12'>
     {Object.entries(flightsByOrigin).map(([country, flights]) => (
       <div key={country} style={{ marginBottom: '20px' }}>
         <button>{country}</button>

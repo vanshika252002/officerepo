@@ -1,60 +1,96 @@
 import { useGetAllFlightsQuery } from '../../Services/Api/liveflight';
 import Loading from '../loading/Loading';
 import './flightInformation.css';
-type details=[string,string,string,number,number,number,number,number,boolean,number];
-interface FlightInformationprops{
-    chooseOption:{flight:{setFlightData:(value:boolean)=>void,setFlightVisible:(value:boolean)=>void;
-    origin:{origin:string,setOrigin:(value:string)=>void}
-    }
 
+interface FlightDetail {
+  icao24: string;
+  callSign: string;
+  originCountry: string;
+  timePosition: number;
+  lastContact: number;
+  latitude: number;
+  longitude: number;
+  baroAltitude: number;
+  onGround: boolean;
+  velocity: number;
 }
+
+interface FlightInformationProps {
+  chooseOption: {
+    flight: {
+      setFlightData: (value: boolean) => void;
+      setFlightVisible: (value: boolean) => void;
+      origin: { origin: string; setOrigin: (value: string) => void };
+    };
+  };
 }
 
-const FlightInformation=({chooseOption}:FlightInformationprops)=>{
-    const {data:liveflight,isLoading}=useGetAllFlightsQuery(null);
-    const FlightDetails=liveflight?.states||null;
-   const origin=chooseOption.flight.origin.origin;
-// FlightDetails?.map((details:[string,string,string,number,number,number,number,number,boolean,number,number,number,number[],number,string,boolean,number,number])=>{
-//     details[5] && details[6]&& console.log("flight info",details[2]," ",details[0]," ",details[5]," ",details[6])
-// })
- console.log("origin is ",chooseOption.flight.origin.origin);
+const FlightInformation = ({ chooseOption }: FlightInformationProps) => {
+  const { data: liveflight, isLoading, error } = useGetAllFlightsQuery(null);
+  const FlightDetails: FlightDetail[] =
+    liveflight?.states?.map((tuple: any) => ({
+      icao24: tuple[0],
+      callSign: tuple[1],
+      originCountry: tuple[2],
+      timePosition: tuple[3],
+      lastContact: tuple[4],
+      latitude: tuple[5],
+      longitude: tuple[6],
+      baroAltitude: tuple[7],
+      onGround: tuple[8],
+      velocity: tuple[9],
+    })) || [];
 
+  const originFilter = chooseOption.flight.origin.origin.trim().toLowerCase();
+  const filteredFlights = FlightDetails.filter(
+    (flight) => flight.originCountry.toLowerCase() === originFilter && flight.latitude && flight.longitude
+  );
 
-    return (
-        <div className="flightInformation-wrapper">
-            
-          <div className="flightInformation-header">  
-                <div className='fi1'><button onClick={()=>{chooseOption.flight.setFlightData(false); chooseOption.flight.setFlightVisible(true)}}>x</button></div>
-                <div className='fi2'><span>Flights</span></div>
-            </div>
-           { isLoading && <Loading/> }
-          {isLoading &&   <div className='fi-loading'> Loading....</div>}
-      {FlightDetails && <div className='fd'>
-             {FlightDetails?.map((details:details)=>(
-           details[5]&& details[6] &&  (origin.charAt(0).toUpperCase()+origin.slice(1).toLowerCase()==details[2])   &&   <div key={details[0]} className='wrapper-for-flight-information'>
-                     <div className="flightInformation-origin">
-                <div className='fi-o1'><span>Origin</span></div>
-                <div className='fi-o2'> <span>{details[2]}</span></div>
-                </div>
-                <div className='flightInformation-origin'>
-                    <div className='fi-o1'><span>Icao24 code</span></div>
-              <div className='fi-o2'><span>{details[0]}</span></div>
-                </div>
-                <div className='flightInformation-origin'>
-                    <div className='fi-o1'><span>Latitude</span></div>
-                    <div className='fi-o2'><span>----</span></div>
-                </div>
-                <div className='flightInformation-origin'>
-                    <div className='fi-o1'><span>Longitude</span></div>
-                    <div className='fi-o2'><span>Longitue</span></div>
-                </div>
-                    </div>
-               ))}
-            </div>}
-
-          
+  return (
+    <div className="flightInformation-wrapper">
+      <div className="flightInformation-header">
+        <div className="fi1">
+          <button onClick={() => { chooseOption.flight.setFlightData(false); chooseOption.flight.setFlightVisible(true); }} aria-label="Close Flight Information">x</button>
         </div>
-    )
-    }
+        <div className="fi2">
+          <span>Flights</span>
+        </div>
+      </div>
+      {isLoading && <Loading />}
+      {error && <div className="fi-error">Error fetching flights. Please try again.</div>}
+      {filteredFlights.length === 0 && !isLoading && (
+        <div className="fi-no-results">No flights found for the specified origin.</div>
+      )}
+      {filteredFlights.length > 0 && (
+        <div className="fd">
+          {filteredFlights.map((flight) => (
+            <div key={flight.icao24} className="wrapper-for-flight-information">
+              <div className="flightInformation-origin">
+                <div className="fi-o1"><span>Origin</span></div>
+                <div className="fi-o2"><span>{flight.originCountry}</span></div>
+              </div>
+              <div className="flightInformation-origin">
+                <div className="fi-o1"><span>Icao24 Code</span></div>
+                <div className="fi-o2"><span>{flight.icao24}</span></div>
+              </div>
+              <div className="flightInformation-origin">
+                <div className="fi-o1"><span>Latitude</span></div>
+                <div className="fi-o2"><span>{flight.latitude.toFixed(2)}</span></div>
+              </div>
+              <div className="flightInformation-origin">
+                <div className="fi-o1"><span>Longitude</span></div>
+                <div className="fi-o2"><span>{flight.longitude.toFixed(2)}</span></div>
+              </div>
+              <div className="flightInformation-origin">
+                <div className="fi-o1"><span>Velocity</span></div>
+                <div className="fi-o2"><span>{flight.velocity}</span></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default FlightInformation;

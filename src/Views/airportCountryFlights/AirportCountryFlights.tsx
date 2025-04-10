@@ -4,7 +4,7 @@ import { useGetAllFlightsQuery } from '../../Services/Api/liveflight';
 import Loading from '../loading/Loading';
 import { useState } from 'react';
 
-interface airportCountryFlightsProps {
+interface AirportCountryFlightsProps {
   chooseOption: {
     airport: {
       setAirportByCode: (value: boolean) => void;
@@ -17,8 +17,9 @@ interface airportCountryFlightsProps {
     };
   };
 }
+type Details = [string, string, string, number, number, number, number, number, boolean, number];
 
-const AirportCountryFlights = ({ chooseOption }: airportCountryFlightsProps) => {
+const AirportCountryFlights = ({ chooseOption }: AirportCountryFlightsProps) => {
   const { airport } = chooseOption;
   const { code } = airport;
   const { country } = airport;
@@ -32,7 +33,7 @@ const AirportCountryFlights = ({ chooseOption }: airportCountryFlightsProps) => 
   const { data: flightData, isLoading } = useGetAllFlightsQuery(null);
 
   const filteredFlights = flightData?.states?.filter(
-    (detail) => country.country.toLowerCase() === detail[2]?.toLowerCase()
+    (detail:Details) => country.country.toLowerCase() === detail[2]?.toLowerCase()
   );
 
   return (
@@ -61,7 +62,7 @@ const AirportCountryFlights = ({ chooseOption }: airportCountryFlightsProps) => 
         )}
 
         {filteredFlights?.length>0 && <div className='country-flight-list-wrapper'>
-        {  filteredFlights?.map((detail) => {
+        {  filteredFlights?.map((detail:Details) => {
           const icaoCode = detail[0];
           const flightCountry = detail[2];
           const longitude = detail[5];

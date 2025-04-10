@@ -1,7 +1,13 @@
 import './searching.css';
 import { useGetAllFlightsQuery } from '../../Services/Api/liveflight';
-
-const Searching = ({ chooseOption }) => {
+interface Props{
+  chooseOption:{searching:{searchedData:string,setSearchingVisible:(value:boolean)=>void}
+}
+}
+type Details=[
+  string,string,string,number,number,number,number,number,boolean,number
+]
+const Searching = ({ chooseOption }:Props) => {
   const { searching } = chooseOption;
   const { searchedData, setSearchingVisible } = searching;
   const place = searchedData.trim().toLowerCase();
@@ -10,7 +16,7 @@ const Searching = ({ chooseOption }) => {
   const { data: flightData } = useGetAllFlightsQuery(null);
   console.log('flight data is', flightData);
 
-  const matchingFlights = flightData?.states?.filter((details) =>
+  const matchingFlights = flightData?.states?.filter((details:Details) =>
     details[2]?.toLowerCase().includes(place)
   );
 
@@ -29,7 +35,7 @@ const Searching = ({ chooseOption }) => {
 
       {
         <div className="near-by-list-wrapper">
-          {matchingFlights?.map((details: details) => (
+          {matchingFlights?.map((details: Details) => (
             <div className="nearby">
               <div className="n11">
                 <h2>{details[2]}</h2>

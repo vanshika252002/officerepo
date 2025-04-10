@@ -17,7 +17,9 @@ import loading from './icons/loading.svg';
 import earthquake from './icons/earthquake.png';
 import accordianLogo  from './icons/download.svg';
 import arrow from './icons/arrow.svg';
+import hightlightedflight from './icons/aeroplane-mode.png';
 export const ICONS = {
+  hightlightedflight,
   arrow,
   accordianLogo,
   earthquake,

@@ -25,7 +25,7 @@ console.log("weather visible in weather",chooseOption.weather.weatherVisible)
             <img src={ICONS.flightroute} />
             Flight by route
           </li>
-          <li onClick={(e)=>{e.stopPropagation();setSearchBar(false); chooseOption.airport.setAirportByCountry(true)}}>
+          <li onClick={(e)=>{e.stopPropagation();setSearchBar(false); chooseOption.live.setLive(true)}}>
             <img src={ICONS.liveairplane} />
             LIVE flight by airplane
           </li>

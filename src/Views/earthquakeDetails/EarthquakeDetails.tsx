@@ -1,5 +1,5 @@
 import './earthquakeDetails.css'
-interface eq{
+interface Earthquake{
     place:string;
     time:number;
     depth?:number;
@@ -8,7 +8,7 @@ interface eq{
     setSelectedEarthquake:any;
 
 }
-const EarthquakeDetails=({place,time,lat,lon,setSelectedEarthquake}:eq)=>{
+const EarthquakeDetails=({place,time,lat,lon,setSelectedEarthquake}:Earthquake)=>{
     console.log("displayed")
     return (
         <div className="earthquake-details-wrapper">

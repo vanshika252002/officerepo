@@ -10,9 +10,11 @@ interface nearbyProps{
     nearby:{setNearByVisible:(value:boolean)=>void}
   };
   setSearchBar:(value:boolean)=>void;
+  setFlight:(value:boolean)=>void;
+  setSelectedLocation:({lat:number,lon:number,id:string,angle:number}| null)
 }
 
-const Nearby=({chooseOption,setSearchBar}:nearbyProps)=>{
+const Nearby=({chooseOption,setSearchBar,setSelectedLocation,setFlight}:nearbyProps)=>{
     const [lat,setLat]=useState<number|null>(null);
     const [lon,setLon]=useState<number |null>(null);
     const {data:liveflight,isLoading}=useGetAllFlightsQuery(null);
@@ -65,16 +67,16 @@ const Nearby=({chooseOption,setSearchBar}:nearbyProps)=>{
     return (
         <div className='near-by-wrappper'>
              <div className="near-by-header">  
-                <div className='near-by-f1'><button onClick={()=>{setSearchBar(true); chooseOption.nearby.setNearByVisible(false)}}>x</button></div>
+                <div className='near-by-f1'><button onClick={()=>{setSearchBar(true); chooseOption.nearby.setNearByVisible(false);setFlight(false);setSelectedLocation(null)}}>x</button></div>
                 <div className='near-by-f2'><span>Nearby</span></div>
             </div>
             {!lat && !lon && <Loading/>}
           { isLoading  && <Loading/>} 
-             {/* {isLoading  && <div className='near-by-loading'> Loading....</div>} */}
+      
                  
                  {<div className='near-by-list-wrapper'>
                   {  nearbyFlights?.map((details:details)=>(
-                <div className='nearby'>
+                <div onClick={()=>{setSelectedLocation({lat:details[6],lon:details[5],id:details[0]}); setFlight(true);}} className='nearby'>
                     <div className='n11'>
                         <h2>{details[2]}</h2>
                         </div>

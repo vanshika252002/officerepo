@@ -22,6 +22,7 @@ const router = createBrowserRouter(
 
 function App() {
   // const [count, setCount] = useState<number>(0);
+  
   return (
     <div className='app.tsx'>
       <Provider store={store}>
