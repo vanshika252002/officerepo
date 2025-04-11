@@ -1,0 +1,6 @@
+VITE_BASE_URL='https://api.openweathermap.org/'
+VITE_GEOLOCATION_URL=https://api.opencagedata.com/geocode/v1/json
+VITE_GEOLOCATION_API_KEY=ba72c616258849d18b2bea955a2b32a3
+
+VITE_WEATHER_URL=https://api.openweathermap.org/data/2.5/
+VITE_WEATHER_API_KEY=30dbf5fbfaa3fa2517f8ed20337f8437

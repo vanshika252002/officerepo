@@ -1,0 +1,31 @@
+.search-bar {
+    padding: 10px;
+    text-align: center;
+  }
+  .search-bar input {
+    width: 80%;
+    padding: 8px;
+    font-size: 1rem;
+  }
+  .airline-list{
+    height:40vh;
+    overflow: scroll;
+  }
+  .airline-block {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .airline-header {
+    font-weight: bold;
+    background: #eef;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+  }
+  .f12{
+    margin:10px;
+    background-color: pink;
+    overflow:scroll;
+    height:70vh;
+  }
+  

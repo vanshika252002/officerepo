@@ -1,0 +1,122 @@
+/* Full page styles */
+.login-wrapper-component {
+  height:100vh;
+  width:100vw;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("https://wallpaperset.com/w/full/5/a/d/487562.jpg");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-size: cover;  
+    background-position: center; 
+    background-repeat: no-repeat;
+    
+  }
+  
+  /* Centered Login Container */
+  .signup-container {
+    width: 320px;
+    background: rgba(255, 255, 255, 0.75); ;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: #000000;
+    text-align: center;
+  }
+  
+  /* Form Heading */
+  .signup-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Labels */
+  .signup-form label {
+    display: block;
+    font-size: 0.85rem;
+    margin: 5px 0;
+    color:black;
+    text-align: left;
+  }
+  
+  /* Input Fields */
+  .signup-form input {
+    width: 93%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background:white;
+    color: black;
+    outline: none;
+    font-size: 1rem;
+  }
+  
+  /* Error Messages */
+  .error {
+    color: #ff4d4d;
+    font-size: 0.8rem;
+    margin-top: 2px;
+    text-align: left;
+  }
+  
+  /* Submit Button */
+  .signup-form button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background:#0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .signup-form button:hover {
+    background: #0056b3;
+  }
+  
+  /* Divider */
+  .or-divider {
+    text-align: center;
+    margin: 15px 0;
+    font-size: 0.85rem;
+    color: black;
+  }
+  
+  /* Google Button */
+  .google-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: #fff;
+    color: #000;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .google-btn img {
+    width: 18px;
+    margin-right: 8px;
+  }
+  
+  .google-btn:hover {
+    background: #e0e0e0;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 400px) {
+    .signup-container {
+      width: 90%;
+      padding: 15px;
+    }
+  }
+  

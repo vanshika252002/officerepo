@@ -1,0 +1,118 @@
+.h1 {
+ 
+    height:5.5rem;
+    width: 100vw;
+    align-items: center;
+    display: flex;
+    background: linear-gradient(to bottom,rgba(18,18,18,0.9), rgba(18,18,18, 0.6),rgba(18,18,18,0.3),rgba(18,18,18,0));
+
+    /* Glass effect (like Flightradar24) */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    /* Optional extra polish */
+
+    position: absolute;
+    z-index:5000;
+}
+
+
+.h2{
+    margin-top:5px;
+    display: flex;
+    justify-content:end;
+    align-items: center;
+    width:55%;
+    color: white;
+    height:100%;
+    overflow: hidden;
+}
+.h2 img{
+   height:165px;
+   
+
+}
+.h4{
+    
+}
+.h5{
+    width:45%;
+    display: flex;
+   justify-content:end;
+   align-items: center;
+    gap:5%;
+}
+.h3{
+    height:3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius:10px;
+}
+.h3 img{
+   height:3vh; 
+   border: none;
+ 
+   border-radius: 8px;
+}
+.h3 input{
+    height:3.5vh;
+    width:12vw;
+    border:none;
+    border-radius: 8px;
+    
+}
+.h3 input:focus{
+    outline: none;
+}
+.h4{
+   margin-right:7%;
+   background-color: transparent;
+}
+.h4 button{
+    height:auto;
+    width:auto;
+    color:rgb(60, 57, 57);
+    background-color: transparent;
+   border-radius: 6px;
+    box-sizing: border-box;
+    font-size:20px;
+    font-weight:600;
+
+}
+.h7{
+    display: flex;
+    flex-direction: column;
+     justify-content: center;
+      align-items: center;
+
+    }
+
+    .weather-details{
+        box-shadow: 5px 5px 10px black;
+        position: absolute;
+        top: 75px;
+        right:170px;
+        width: 280px;
+        background-color: rgb(209, 208, 208);
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+        padding: 12px;
+        font-family: Arial, sans-serif;
+        z-index: 1000;
+      }
+    @media  (max-width:545px) {
+        .h2{
+            justify-content:start;
+        }
+        .h2 img{
+         
+         height:85px;
+        
+        }
+    }
+    @media (min-width:1024px) and (max-width:1280px)
+    {
+
+    }

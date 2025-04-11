@@ -1,0 +1,33 @@
+.mini-map-wrapper {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 320px;
+  height: 320px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f6f6f6;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.mini-map-view {
+  flex: 1;
+  height: 100%;
+}
+
+.leaf2 {
+  height: 100%;
+  width: 100%;
+}

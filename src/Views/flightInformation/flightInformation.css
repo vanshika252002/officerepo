@@ -1,0 +1,86 @@
+.flightInformation-wrapper {
+     /* This makes .loading position relative to this */
+     top: 75px;
+     right:170px;
+     position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: auto;
+    width: 18vw;
+    border-radius: 8px;
+    border: 1px solid black;
+    box-shadow: 5px 5px  10px  black;
+  }
+  .fi-loading{
+    background-color: rgb(245, 242, 243);
+    height:158px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
+  
+.flightInformation-header{
+    width:100% ;
+    height:5vh;
+      display: flex;
+      justify-content: start;
+      
+      background-color:#303030;
+     color:white;
+      align-items: center;
+      border-top-left-radius: 7px;
+      border-top-right-radius:7px;
+  }
+  .fi1{
+      width:12%;
+      height:100%;
+      display:flex;
+      
+  }
+  .fi1 button{
+      border:none;
+      width:100%;
+      height:100%;
+      background-color:#303030;
+      color:white;
+      border-top-left-radius: 7px;
+  }
+  .fi2{
+    width:80%;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      border-top-right-radius:7px;
+  }
+  .fi2 span{
+      font-size:20px;
+      font-family:'Open Sans';
+  }
+  .flightInformation-origin{
+    color:black;
+    display: flex;
+    justify-content:start;
+    align-items:center;  
+
+gap:10%}
+.fi-o1 {
+    width:50%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: beige;
+}
+.fi-o2{
+background-color: azure;
+}
+  .wrapper-for-flight-information{
+    border-bottom: 1px solid black ;
+  }
+  .fd{
+     height:80vh;
+     overflow: scroll;
+  }

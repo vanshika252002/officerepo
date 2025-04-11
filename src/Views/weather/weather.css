@@ -1,0 +1,101 @@
+.weather-container-wrapper {
+  position: absolute;
+  top: 75px;
+  right:170px;
+  width: 280px;
+  background-color: rgb(209, 208, 208);
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  padding: 12px;
+  font-family: Arial, sans-serif;
+  z-index: 1000;
+  box-shadow: 5px 5px 10px black;
+}
+
+.weather-btn button{
+
+  background-color: rgb(209, 208, 208);
+  margin-bottom: 5px;
+
+}
+.weather-container-wrapper input {
+  width: 93%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  margin-left:9px;
+}
+.weather-container-wrapper input :hover{
+  border: 2px solid rgb(248, 192, 35);
+  
+    outline:none;
+}
+.weather-container-wrapper input:focus{
+  border: 2px solid rgb(248, 192, 35);
+  
+  outline:none;
+}
+
+
+.locations-list {
+
+  background-color: rgb(209, 208, 208);
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.locations-list h3 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 8px;
+}
+
+
+.custom-item {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s ease-in-out;
+  background-color: rgb(255, 255, 255);
+}
+
+
+.custom-item:hover {
+  background-color: rgb(248, 192, 35);
+}
+
+.weather-details {
+  margin-top: 12px;
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 6px;
+}
+
+.weather-details h2 {
+  font-size: 16px;
+  color: #333;
+}
+
+.weather-details p {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #555;
+}
+.scroll-weather {
+ width: 100%;
+ max-height: 200px;
+ overflow-y: auto; 
+ overflow-x: hidden; 
+ display: flex;
+ flex-direction: column;
+}
