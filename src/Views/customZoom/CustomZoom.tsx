@@ -4,7 +4,7 @@ import L from 'leaflet';
 import { ICONS } from '../../assets';
 import './customZoom.css';
 interface Props{
-  chooseOption:{flight:{setFlight:(value:boolean)=>void},earthquake:{setAlert:(value:boolean)=>void}}
+  chooseOption:{flight:{setFlight:(value:boolean)=>void,flight:boolean},earthquake:{setAlert:(value:boolean)=>void,alert:boolean}}
 }
 const CustomZoom = ({chooseOption}:Props) => {
   const map = useMap();

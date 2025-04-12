@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from 'react';
 import {NearbyFlight} from './Types/types';
 import './nearby.css';
 import { useLazyGetAllFlightsQuery } from '../../Services/Api/liveflight';
+import Loading from '../loading';
 //import Loading from '../loading/Loading';
 
 type details = [string, string, string, number, number, number, number, number, boolean, number];
@@ -35,7 +36,7 @@ const Nearby = ({ chooseOption, setSearchBar, setSelectedLocation, setFlight }: 
   const [lat, setLat] = useState<number | null>(null);
   const [lon, setLon] = useState<number | null>(null);
   const [errorMsg, setErrorMsg] = useState('');
-  const [trigger, { data: liveflight }] = useLazyGetAllFlightsQuery();
+  const [trigger, { data: liveflight ,isLoading :flightLoading}] = useLazyGetAllFlightsQuery();
   const FlightDetails = liveflight?.states || null;
 
 console.log("flight",FlightDetails)
@@ -58,6 +59,11 @@ console.log("flight",FlightDetails)
     } else {
       setErrorMsg('Geolocation is not supported by your browser.');
     }
+    return () => {
+      setLat(null);
+      setLon(null);
+      setErrorMsg('');
+    };
   }, []);
 
  
@@ -99,7 +105,7 @@ console.log("flight",FlightDetails)
 
         <div className="geo-error">
           <p>{errorMsg}</p>
-          <small>Please enable location access in your browser settings and try again.</small>
+         
         </div>
       </div>
     );
@@ -112,7 +118,10 @@ console.log("flight",FlightDetails)
 
   return (
     <div className='near-by-wrappper'>
+   
       <div className="near-by-header">
+         
+        {flightLoading && <Loading/>}
         <div className='near-by-f1'>
           <button onClick={() => {
             setSearchBar(true);
@@ -123,8 +132,13 @@ console.log("flight",FlightDetails)
         </div>
         <div className='near-by-f2'><span>Nearby</span></div>
       </div>
-     
-        <ul className='near-by-list-wrapper'>
+      {!flightLoading && nearbyFlights.length === 0 && lat && lon && (
+  <div className="near-by-lit-wrapper">
+    <p>No nearby flights found within 500 km.</p>
+  </div>
+)}
+      { nearbyFlights.length>0 &&  <ul className='near-by-list-wrapper'>
+   
           {nearbyFlights.map(({ details, distance }: any) => (
             <li key={details[0]} className='nearby' onClick={() => {
               setSelectedLocation({ lat: details[6], lon: details[5], id: details[0] });
@@ -139,6 +153,8 @@ console.log("flight",FlightDetails)
             </li>
           ))}
         </ul>
+}
+
     
     </div>
   );

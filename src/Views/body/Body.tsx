@@ -27,11 +27,11 @@ import Footer from '../footer/Footer';
 import { useGetEarthquakesQuery } from '../../Services/Api/earthquake';
 import CustomZoom from '../customZoom/CustomZoom';
 import Earthquake from '../earthquake/Earthquake';
-import Loading from '../loading/Loading';
+
 import { useLazyGetGeolocationByLatLngQuery } from '../../Services/Api/geolocation';
 import { EarthquakeFeature, Props, Details } from './Types/Types';
 
-const createFlightIcon = (fillColor: string, size = 38, angle = 0) =>
+const createFlightIcon = (fillColor: string, size = 38) =>
   new L.DivIcon({
     html: `
       <svg xmlns="http://www.w3.org/2000/svg"
@@ -74,20 +74,20 @@ const Body = ({
 
   const [earthquakeVisible, setEarthquakeVisible] = useState<boolean>(false);
 
-  const [triggerWeather, { data: weatherData, isLoading: weatherLoading }] =
+  const [triggerWeather, { data: weatherData }] =
     useLazyGetWeatherByCoordsQuery();
   const [triggerGeolocation, { data: geolocation }] =
     useLazyGetGeolocationByLatLngQuery();
 
-  const { data: liveflight, isLoading: flightLoading } =
+  const { data: liveflight} =
     useGetAllFlightsQuery(null);
   const FlightDetails = liveflight?.states || null;
 
-  const { data: earthquakeData, isLoading: earthquakeLoading } =
+  const { data: earthquakeData } =
     useGetEarthquakesQuery({ startTime, endTime });
 
   //console.log("earthquakeData",earthquakeData);
-  console.log('selected angle is', selectedLocation?.angle);
+  // console.log('selected angle is', selectedLocation?.angle);
 
   const MapClickHandler = () => {
     useMapEvents({
@@ -140,7 +140,7 @@ const Body = ({
         <CustomZoom chooseOption={chooseOption} />
 
         <MarkerClusterGroup showCoverageOnHover={false}>
-          {flightLoading && <Loading />}
+        
           {flight &&
             FlightDetails?.map((details: Details) => {
               const isSelected =
@@ -168,7 +168,7 @@ const Body = ({
                           id: details[0],
                           lat: details[6],
                           lon: details[5],
-                          angle: details[9],
+                          
                         });
                       },
                     }}
@@ -189,7 +189,7 @@ const Body = ({
             rotationOrigin="center center "
           >
             <Popup>
-              <strong>angle{selectedLocation.angle}</strong>
+             
               <strong>Flight ID:</strong> {selectedLocation.id} <br />
               <strong>Lat:</strong> {selectedLocation.lat} <br />
               <strong>Lon:</strong> {selectedLocation.lon}
@@ -197,7 +197,7 @@ const Body = ({
           </Marker>
         )}
 
-        {earthquakeLoading && <Loading />}
+   
         {alert &&
           earthquakeData?.features?.map((item: EarthquakeFeature) => {
             const [lng, lat] = item.geometry.coordinates;
@@ -224,7 +224,7 @@ const Body = ({
         {clickedLocation && (
           <Popup position={clickedLocation}>
             <div>
-              {weatherLoading && <p>Loading Weather...</p>}
+            
               {weatherData && (
                 <div className="popup">
                   <h1>

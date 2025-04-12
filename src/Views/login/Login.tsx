@@ -19,7 +19,7 @@ const Login: React.FC = () => {
 
   return (
     <div className='login-wrapper-component'>
-      
+       <div className='login-image'><img src={ICONS.login} /></div>
       <div className={DATA.FormContainer}>
       <Formik
         initialValues={initialValues}

@@ -16,5 +16,5 @@ export const geoLocationApi = createApi({
     })
   }),
 });
-export const { useGetGeolocationByCoordsQuery ,useGetGeolocationByLatLngQuery,useLazyGetGeolocationByLatLngQuery} = geoLocationApi;
+export const { useGetGeolocationByCoordsQuery ,  useLazyGetGeolocationByCoordsQuery,useGetGeolocationByLatLngQuery,useLazyGetGeolocationByLatLngQuery} = geoLocationApi;
  

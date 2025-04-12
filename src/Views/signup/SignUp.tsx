@@ -20,24 +20,25 @@ const SignUp: React.FC = () => {
   const navigate = useNavigate();
   return (
    <div className='signup-wrapper-component'>
+    <div className='login-image'><img src={ICONS.login} /></div>
      <div className={DATA.FormContainer}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={handleSignUpSubmit}
+        onSubmit={(values, actions) => handleSignUpSubmit(values, actions, navigate)}
       >
         <Form className={DATA.Form}>
           <h1>{DATA.SignUp}</h1>
-          <FormInput name={DATA.Email} type={DATA.Email} label={DATA.Email} />
+          <FormInput name={DATA.Email} type={DATA.Email} label="Email" />
           <FormInput
             name={DATA.Password}
             type={DATA.Password}
-            label={DATA.Password}
+            label="Password"
           />
           <FormInput
             name={DATA.ConfirmPassword}
             type={DATA.Password}
-            label={DATA.ConfirmPassword}
+            label="ConfirmPassword"
           />
           <Button
             label={DATA.SignUp}

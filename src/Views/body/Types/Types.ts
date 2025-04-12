@@ -11,15 +11,15 @@ export interface EarthquakeFeature {
 export interface Props {
     selectedLocation: {
       id: string;
-      lat: number;
-      lon: number;
-      angle: number;
+      lat: number|null;
+      lon: number|null;
+      
     } | null;
     setSelectedLocation: (location: {
       id: string;
-      lat: number;
-      lon: number;
-      angle: number;
+      lat: number|null;
+      lon: number|null;
+
     } | null) => void;
     flight: boolean;
     setFlight: (value: boolean) => void;

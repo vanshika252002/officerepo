@@ -1,7 +1,7 @@
 .earthquake-wrapper {
     position: fixed; /* keep fixed if you want it to stay while scrolling */
     top: 107px;       /* instead of margin-top */
-    left: 10px;           /* or wherever you want it */
+    left: 31px;           /* or wherever you want it */
     width: 18vw;
     height: auto;
     background-color: #444;
@@ -137,3 +137,19 @@ width:33px;
     justify-content: space-evenly;
    align-items: center;
 }
+/* Adjust the width of the calendar popup */
+.react-datepicker__month {
+    width:80px; /* Adjust to your preferred width */
+  }
+  
+  /* Adjust the height of the calendar popup */
+  .react-datepicker__month-container {
+    height: auto; /* Adjust to fit the content */
+  }
+  
+  /* Optionally, you can also adjust the input field size */
+  .react-datepicker__input-container input {
+    font-size: 16px; /* Adjust font size of the input field */
+    padding: 10px;  /* Adjust padding to make it bigger/smaller */
+  }
+  

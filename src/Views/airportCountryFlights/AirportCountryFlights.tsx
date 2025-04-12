@@ -67,7 +67,7 @@ const AirportCountryFlights = ({ chooseOption }: AirportCountryFlightsProps) => 
           const flightCountry = detail[2];
           const longitude = detail[5];
           const latitude = detail[6];
-          const angle=detail[9];
+     
           const isExpanded = expandedIcao === icaoCode;
 
           return (
@@ -79,7 +79,7 @@ const AirportCountryFlights = ({ chooseOption }: AirportCountryFlightsProps) => 
                   code.setIcaoCode(icaoCode);
                 }}
               >
-                <div className='logo' onClick={()=>{setSelectedLocation({lat:latitude,lon:longitude,angle:angle,id:icaoCode})}}>
+                <div className='logo' >
                   <img src={ICONS.airports} alt="airport icon" />
                 </div>
                 <div className='formatted'>

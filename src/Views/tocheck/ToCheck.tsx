@@ -19,8 +19,8 @@ import Live from '../live';
 
 interface Props{
   setFlight:(value:boolean)=>void;
-  selectedLocation:{id:string,lat:number,lon:number};
-  setSelectedLocation:(location:{id:string,lat:number,lon:number}|null)=>void;
+  selectedLocation:{id:string,lat:number|null,lon:number|null}|null;
+  setSelectedLocation:(location:{id:string,lat:number|null,lon:number|null}|null)=>void;
   setClickedLocation: (location: [number, number] | null) => void;
 }
 const ToCheck = ({selectedLocation,setSelectedLocation,setFlight}:Props) => {
@@ -114,16 +114,8 @@ const ToCheck = ({selectedLocation,setSelectedLocation,setFlight}:Props) => {
           <div className="h7" onClick={() => {!weatherVisible && !weatherDetails && !flightVisible && !flightData && !airportByCountry  && !airportByCode && !searchingVisible  && !live  && !nearbyVisible && setSearchBar(true)}}>
             {
               <div className="h3" ref={inputRef1}>
-                <img src={ICONS.searchLogo} alt="Search Icon" />
-                <input
-                  type="text"
-                  placeholder="Search Country"
-                  onChange={(e) => {
-                    setSearchedData(e.target.value);
-                    setSearchBar(false);
-                    setSearchingVisible(true);
-                  }}
-                />
+                <img src={ICONS.search} alt="Search Icon" />
+               <span>Search</span>
               </div>
             }
           </div>
@@ -188,7 +180,7 @@ const ToCheck = ({selectedLocation,setSelectedLocation,setFlight}:Props) => {
           {airportByCode && (
             <AirportCountryFlights chooseOption={chooseOption} />
           )}
-          {searchingVisible && <Searching chooseOption={chooseOption} />}
+          {searchingVisible &&  <Searching chooseOption={chooseOption} />}
           {live && (
             <Live chooseOption={chooseOption} setSearchBar={setSearchBar} />
           )}

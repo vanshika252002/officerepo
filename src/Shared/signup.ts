@@ -25,19 +25,23 @@ export const validationSchema = Yup.object({
 
 export const handleSignUpSubmit = async (
   values: SignUpFormValues,
-  { resetForm }: FormikHelpers<SignUpFormValues>
+  { resetForm }: FormikHelpers<SignUpFormValues>,
+  navigate: (path: string) => void
+
 ) => {
   try {
     await createUserWithEmailAndPassword(auth, values.email, values.password);
     toast.success('Signup successful! Welcome!', {
       position: 'top-right',
     });
+    navigate('/login');
   } catch (error: any) {
     console.error(error);
     if (error.code === 'auth/email-already-in-use') {
       toast.error('This email is already registered. Please log in.', {
         position: 'top-right',
       });
+    
     } else {
       toast.error('Something went wrong. Please try again.', {
         position: 'top-right',

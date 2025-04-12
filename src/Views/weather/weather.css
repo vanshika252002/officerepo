@@ -99,3 +99,8 @@
  display: flex;
  flex-direction: column;
 }
+.no-results {
+  color: #ff4444;
+  margin-top: 10px;
+  font-weight: 500;
+}

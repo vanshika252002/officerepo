@@ -18,7 +18,11 @@ import earthquake from './icons/earthquake.png';
 import accordianLogo  from './icons/download.svg';
 import arrow from './icons/arrow.svg';
 import hightlightedflight from './icons/aeroplane-mode.png';
+import login from './icons/login.jpg';
+import search from './icons/search.svg';
 export const ICONS = {
+  search,
+  login,
   hightlightedflight,
   arrow,
   accordianLogo,
