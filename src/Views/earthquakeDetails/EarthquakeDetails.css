@@ -112,3 +112,11 @@
     display:flex;
     justify-content: end;
 }
+@media  (max-width:545px) {
+    .earthquake-details-wrapper {
+   height:auto;
+   width:auto;
+    }
+   
+    
+   }

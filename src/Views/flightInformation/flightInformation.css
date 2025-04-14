@@ -84,3 +84,10 @@ background-color: azure;
      height:80vh;
      overflow: scroll;
   }
+
+  @media  (max-width:545px) {
+    .flightInformation-wrapper {
+      right:15%;
+      width: 200px;
+    }
+   }

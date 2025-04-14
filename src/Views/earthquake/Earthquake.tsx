@@ -1,11 +1,13 @@
 import './earthquake.css';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useGetEarthquakesQuery } from '../../Services/Api/earthquake';
-import { skipToken } from '@reduxjs/toolkit/query';
+import { useLazyGetEarthquakesQuery } from '../../Services/Api/earthquake';
+import { useDebounce } from '../debouncing/useDebounce';
+
 import EarthquakeDetails from '../earthquakeDetails';
 import { EarthquakeProps, EarthquakeFeature } from './Types/types';
+import Loading from '../loading';
 
 const Earthquake = ({
   setFooterVisible,
@@ -19,10 +21,10 @@ const Earthquake = ({
 
   const [selectedEarthquake, setSelectedEarthquake] = useState<EarthquakeFeature | null>(null);
 
-  // Function to format a Date object to 'yyyy-mm-dd'
+ 
   const formatDate = (date: Date): string => {
     if (!(date instanceof Date) || isNaN(date.getTime())) {
-      return ''; // return empty string if date is invalid
+      return ''; 
     }
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -30,28 +32,31 @@ const Earthquake = ({
     return `${year}-${month}-${day}`;
   };
 
-  // Function to parse a string 'yyyy-mm-dd' to Date object
+ 
   const parseDateString = (dateString: string): Date => {
     const parts = dateString.split('-');
     const year = parseInt(parts[0]);
-    const month = parseInt(parts[1]) - 1; // months are 0-based
+    const month = parseInt(parts[1]) - 1; 
     const day = parseInt(parts[2]);
     return new Date(year, month, day);
   };
 
-  const { data: earthquakeData } = useGetEarthquakesQuery(
-    startTime && endTime
-      ? { startTime: startTime, endTime: endTime }
-      : skipToken
-  );
+  const debouncedStartTime = useDebounce(startTime, 500);
+  const debouncedEndTime = useDebounce(endTime, 500);
 
-  // Format start time and end time for use in the datepicker
+  const [trigger, { data: earthquakeData, isLoading}] = useLazyGetEarthquakesQuery();
+  useEffect(() => {
+    if (debouncedStartTime && debouncedEndTime) {
+      trigger({ startTime: debouncedStartTime, endTime: debouncedEndTime });
+    }
+  }, [debouncedStartTime, debouncedEndTime, trigger]);
+  
   const formattedStartTime = startTime ? parseDateString(startTime) : null;
   const formattedEndTime = endTime ? parseDateString(endTime) : null;
 
   const Timestamp = (timestamp: number) => {
     const date = new Date(timestamp);
-    date.setMinutes(date.getMinutes() + 330); // Adjust for UTC+05:30
+    date.setMinutes(date.getMinutes() + 330); 
     return date.toISOString().replace('T', ' ').slice(0, 19) + '(UTC+05:30)';
   };
 
@@ -71,17 +76,17 @@ const Earthquake = ({
           <strong>Earthquake</strong>
         </h2>
       </div>
-
+  {isLoading && <Loading/>}
       <div className="earthquake-timer">
         <div className="start">
           <h3>Start Time</h3>
           <DatePicker
-            selected={formattedStartTime} // Date object passed here
+            selected={formattedStartTime} 
             onChange={(date: Date | null) => {
-              if (date) {
-                setStartTime(formatDate(date)); // Set formatted date string
-              }
-            }} // Handle null value as well
+             
+                setStartTime(date ? formatDate(date) : ''); 
+              
+            }} 
             dateFormat="yyyy-MM-dd"
             placeholderText="YYYY-MM-DD"
             
@@ -90,12 +95,12 @@ const Earthquake = ({
         <div className="end">
           <h3>End Time</h3>
           <DatePicker
-            selected={formattedEndTime} // Date object passed here
+            selected={formattedEndTime} 
             onChange={(date: Date | null) => {
-              if (date) {
-                setEndTime(formatDate(date)); // Set formatted date string
-              }
-            }} // Handle null value as well
+             
+              setEndTime(date ? formatDate(date) :'');
+              
+            }} 
             dateFormat="yyyy-MM-dd"
             placeholderText="YYYY-MM-DD"
           />
@@ -140,8 +145,8 @@ const Earthquake = ({
           setSelectedEarthquake={setSelectedEarthquake}
           place={selectedEarthquake.properties.place}
           time={Timestamp(selectedEarthquake.properties.time)}
-          lat={selectedEarthquake.geometry.coordinates[0]}
-          lon={selectedEarthquake.geometry.coordinates[1]}
+          lat={selectedEarthquake.geometry.coordinates[1]}
+          lon={selectedEarthquake.geometry.coordinates[0]}
         />
       )}
     </div>

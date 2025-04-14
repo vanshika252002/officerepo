@@ -1,7 +1,7 @@
 import { useMap } from 'react-leaflet';
 import 'leaflet-minimap/dist/Control.MiniMap.min.css';
 import 'leaflet-minimap';
-
+import './minimapview.css';
 import * as L from 'leaflet';
 
 

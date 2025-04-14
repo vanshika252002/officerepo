@@ -7,19 +7,23 @@ import { useState } from 'react';
 interface AirportCountryFlightsProps {
   chooseOption: {
     airport: {
-      setAirportByCode: (value: boolean) => void;
-      setAirportByCountry: (value: boolean) => void;
+    
       country: { country: string };
       code: {
         setIcaoCode: (value: string) => void;
         icaoCode: string;
       };
+     
     };
+    
   };
+  setVisible:(value:string)=>void;
+  setSelectedLocation:any;
+  setFlight:any;
 }
 type Details = [string, string, string, number, number, number, number, number, boolean, number];
 
-const AirportCountryFlights = ({ chooseOption }: AirportCountryFlightsProps) => {
+const AirportCountryFlights = ({ chooseOption,setVisible ,setSelectedLocation,setFlight}: AirportCountryFlightsProps) => {
   const { airport } = chooseOption;
   const { code } = airport;
   const { country } = airport;
@@ -43,8 +47,9 @@ const AirportCountryFlights = ({ chooseOption }: AirportCountryFlightsProps) => 
       <div className='country-flight-header'>
         <div className='country-flight-f1'>
           <button onClick={() => {
-            airport.setAirportByCode(false);
-            airport.setAirportByCountry(true);
+           setVisible("airports");
+           setFlight(false);
+           setSelectedLocation(null);
           }}>
             <img src={ICONS.arrow} />
           </button>
@@ -54,7 +59,7 @@ const AirportCountryFlights = ({ chooseOption }: AirportCountryFlightsProps) => 
         </div>
       </div>
 
-      
+      {flightData?.states==null &&  <div className="fi-no-results"> Data is not Available right now  </div>}
         {!isLoading && filteredFlights?.length === 0 && (
           <div className='no-flights-found'>
             <p>No flights found for <strong>{country.country}</strong>.</p>
@@ -89,14 +94,22 @@ const AirportCountryFlights = ({ chooseOption }: AirportCountryFlightsProps) => 
                   <img src={ICONS.accordianLogo} />
                 </div>
               </button>
-
+                
               {isExpanded && (
-                <div className="accordion-content">
-                  <p><strong>ICAO Code:</strong> {icaoCode}</p>
+                <div>
+                  
+                  
+                  <div className="accordion-content">
+                  <div className='acc-btn'><button onClick={() => {
+              setSelectedLocation({ lat: latitude, lon:longitude, id:icaoCode });
+              setFlight(true);
+            }}><img src={ICONS.showonmap}/><span>Show on Map</span></button></div>
+                  <div><p><strong>ICAO Code:</strong> {icaoCode}</p>
                   <p><strong>Country:</strong> {flightCountry}</p>
                   <p><strong>Latitude:</strong> {latitude}</p>
-                  <p><strong>Longitude:</strong> {longitude}</p>
+                  <p><strong>Longitude:</strong> {longitude}</p></div>
                 </div>
+                  </div>
               )}
             </div>
           );

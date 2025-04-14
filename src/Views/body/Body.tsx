@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import * as L from 'leaflet';
+import { Tooltip } from 'react-leaflet';
 
 // import 'leaflet-rotatedmarker';
 
@@ -67,8 +68,8 @@ const Body = ({
     earthquake: { alert, setAlert },
   };
 
-  const [startTime, setStartTime] = useState<string>('2024-03-01'); //forearthquake
-  const [endTime, setEndTime] = useState<string>('2024-04-01');
+  const [startTime, setStartTime] = useState<string|null>('2024-03-01'); //forearthquake
+  const [endTime, setEndTime] = useState<string|null>('2024-04-01');
   console.log('start time and end time int the body ', startTime, ' ', endTime);
   const [footerVisible, setFooterVisible] = useState<boolean>(true);
 
@@ -123,7 +124,7 @@ const Body = ({
         zoom={5}
         style={{ height: '100%', width: '100%' }}
         zoomControl={false}
-        minZoom={3}
+        minZoom={2}
         maxBounds={[
           [85, -180],
           [-85, 180],
@@ -138,66 +139,71 @@ const Body = ({
         {flight && selectedLocation && <FlyToSelectedFlight />}
         <MapClickHandler />
         <CustomZoom chooseOption={chooseOption} />
-
         <MarkerClusterGroup showCoverageOnHover={false}>
         
-          {flight &&
-            FlightDetails?.map((details: Details) => {
-              const isSelected =
-                selectedLocation?.id === details[0] &&
-                selectedLocation?.lat === details[6] &&
-                selectedLocation?.lon === details[5];
+        {flight &&
+          FlightDetails?.map((details: Details) => {
+            const isSelected =
+              selectedLocation?.id === details[0] &&
+              selectedLocation?.lat === details[6] &&
+              selectedLocation?.lon === details[5];
 
-              if (isSelected) return null;
+            if (isSelected) return null;
 
-              if (details[5] !== null && details[6] !== null) {
-                if (details[0] == '710054') {
-                  console.log('angle is ', details[9]);
-                }
-
-                return (
-                  <Marker
-                    key={details[0]}
-                    position={[details[6], details[5]]}
-                    icon={createFlightIcon('green', 42)}
-                    rotationAngle={0}
-                    rotationOrigin="center center"
-                    eventHandlers={{
-                      click: () => {
-                        setSelectedLocation({
-                          id: details[0],
-                          lat: details[6],
-                          lon: details[5],
-                          
-                        });
-                      },
-                    }}
-                  ></Marker>
-                );
-              }
-              return null;
-            })}
-        </MarkerClusterGroup>
-
-        {flight && selectedLocation?.lat && selectedLocation?.lon && (
-          <Marker
-            key={selectedLocation.id}
-            position={[selectedLocation.lat, selectedLocation.lon]}
-            icon={createFlightIcon('red', 42)}
-            zIndexOffset={1000}
-            rotationAngle={0}
-            rotationOrigin="center center "
-          >
-            <Popup>
+            if (details[5] !== null && details[6] !== null) {
              
-              <strong>Flight ID:</strong> {selectedLocation.id} <br />
-              <strong>Lat:</strong> {selectedLocation.lat} <br />
-              <strong>Lon:</strong> {selectedLocation.lon}
-            </Popup>
-          </Marker>
-        )}
+              return (
+                <Marker
+                  key={details[0]}
+                  position={[details[6], details[5]]}
+                  icon={createFlightIcon('green', 42)}
+                  rotationAngle={0}
+                  rotationOrigin="center center"
+                  eventHandlers={{
+                    click: () => {
+                      setSelectedLocation({
+                        id: details[0],
+                        lat: details[6],
+                        lon: details[5],
+                        
+                      });
+                    },
+                  }}
+                >
+            <Tooltip>
+         <strong>Flight ID:</strong> {details[0]}<br />
+            <strong>Lat:</strong>  {details[6]} <br />
+            <strong>Lon:</strong> {details[5]}
+         </Tooltip>
+           
 
-   
+                </Marker>
+              );
+            }
+            return null;
+          })}
+      </MarkerClusterGroup>
+
+      {flight && selectedLocation?.lat && selectedLocation?.lon && (
+        <Marker
+          key={selectedLocation.id}
+          position={[selectedLocation.lat, selectedLocation.lon]}
+          icon={createFlightIcon('red', 42)}
+          zIndexOffset={1000}
+          rotationAngle={0}
+          rotationOrigin="center center "
+        >
+         <Tooltip>
+         <strong>Flight ID:</strong> {selectedLocation.id} <br />
+            <strong>Lat:</strong> {selectedLocation.lat} <br />
+            <strong>Lon:</strong> {selectedLocation.lon}
+         </Tooltip>
+           
+            
+        </Marker>
+      )}
+
+
         {alert &&
           earthquakeData?.features?.map((item: EarthquakeFeature) => {
             const [lng, lat] = item.geometry.coordinates;
@@ -211,12 +217,14 @@ const Body = ({
                 position={[lat, lng]}
                 icon={EarthquakeAlert}
               >
-                <Popup>
-                  <h2>
+                 <Tooltip direction="top" offset={[0, -20]} opacity={1} permanent={false}>
+                  <div className='earthquake-tooltip'>
+                  
                     <strong>{item.properties.place}</strong>
-                  </h2>
+                  
                   <p>Magnitude: {item.properties.mag}</p>
-                </Popup>
+                  </div>
+              </Tooltip>
               </Marker>
             );
           })}

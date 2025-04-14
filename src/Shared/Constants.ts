@@ -20,7 +20,7 @@ const WILDCARD_ROUTES = {
 const ROUTES_CONFIG = {
   HOMEPAGE: {
     path: ROUTES.HOMEPAGE,
-    title: 'Master Plan',
+    title: 'Trackit Live',
   },
   LOGOUT: {
     path: ROUTES.LOGOUT,

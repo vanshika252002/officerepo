@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { signOut } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { auth } from '../../Components/firebase';
-import { Button } from '../../Components/Common';
+
 import { useLazyGetWeatherByCoordsQuery } from '../../Services/Api/weather';
 import { updateAuthTokenRedux } from '../../Store/Common';
 import './tocheck.css';
@@ -14,7 +14,7 @@ import FlightInformation from '../flightInformation';
 import Nearby from '../nearby';
 import Airports from '../airports';
 import AirportCountryFlights from '../airportCountryFlights';
-import Searching from '../searching';
+//import Searching from '../searching';
 import Live from '../live';
 
 interface Props{
@@ -23,54 +23,33 @@ interface Props{
   setSelectedLocation:(location:{id:string,lat:number|null,lon:number|null}|null)=>void;
   setClickedLocation: (location: [number, number] | null) => void;
 }
-const ToCheck = ({selectedLocation,setSelectedLocation,setFlight}:Props) => {
+const ToCheck = ({setSelectedLocation,setFlight}:Props) => {
   const dispatch = useDispatch();
 
-  const [searchingVisible, setSearchingVisible] = useState<boolean>(false);
-  const [searchedData, setSearchedData] = useState<string>('');
+const [visible,setVisible]=useState<string>(""); //visibility
+const [clickedLocationWeather, setClickedLocationWeather] = useState<
+{lat:number,lon:number} | null
+>(null);
 
-  const [searchBar, setSearchBar] = useState<boolean>(false);
-  const [weatherDetails, setWeatherDetails] = useState<boolean>(false); // weather details view
-  const [weatherVisible, setWeatherVisible] = useState<boolean>(false); // search UI for weather
   const [place, setPlace] = useState('');
-
-  const [flightVisible, setFlightVisible] = useState<boolean>(false);
-  const [flightData, setFlightData] = useState<boolean>(false); // flight by route details
-  const [origin, setOrigin] = useState('');
-
-  const [nearbyVisible, setNearByVisible] = useState<boolean>(false);
-  const [live, setLive] = useState<boolean>(false);
-
-  const [airportByCountry, setAirportByCountry] = useState<boolean>(false);
-  const [airportByCode, setAirportByCode] = useState<boolean>(false);
+   const [origin, setOrigin] = useState('');
   const [country, setCountry] = useState<string>('');
   const [icaoCode, setIcaoCode] = useState<string>('');
 
 
   const chooseOption = {
-    searching: { searchedData, setSearchedData, setSearchingVisible },
     weather: {
-      weatherDetails,
-      setWeatherDetails,
-      weatherVisible,
-      setWeatherVisible,
-      setSelectedLocation,
+      setClickedLocationWeather,
       place: { place, setPlace },
     },
     flight: {
-      flightVisible,
-      setFlightVisible,
-      flightData,
-      setFlightData,
+    
       origin: { origin, setOrigin },
     },
-    nearby: { nearbyVisible, setNearByVisible },
-    live: { live, setLive },
+   
+   
     airport: {
-      airportByCountry,
-      setAirportByCountry,
-      airportByCode,
-      setAirportByCode,
+  
       country: { country, setCountry },
       code: { icaoCode, setIcaoCode },
     },
@@ -80,10 +59,10 @@ const ToCheck = ({selectedLocation,setSelectedLocation,setFlight}:Props) => {
     useLazyGetWeatherByCoordsQuery();
 
   useEffect(() => {
-    if (selectedLocation) {
-      triggerWeather({ lat: selectedLocation.lat, lon: selectedLocation.lon });
+    if (clickedLocationWeather) {
+      triggerWeather({ lat: clickedLocationWeather.lat, lon: clickedLocationWeather.lon });
     }
-  }, [selectedLocation, triggerWeather]);
+  }, [clickedLocationWeather, triggerWeather]);
 
   const handleLogout = () => {
     signOut(auth);
@@ -95,7 +74,7 @@ const ToCheck = ({selectedLocation,setSelectedLocation,setFlight}:Props) => {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (!inputRef.current?.contains(event.target as Node)) {
-        setSearchBar(false);
+        setVisible("");
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -107,44 +86,40 @@ const ToCheck = ({selectedLocation,setSelectedLocation,setFlight}:Props) => {
   return (
     <div className="h1">
       <div className="h2">
-        <img src={ICONS.headerLogo} alt="Header Logo" />
+        <img src={ICONS.trackitlive} alt="Header Logo" />
       </div>
       <div className="h5">
         <div className="refrence-to-options" ref={inputRef}>
-          <div className="h7" onClick={() => {!weatherVisible && !weatherDetails && !flightVisible && !flightData && !airportByCountry  && !airportByCode && !searchingVisible  && !live  && !nearbyVisible && setSearchBar(true)}}>
+          <div className="h7" onClick={() => { setVisible("searchbar")}}>
             {
               <div className="h3" ref={inputRef1}>
                 <img src={ICONS.search} alt="Search Icon" />
-               <span>Search</span>
+               {/* <span>Search</span> */}
               </div>
             }
           </div>
-          {searchBar && (
+          {visible=="searchbar"  && (
             <SearchBar
               chooseOption={chooseOption}
-              setSearchBar={setSearchBar}
+              setVisible={setVisible}
             />
           )}
-          {weatherVisible && (
-            <Weather chooseOption={chooseOption} setSearchBar={setSearchBar} />
+          {visible=="weather" && (
+            <Weather chooseOption={chooseOption} setVisible={setVisible} />
           )}
-          {weatherDetails && weatherData && (
+          {visible=="weatherdetails" && weatherData && (
             <div
-              className="weather-details"
+              className="weather-details-ww"
               onClick={(e) => e.stopPropagation()}
             >
-              <div>
-                <Button
-                  onClick={() => {
-                    setWeatherDetails(false);
-                    setWeatherVisible(true);
-                  }}
-                  label="x"
-                />
-              </div>
-              <h2>
+               <div className='weather-btn'>
+      <button onClick={()=>{setVisible("weather")}}> <img src={ICONS.arrow}/></button>
+      <div className='w1'><span>Weather</span></div>
+      </div>
+              <div className='weather-ww1'>
+              <h3>
                 <strong>{place}</strong>
-              </h2>
+              </h3>
               <p>
                 <strong>Weather:</strong> {weatherData.weather[0]?.description}
               </p>
@@ -157,32 +132,36 @@ const ToCheck = ({selectedLocation,setSelectedLocation,setFlight}:Props) => {
               <p>
                 <strong>Wind Speed:</strong> {weatherData.wind?.speed} m/s
               </p>
+                </div>
             </div>
           )}
-          {flightVisible && (
+          {visible=="flight-by-route" && (
             <FlightByRoute
               chooseOption={chooseOption}
-              setSearchBar={setSearchBar}
+             setVisible={setVisible}
             />
           )}
-          {flightData && <FlightInformation chooseOption={chooseOption} />}
-          {nearbyVisible && (
+          {visible=="flight-details" && <FlightInformation chooseOption={chooseOption} setVisible={setVisible} />}
+          {visible=="nearby" && (
             <Nearby
-              chooseOption={chooseOption}
-              setSearchBar={setSearchBar}
+            
+              
               setSelectedLocation={setSelectedLocation}
               setFlight={setFlight}
+              setVisible={setVisible}
             />
           )}
-          {airportByCountry && (
-            <Airports chooseOption={chooseOption} setSearchBar={setSearchBar} />
+          {visible=="airports" && (
+            <Airports chooseOption={chooseOption} setVisible={setVisible} />
           )}
-          {airportByCode && (
-            <AirportCountryFlights chooseOption={chooseOption} />
+          {visible=="airport-by-code" && (
+            <AirportCountryFlights chooseOption={chooseOption} setVisible={setVisible} setSelectedLocation={setSelectedLocation}
+            setFlight={setFlight}/>
           )}
-          {searchingVisible &&  <Searching chooseOption={chooseOption} />}
-          {live && (
-            <Live chooseOption={chooseOption} setSearchBar={setSearchBar} />
+          
+          {visible=="live-flight" && (
+            <Live setVisible={setVisible}    setSelectedLocation={setSelectedLocation}
+            setFlight={setFlight} />
           )}
         </div>
         <div className="h4">

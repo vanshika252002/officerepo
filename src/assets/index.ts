@@ -20,7 +20,13 @@ import arrow from './icons/arrow.svg';
 import hightlightedflight from './icons/aeroplane-mode.png';
 import login from './icons/login.jpg';
 import search from './icons/search.svg';
+import showonmap from './icons/showonmap.svg';
+import trackitlive from './icons/trackitlive.png';
+import search1 from './icons/search1.svg';
 export const ICONS = {
+  search1,
+  trackitlive,
+  showonmap,
   search,
   login,
   hightlightedflight,

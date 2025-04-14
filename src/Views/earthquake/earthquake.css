@@ -153,3 +153,10 @@ width:33px;
     padding: 10px;  /* Adjust padding to make it bigger/smaller */
   }
   
+  @media  (max-width:545px) {
+    .earthquake-wrapper {
+      right:15%;
+      width: 200px;
+    }
+   }
+  

@@ -86,6 +86,13 @@
 }
 
 
+@media (max-width:545px) {
+  .searchbar-wrapper{
+     right:15%;
+     width: 200px;
+     
+  }
+}
 /* Close Button */
 /* .weather-overlay .close-btn {
   position: absolute;

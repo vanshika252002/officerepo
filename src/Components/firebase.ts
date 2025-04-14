@@ -3,17 +3,15 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBjzhZDs5ULytrqADs7KwIDjK3qjgQX3Oc',
-  authDomain: 'flightradar-1990b.firebaseapp.com',
-  projectId: 'flightradar-1990b',
-  storageBucket: 'flightradar-1990b.firebasestorage.app',
-  messagingSenderId: '697508313818',
-  appId: '1:697508313818:web:f48bb17b114a5031b9c3e3',
-  measurementId: 'G-Q12692W10R',
+  apiKey: "AIzaSyC5evclnia2KOeej4yf9UMRIr3bgD8iH4I",
+  authDomain: "flightradar25-09-2002.firebaseapp.com",
+  projectId: "flightradar25-09-2002",
+  storageBucket: "flightradar25-09-2002.firebasestorage.app",
+  messagingSenderId: "434355186736",
+  appId: "1:434355186736:web:2bb51c9cbd4d06b60d51f5",
+  measurementId: "G-GJ0TDMFT3F"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export default app;

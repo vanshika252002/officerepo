@@ -58,3 +58,33 @@ z-index: 5000;
   color:white;
   align-self: center;
 }
+.mini-map-option2 button{
+  width: 100%;
+  height: 100%;
+}
+@media  (max-width:545px) {
+  .footer {
+   left:0%;
+    width:61px;
+    border-radius:45px;
+  }
+  .mini-map-option2{
+   
+        right:15%;
+        width: 100px;
+     
+    
+  }
+  
+  .mini-map-option2 img{
+    width:50%;
+    height:50%;
+  }
+  .mini-map-option2 button{
+    width:82%;
+  }
+  .mini-map-option2 span{
+    font-size: 10px;
+  }
+  
+ }

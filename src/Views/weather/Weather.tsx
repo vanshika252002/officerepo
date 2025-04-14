@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
-import { Input ,Button} from '../../Components/Common';
+import { Input } from '../../Components/Common';
 import Loading from '../loading';
 import{ useLazyGetGeolocationByCoordsQuery } from "../../Services/Api/geolocation";
 import { useDebounce } from '../debouncing/useDebounce';
 // import { useGetWeatherByCoordsQuery } from "../../Services/Api/weather";
 import './weather.css'
+import { ICONS } from '../../assets';
 interface weatherprops{
 chooseOption:any;
- setSearchBar:any;
+ setVisible:any;
 
 }
-function Weather({chooseOption,setSearchBar}:weatherprops) {
+function Weather({chooseOption,setVisible}:weatherprops) {
   const [city, setCity] = useState(""); 
   const [locations, setLocations] = useState([]); 
  const debouncedCity = useDebounce(city, 400);
@@ -37,8 +38,12 @@ function Weather({chooseOption,setSearchBar}:weatherprops) {
 //console.log("setWeathervisible",weatherVisible)
   return (
     <div className="weather-container-wrapper" onClick={(e)=>e.stopPropagation()}>
-      <div className='weather-btn'><Button onClick={()=>{chooseOption.weather.setWeatherVisible(false);setSearchBar(true)}} label="x"/></div>
-      <div>
+      <div className='weather-btn'>
+      <button onClick={()=>{setVisible("searchbar")}}> <img src={ICONS.arrow}/></button>
+      <div className='w1'><span>Weather</span></div>
+      </div>
+      
+      <div className='w2'>
         <Input placeholder="Enter a place" onChange={(e) => {setCity(e.target.value)}} />
       </div>
       {isLoading && <Loading />}
@@ -54,15 +59,15 @@ function Weather({chooseOption,setSearchBar}:weatherprops) {
     )}
     <div className='scroll-weather'>
     {locations.map((location: any, index: number) => (
-      <div 
+      <button
         key={index} 
         className="custom-item" 
-        onClick={() =>{ chooseOption.weather.place.setPlace(location.formatted),chooseOption.weather.setSelectedLocation({ lat: location.geometry.lat, lon: location.geometry.lng }),chooseOption.weather.setWeatherVisible(false),chooseOption.weather.setWeatherDetails(true)}
+        onClick={() =>{ chooseOption.weather.place.setPlace(location.formatted),chooseOption.weather.setClickedLocationWeather({lat:location.geometry.lat,lon:location.geometry.lng}),setVisible("weatherdetails")}
    
       }
       >
         <strong>{location.formatted}</strong>  ({location.geometry.lat}, {location.geometry.lng})
-      </div>
+      </button>
     ))}
     </div>
     

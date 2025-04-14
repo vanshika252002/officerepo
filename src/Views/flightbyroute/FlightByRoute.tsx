@@ -4,15 +4,14 @@ import './flightbyroute.css';
 interface RouteProps {
   chooseOption: {
     flight: {
-      setFlightVisible: (value: boolean) => void;
-      setFlightData: (value: boolean) => void;
+     
       origin: { origin: string; setOrigin: (value: string) => void };
     };
   };
-  setSearchBar: (value: boolean) => void;
+  setVisible: (value:string) => void;
 }
 
-const FlightByRoute = ({ chooseOption, setSearchBar }: RouteProps) => {
+const FlightByRoute = ({ chooseOption, setVisible}: RouteProps) => {
   const [originInput, setOriginInput] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,8 +22,7 @@ const FlightByRoute = ({ chooseOption, setSearchBar }: RouteProps) => {
 
   const handleSearch = () => {
     if (originInput.trim() !== '') {
-      chooseOption.flight.setFlightData(true);
-      chooseOption.flight.setFlightVisible(false);
+     setVisible("flight-details");
     }
   };
 
@@ -34,8 +32,8 @@ const FlightByRoute = ({ chooseOption, setSearchBar }: RouteProps) => {
         <div
           className="f1"
           onClick={() => {
-            setSearchBar(true);
-            chooseOption.flight.setFlightVisible(false);
+            setVisible("searchbar")
+            
           }}
         >
           <button aria-label="Close Flight By Route">x</button>

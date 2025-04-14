@@ -6,14 +6,12 @@ import './airports.css';
 interface Airports {
   chooseOption: {
     airport: {
-      setAirportByCountry: (value: boolean) => void;
-      setAirportByCode: (value: boolean) => void;
       country: {
         setCountry: (countryName: string) => void;
       };
     };
   };
-  setSearchBar: (value: boolean) => void;
+  setVisible: (value:string) => void;
 }
 interface Data {
   components: {
@@ -24,7 +22,7 @@ interface Data {
   };
 }
 
-const Airports = ({ chooseOption, setSearchBar }: Airports) => {
+const Airports = ({ chooseOption, setVisible }: Airports) => {
   const { data: airports, isLoading } =
     useGetGeolocationByCoordsQuery('airport');
 
@@ -41,8 +39,7 @@ const Airports = ({ chooseOption, setSearchBar }: Airports) => {
         <div className="airport-f1">
           <button
             onClick={() => {
-              chooseOption.airport.setAirportByCountry(false),
-                setSearchBar(true);
+             setVisible("searchbar")
             }}
           >
             <img src={ICONS.arrow} />
@@ -61,8 +58,7 @@ const Airports = ({ chooseOption, setSearchBar }: Airports) => {
                 chooseOption.airport.country.setCountry(
                   item.components.country
                 );
-                chooseOption.airport.setAirportByCountry(false);
-                chooseOption.airport.setAirportByCode(true);
+             setVisible("airport-by-code")
               }}
             >
               <div className="flag">

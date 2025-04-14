@@ -8,10 +8,7 @@ import Loading from '../loading';
 type details = [string, string, string, number, number, number, number, number, boolean, number];
 
 interface NearbyProps {
-  chooseOption: {
-    nearby: { setNearByVisible: (value: boolean) => void };
-  };
-  setSearchBar: (value: boolean) => void;
+  setVisible: (value:string) => void;
   setFlight: (value: boolean) => void;
   setSelectedLocation: (
     location: { lat: number; lon: number; id: string } | null
@@ -32,7 +29,7 @@ function getDistanceFromLatLonInKm(lat1: number, lon1: number, lat2: number, lon
   return R * c;
 }
 
-const Nearby = ({ chooseOption, setSearchBar, setSelectedLocation, setFlight }: NearbyProps) => {
+const Nearby = ({ setVisible, setSelectedLocation, setFlight }: NearbyProps) => {
   const [lat, setLat] = useState<number | null>(null);
   const [lon, setLon] = useState<number | null>(null);
   const [errorMsg, setErrorMsg] = useState('');
@@ -94,8 +91,7 @@ console.log("flight",FlightDetails)
         <div className="near-by-header">
           <div className='near-by-f1'>
             <button onClick={() => {
-              setSearchBar(true);
-              chooseOption.nearby.setNearByVisible(false);
+             setVisible("searchbar")
               setFlight(false);
               setSelectedLocation(null);
             }}>x</button>
@@ -124,15 +120,15 @@ console.log("flight",FlightDetails)
         {flightLoading && <Loading/>}
         <div className='near-by-f1'>
           <button onClick={() => {
-            setSearchBar(true);
-            chooseOption.nearby.setNearByVisible(false);
+          setVisible("searchbar")
             setFlight(false);
             setSelectedLocation(null);
           }}>x</button>
         </div>
         <div className='near-by-f2'><span>Nearby</span></div>
       </div>
-      {!flightLoading && nearbyFlights.length === 0 && lat && lon && (
+      {liveflight?.states===null &&  <div className="fi-no-results"> Data is not Available right now  </div>}
+      {  !flightLoading && nearbyFlights.length === 0 && lat && lon && (
   <div className="near-by-lit-wrapper">
     <p>No nearby flights found within 500 km.</p>
   </div>

@@ -28,6 +28,7 @@ function App() {
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <HelmetProvider>
+         
             <RouterProvider router={router} />
           </HelmetProvider>
           <ToastContainer />

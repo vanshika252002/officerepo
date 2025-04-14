@@ -25,7 +25,7 @@
   }
   
   .near-by-f1 {
-    width: 9%;
+    width: 18%;
     height: 100%;
     display: flex;
     justify-content: start;
@@ -190,4 +190,10 @@
   .retry-btn:hover {
     background-color: #0056b3;
   }
+  @media  (max-width:545px) {
+    .near-by-wrappper {
+      right:15%;
+      width: 200px;
+    }
+   }
   

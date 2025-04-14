@@ -18,15 +18,16 @@ interface FlightDetail {
 interface FlightInformationProps {
   chooseOption: {
     flight: {
-      setFlightData: (value: boolean) => void;
-      setFlightVisible: (value: boolean) => void;
       origin: { origin: string; setOrigin: (value: string) => void };
     };
+  
   };
+  setVisible:(value:string)=>void;
 }
 
-const FlightInformation = ({ chooseOption }: FlightInformationProps) => {
+const FlightInformation = ({chooseOption, setVisible }: FlightInformationProps) => {
   const { data: liveflight, isLoading, error } = useGetAllFlightsQuery(null);
+  console.log("liveflights",liveflight);
   const FlightDetails: FlightDetail[] =
     liveflight?.states?.map((tuple: any) => ({
       icao24: tuple[0],
@@ -41,7 +42,7 @@ const FlightInformation = ({ chooseOption }: FlightInformationProps) => {
       velocity: tuple[9],
     })) || [];
 
-  const originFilter = chooseOption.flight.origin.origin.trim().toLowerCase();
+  const originFilter = chooseOption?.flight?.origin?.origin.trim().toLowerCase();
   const filteredFlights = FlightDetails.filter(
     (flight) => flight.originCountry.toLowerCase() === originFilter && flight.latitude && flight.longitude
   );
@@ -50,7 +51,7 @@ const FlightInformation = ({ chooseOption }: FlightInformationProps) => {
     <div className="flightInformation-wrapper">
       <div className="flightInformation-header">
         <div className="fi1">
-          <button onClick={() => { chooseOption.flight.setFlightData(false); chooseOption.flight.setFlightVisible(true); }} aria-label="Close Flight Information">x</button>
+          <button onClick={() => {setVisible("flight-by-route") }} aria-label="Close Flight Information">x</button>
         </div>
         <div className="fi2">
           <span>Flights</span>
@@ -58,9 +59,10 @@ const FlightInformation = ({ chooseOption }: FlightInformationProps) => {
       </div>
       {isLoading && <Loading />}
       {error && <div className="fi-error">Error fetching flights. Please try again.</div>}
-      {filteredFlights.length === 0 && !isLoading && (
+      {liveflight?.states!=null &&  filteredFlights.length === 0 && !isLoading && (
         <div className="fi-no-results">No flights found for the specified origin.</div>
       )}
+      {liveflight?.states==null &&  <div className="fi-no-results"> Data is not Available right now  </div>}
       {filteredFlights.length > 0 && (
         <div className="fd">
           {filteredFlights.map((flight) => (

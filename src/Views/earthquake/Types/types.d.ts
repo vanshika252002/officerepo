@@ -3,8 +3,8 @@ export interface EarthquakeProps {
     setEarthquakeVisible: (value: boolean) => void;
     setStartTime:(value:string)=>void;
     setEndTime:(value:string)=>void;
-    startTime:string;
-    endTime:string;
+    startTime:string|null;
+    endTime:string|null;
     setAlert:(value:boolean)=>void;
   }
  export  interface EarthquakeFeature {

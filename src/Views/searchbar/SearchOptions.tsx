@@ -5,9 +5,9 @@ import './searchoptions.css';
 import { ICONS } from '../../assets';
 type SearchbarProps={
  chooseOption:any;
- setSearchBar:any;
+ setVisible:any;
 }
-function SearchBar({chooseOption,setSearchBar}:SearchbarProps) {
+function SearchBar({chooseOption,setVisible}:SearchbarProps) {
  
 console.log("weather visible in weather",chooseOption.weather.weatherVisible)
   return (
@@ -17,22 +17,22 @@ console.log("weather visible in weather",chooseOption.weather.weatherVisible)
       </div>
       <div className="searchbar-options">
         <ul>
-          <li onClick={(e) => {e.stopPropagation(); setSearchBar(false) ; chooseOption.weather.setWeatherVisible(true);}}>
+          <li onClick={(e) => {e.stopPropagation(); setVisible("weather") ; }}>
             <img src={ICONS.weather} />
             Weather
           </li>
-          <li onClick={(e) =>{e.stopPropagation();setSearchBar(false);chooseOption.flight.setFlightVisible(true)}}>
+          <li onClick={(e) =>{e.stopPropagation();setVisible("flight-by-route")}}>
             <img src={ICONS.flightroute} />
             Flight by route
           </li>
-          <li onClick={(e)=>{e.stopPropagation();setSearchBar(false); chooseOption.live.setLive(true)}}>
+          <li onClick={(e)=>{e.stopPropagation(); setVisible("live-flight")}}>
             <img src={ICONS.liveairplane} />
             LIVE flight by airplane
           </li>
-          <li onClick={(e)=>{e.stopPropagation();setSearchBar(false);chooseOption.airport.setAirportByCountry(true)}}>
+          <li onClick={(e)=>{e.stopPropagation();setVisible("airports")}}>
             <img src={ICONS.airports} /> Airports
           </li>
-          <li onClick={(e)=>{e.stopPropagation();setSearchBar(false);chooseOption.nearby.setNearByVisible(true)}}>
+          <li onClick={(e)=>{e.stopPropagation();setVisible("nearby")}}>
             <img src={ICONS.nearby} /> Nearby
           </li>
         </ul>
