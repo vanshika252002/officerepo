@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import {NearbyFlight} from './Types/types';
+import { ICONS } from '../../assets';
 import './nearby.css';
 import { useLazyGetAllFlightsQuery } from '../../Services/Api/liveflight';
 import Loading from '../loading';
@@ -36,31 +37,37 @@ const Nearby = ({ setVisible, setSelectedLocation, setFlight }: NearbyProps) => 
   const [trigger, { data: liveflight ,isLoading :flightLoading}] = useLazyGetAllFlightsQuery();
   const FlightDetails = liveflight?.states || null;
 
-console.log("flight",FlightDetails)
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-          setLat(latitude);
-          setLon(longitude);
-          console.log("geo",latitude,longitude);
-        },
-        (error) => {
-          console.log("error is ",error)
-         setErrorMsg('Unable to access your location. Please enable location permission.');
-       
-        }
-      );
-    } else {
+    if (!navigator.geolocation) {
       setErrorMsg('Geolocation is not supported by your browser.');
+      setLoading(false);
+      return;
     }
-    return () => {
-      setLat(null);
-      setLon(null);
-      setErrorMsg('');
-    };
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLat(position.coords.latitude);
+        setLon(position.coords.longitude);
+        setLoading(false);
+      },
+      (error) => {
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            setErrorMsg('Unable to access your location. Please enable location permission.');
+            break;
+          case error.POSITION_UNAVAILABLE:
+            setErrorMsg('Location information is unavailable.');
+            break;
+          case error.TIMEOUT:
+            setErrorMsg('The request to get your location timed out.');
+            break;
+         
+        }
+        setLoading(false);
+      }
+    );
   }, []);
 
  
@@ -99,19 +106,11 @@ console.log("flight",FlightDetails)
           <div className='near-by-f2'><span>Nearby</span></div>
         </div>
 
-        <div className="geo-error">
-          <p>{errorMsg}</p>
-         
-        </div>
+        { loading && <p>Getting your location...</p>}
+       { errorMsg && <p>{errorMsg}</p>}
       </div>
     );
   }
-
-  
-  // if (isFetching || lat === null || lon === null) {
-  //   return <Loading />;
-  // }
-
   return (
     <div className='near-by-wrappper'>
    
@@ -123,32 +122,36 @@ console.log("flight",FlightDetails)
           setVisible("searchbar")
             setFlight(false);
             setSelectedLocation(null);
-          }}>x</button>
+          }}><img src={ICONS.arrow} /></button>
         </div>
         <div className='near-by-f2'><span>Nearby</span></div>
       </div>
+     
+     
       {liveflight?.states===null &&  <div className="fi-no-results"> Data is not Available right now  </div>}
       {  !flightLoading && nearbyFlights.length === 0 && lat && lon && (
   <div className="near-by-lit-wrapper">
     <p>No nearby flights found within 500 km.</p>
   </div>
 )}
-      { nearbyFlights.length>0 &&  <ul className='near-by-list-wrapper'>
+      { nearbyFlights.length>0 &&  <div className='near-by-list-wrapper'>
    
           {nearbyFlights.map(({ details, distance }: any) => (
-            <li key={details[0]} className='nearby' onClick={() => {
+            <div key={details[0]} className='nearby' >
+              <div className='n11'><h2>{details[2]}</h2></div>
+              
+              <div className='n1'><div className='n2'><span >ICAO Code :</span></div><div className='n3'><span>{details[0]}</span></div></div>
+              <div className='n1'><div className='n2'><span>Latitude :</span></div><div className='n3'><span>{details[6]}</span></div></div>
+              <div className='n1'><div className='n2'><span>Longitude:</span></div><div className='n3'><span>{details[5]}</span></div></div>
+              <div className='n1'><div className='n2'><span>Velocity:</span></div><div className='n3'><span>{details[9]}</span></div></div>
+              <div className='n1'><div className='n2'><span className='n4'>Distance (km):</span></div><div className='n3'><span className='n4'>{distance.toFixed(2)}</span></div></div>
+              <div className='acc-btn'><button onClick={() => {
               setSelectedLocation({ lat: details[6], lon: details[5], id: details[0] });
               setFlight(true);
-            }}>
-              <div className='n11'><h2>{details[2]}</h2></div>
-              <div className='n1'><div className='n2'>ICAO Code:</div><div className='n3'>{details[0]}</div></div>
-              <div className='n1'><div className='n2'>Latitude:</div><div className='n3'>{details[6]}</div></div>
-              <div className='n1'><div className='n2'>Longitude:</div><div className='n3'>{details[5]}</div></div>
-              <div className='n1'><div className='n2'>Velocity:</div><div className='n3'>{details[9]}</div></div>
-              <div className='n1'><div className='n2'>Distance (km):</div><div className='n3'>{distance.toFixed(2)}</div></div>
-            </li>
+            }}><img src={ICONS.showonmap}/><span>Show on Map</span></button></div>            
+            </div>
           ))}
-        </ul>
+        </div>
 }
 
     

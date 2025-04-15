@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ICONS } from '../../assets';
 import './flightbyroute.css';
 
 interface RouteProps {
@@ -36,7 +37,7 @@ const FlightByRoute = ({ chooseOption, setVisible}: RouteProps) => {
             
           }}
         >
-          <button aria-label="Close Flight By Route">x</button>
+          <button aria-label="Close Flight By Route"><img src={ICONS.arrow}/></button>
         </div>
         <div className="f2">
           <span>Flight by route</span>
@@ -44,10 +45,12 @@ const FlightByRoute = ({ chooseOption, setVisible}: RouteProps) => {
       </div>
       <div className="flight-by-route">
         <div className="flight-by-route-origin">
+          
           <span>Origin</span>
         </div>
       </div>
       <div className="flight-by-route-search">
+        {/* <img src={ICONS.flightbyroute1}/> */}
         <input
           type="text"
           value={originInput}

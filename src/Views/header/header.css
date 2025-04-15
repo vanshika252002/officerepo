@@ -55,12 +55,11 @@
 
 .user-profile {
   display: flex;
-  gap: 10px; /* Adds spacing between children */
+  gap: 10px; 
   align-items: center;
   margin-right: 38px;
 }
 
-/* Search Options - Hidden by Default */
 .search-options {
   position: absolute;
   top: 100%;
@@ -73,7 +72,7 @@
   border-radius: 5px;
 }
 
-/* Show search options when input is focused */
+
 .weather-details{
   position: absolute;
   top: 60px;

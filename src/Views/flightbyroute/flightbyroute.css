@@ -86,6 +86,8 @@
   .flight-by-route-origin {
     padding-left: 4%;
     color: #6D6D6D;
+    display: flex;
+
   }
   
   .flight-by-route-origin span {
@@ -141,6 +143,8 @@
   }
   
   .flight-by-route-search input {
+    display: flex;
+
     font-size: 1rem;
     margin-bottom: 6%;
     width: 100%;
@@ -154,7 +158,10 @@
     border: 1px solid #D1D0D0;
     transition: border-color 0.3s ease-in-out;
   }
-  
+  .flight-by-route-search img{
+    width:20px;
+    height:50px;
+  }
   .flight-by-route-search input:focus {
     border: 2px solid rgb(248, 192, 35);
     outline: none;
@@ -165,7 +172,7 @@
     outline: none;
   }
   
-  /* Additional style for error message */
+
   .error-message {
     margin-top: 0.5rem;
   }
@@ -174,5 +181,11 @@
   .flight-by-route-wrappper {
     right:15%;
     width: 200px;
+  }
+ }
+ @media (min-width:768px){
+  .flight-by-route-wrappper {
+    right:15%;
+    width: 250px;
   }
  }

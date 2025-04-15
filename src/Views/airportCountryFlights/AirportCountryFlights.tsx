@@ -104,7 +104,8 @@ const AirportCountryFlights = ({ chooseOption,setVisible ,setSelectedLocation,se
               setSelectedLocation({ lat: latitude, lon:longitude, id:icaoCode });
               setFlight(true);
             }}><img src={ICONS.showonmap}/><span>Show on Map</span></button></div>
-                  <div><p><strong>ICAO Code:</strong> {icaoCode}</p>
+                  <div className='data-flight'>
+                    <p><strong>ICAO Code:</strong> {icaoCode}</p>
                   <p><strong>Country:</strong> {flightCountry}</p>
                   <p><strong>Latitude:</strong> {latitude}</p>
                   <p><strong>Longitude:</strong> {longitude}</p></div>

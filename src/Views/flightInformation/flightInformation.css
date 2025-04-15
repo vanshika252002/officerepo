@@ -1,5 +1,5 @@
 .flightInformation-wrapper {
-     /* This makes .loading position relative to this */
+    
      top: 75px;
      right:170px;
      position: absolute;
@@ -12,8 +12,38 @@
     border: 1px solid black;
     box-shadow: 5px 5px  10px  black;
   }
+  .flight-place{
+    font-size: 2rem;
+    font-weight:600;
+    font-family:'Times New Roman', Times, serif;
+    text-decoration: underline;
+    height:auto;
+    padding:10px;
+    color:#0071BC;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+    
+  }
+  .flight-place img{
+    width:50px;
+    height:40px;
+  }
+  
+  .wrapper-for-flight-information{
+    margin:15px;
+    margin-top:5px;
+    border-radius: 10px;
+    padding:1px;
+    border: 4px solid rgb(248, 192, 35);
+    background-color: rgb(245, 242, 243);
+  }
   .fi-loading{
     background-color: rgb(245, 242, 243);
+   
+    margin:5px;
     height:158px;
     width: 100%;
     display: flex;
@@ -22,10 +52,21 @@
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
   }
+  .fly{
+    background-color:#EFEFEF;
+    padding-top:5px;
+    padding-bottom: 5px;
+  }
+  .show-on-map{
+    /* background-color: pink; */
+  }
+  .show-on-map button{
+    width:100%;
+  }
   
 .flightInformation-header{
     width:100% ;
-    height:5vh;
+    height:3rem;
       display: flex;
       justify-content: start;
       
@@ -72,22 +113,31 @@ gap:10%}
     display:flex;
     align-items: center;
     justify-content: center;
-    background-color: beige;
+    /* background-color: beige; */
 }
 .fi-o2{
-background-color: azure;
+/* background-color: azure; */
 }
   .wrapper-for-flight-information{
-    border-bottom: 1px solid black ;
+    /* border-bottom: 1px solid black ; */
   }
   .fd{
      height:80vh;
      overflow: scroll;
   }
 
-  @media  (max-width:545px) {
+  @media  (max-width:750px) {
     .flightInformation-wrapper {
       right:15%;
-      width: 200px;
+      width: 210px;
+      height:250px;
+    }
+   }
+   @media (min-width:768px)
+   {
+    .flightInformation-wrapper {
+      right:10%;
+      width: 250px;
+      height:400px;
     }
    }

@@ -34,13 +34,7 @@
     font-size: 20px;
     font-weight:600;
 }
-/* .w-s-body-wrapper{
-    background-color: bisque;
-    display: flex;
-    flex-direction: column;
-    height:100vh;
-    width:100%;
-} */
+
 .w-s-body {
     background-color: white;
    height:30%;

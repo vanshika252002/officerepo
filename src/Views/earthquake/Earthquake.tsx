@@ -110,7 +110,7 @@ const Earthquake = ({
       {earthquakeData && (
         <div className="earthquake-list">
           {earthquakeData?.features?.map((item: EarthquakeFeature) => (
-            <div className="items" key={item.properties.place}> {/* Use place as key */}
+            <div className="items" key={item.properties.place}>
               <button
                 className="earthquake-click-option"
                 onClick={() => {
@@ -147,7 +147,8 @@ const Earthquake = ({
           time={Timestamp(selectedEarthquake.properties.time)}
           lat={selectedEarthquake.geometry.coordinates[1]}
           lon={selectedEarthquake.geometry.coordinates[0]}
-        />
+           depth={selectedEarthquake.geometry.coordinates[2]}
+          />
       )}
     </div>
   );

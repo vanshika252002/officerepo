@@ -1,16 +1,16 @@
 .h1 {
  
-    height:5.5rem;
+    height:4.5rem;
     width: 100vw;
     align-items: center;
     display: flex;
     background: linear-gradient(to bottom,rgba(18,18,18,0.9), rgba(18,18,18, 0.6),rgba(18,18,18,0.3),rgba(18,18,18,0));
 
-    /* Glass effect (like Flightradar24) */
+ 
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 
-    /* Optional extra polish */
+
 
     position: absolute;
     z-index:5000;
@@ -28,9 +28,9 @@
     overflow: hidden;
 }
 .h2 img{
-   height:105px;
+   height:80px;
    background-color: transparent;
-   margin-top: 11px;
+   margin-top:5px;
 
 }
 .h4{
@@ -42,6 +42,7 @@
    justify-content:end;
    align-items: center;
     gap:3%;
+    
 }
 .h3{
     height:2.5rem;
@@ -106,7 +107,7 @@
         position: absolute;
         top: 75px;
         right:170px;
-        width: 280px;
+        width: 250px;
         background-color: rgb(209, 208, 208);
         border-radius: 10px;
         box-shadow: 5px 5px 10px black;
@@ -120,6 +121,17 @@
         border-radius: 10px;
         border:2px solid  rgb(248, 192, 35);
         padding-left:8px;
+      }
+      .weather-ww1 h3{
+        color:#0071BC;
+        margin-bottom:5px;
+        text-decoration: underline;
+        font-weight: 600;
+        font-size:1.25rem;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+      }
+      .weather-ww1 p{
+         margin:4px;
       }
     @media  (max-width:545px) {
         .h2{
@@ -141,8 +153,22 @@
             right:15%;
      width: 200px;
         }
+        .weather-details-ww{
+            right:15%;
+             top:90px;
+        }
     }
-    @media (min-width:1024px) and (max-width:1280px)
+    @media (min-width:768px) and (max-width:1022px)
     {
-
+        .weather-details-ww{
+            right:15%;
+             top:90px;
+        }
+    }
+    @media (min-width:1023px){
+        .weather-details-ww{
+            right:5%;
+            top:90px;
+        
+        }
     }

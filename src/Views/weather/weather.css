@@ -40,6 +40,7 @@
 .w2{
  
   margin-top:8px;
+  margin-right:5px;
 }
 .w2 input:hover{
   border: 2px solid rgb(248, 192, 35);
@@ -144,8 +145,20 @@
 }
 @media (max-width:545px) {
   .weather-container-wrapper{
-     right:15%;
-     width: 200px;
+     right:13%;
+     width: 250px;
+    top:90px;
      
   }
+  .input-container{
+    width:97%;
+    
+  }
+}
+@media (min-width:546px){
+ .weather-container-wrapper{
+  right:10%;
+  width:250px;
+  top:99px;
+ }
 }

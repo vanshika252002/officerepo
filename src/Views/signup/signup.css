@@ -1,4 +1,4 @@
-/* Full Page Styles */
+
 .signup-wrapper-component {
   display: flex;
   justify-content: center;
@@ -8,23 +8,22 @@
   position: relative;
 }
 
-/* Image as a separate div */
 .login-image {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1; /* Ensures the image stays behind the form */
+  z-index: -1; 
 }
 
 .login-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures the image covers the entire div */
+  object-fit: cover; 
 }
 
-/* Centered Signup Container */
+
 .signup-container {
   width: 320px;
   background: rgba(0, 0, 0, 0.85);
@@ -34,5 +33,5 @@
   color: #fff;
   text-align: center;
   position: relative;
-  z-index: 1; /* Ensures the form stays above the image */
+  z-index: 1;
 }

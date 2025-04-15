@@ -1,5 +1,6 @@
 import { useGetAllFlightsQuery } from '../../Services/Api/liveflight';
 import Loading from '../loading/Loading';
+import { ICONS } from '../../assets';
 import './flightInformation.css';
 
 interface FlightDetail {
@@ -20,14 +21,19 @@ interface FlightInformationProps {
     flight: {
       origin: { origin: string; setOrigin: (value: string) => void };
     };
-  
+
   };
   setVisible:(value:string)=>void;
+      setFlight: (value: boolean) => void;
+  setSelectedLocation: (
+    location: { lat: number; lon: number; id: string } | null
+  ) => void;
+  
 }
 
-const FlightInformation = ({chooseOption, setVisible }: FlightInformationProps) => {
+const FlightInformation = ({chooseOption, setVisible ,setFlight,setSelectedLocation}: FlightInformationProps) => {
   const { data: liveflight, isLoading, error } = useGetAllFlightsQuery(null);
-  console.log("liveflights",liveflight);
+
   const FlightDetails: FlightDetail[] =
     liveflight?.states?.map((tuple: any) => ({
       icao24: tuple[0],
@@ -51,7 +57,7 @@ const FlightInformation = ({chooseOption, setVisible }: FlightInformationProps) 
     <div className="flightInformation-wrapper">
       <div className="flightInformation-header">
         <div className="fi1">
-          <button onClick={() => {setVisible("flight-by-route") }} aria-label="Close Flight Information">x</button>
+          <button onClick={() => {setVisible("flight-by-route");setFlight(false);setSelectedLocation(null) }} aria-label="Close Flight Information"><img src={ICONS.arrow}/></button>
         </div>
         <div className="fi2">
           <span>Flights</span>
@@ -65,13 +71,18 @@ const FlightInformation = ({chooseOption, setVisible }: FlightInformationProps) 
       {liveflight?.states==null &&  <div className="fi-no-results"> Data is not Available right now  </div>}
       {filteredFlights.length > 0 && (
         <div className="fd">
+           <div className='flight-place'><img src={ICONS.flightbyroute}/><span>{chooseOption.flight.origin.origin.charAt(0).toUpperCase()+chooseOption.flight.origin.origin.slice(1).toLowerCase()}</span> </div>
           {filteredFlights.map((flight) => (
             <div key={flight.icao24} className="wrapper-for-flight-information">
-              <div className="flightInformation-origin">
-                <div className="fi-o1"><span>Origin</span></div>
-                <div className="fi-o2"><span>{flight.originCountry}</span></div>
-              </div>
-              <div className="flightInformation-origin">
+              <div className='acc-btn'>
+                <button onClick={() => {
+              setSelectedLocation({ lat: flight.latitude, lon:flight.longitude, id:flight.icao24 });
+              setFlight(true);
+            }}><img src={ICONS.showonmap}/><span>Show on Map</span></button>
+                </div>
+
+             <div className='fly'>
+             <div className="flightInformation-origin">
                 <div className="fi-o1"><span>Icao24 Code</span></div>
                 <div className="fi-o2"><span>{flight.icao24}</span></div>
               </div>
@@ -86,6 +97,7 @@ const FlightInformation = ({chooseOption, setVisible }: FlightInformationProps) 
               <div className="flightInformation-origin">
                 <div className="fi-o1"><span>Velocity</span></div>
                 <div className="fi-o2"><span>{flight.velocity}</span></div>
+              </div>
               </div>
             </div>
           ))}

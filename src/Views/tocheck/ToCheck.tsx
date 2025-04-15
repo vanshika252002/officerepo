@@ -141,7 +141,7 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
              setVisible={setVisible}
             />
           )}
-          {visible=="flight-details" && <FlightInformation chooseOption={chooseOption} setVisible={setVisible} />}
+          {visible=="flight-details" && <FlightInformation chooseOption={chooseOption} setVisible={setVisible}  setFlight={setFlight} setSelectedLocation={setSelectedLocation} />}
           {visible=="nearby" && (
             <Nearby
             

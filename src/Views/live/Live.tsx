@@ -23,7 +23,7 @@ const Live = ({ setVisible,setFlight,setSelectedLocation }: Props) => {
   const flightsByOrigin = useMemo<Record<string, FlightData[]>>(() => {
     if (!LiveFlights?.states) return {};
 
-    // Group by origin country, but filter out flights with invalid or missing origin country
+  
     const groupedFlights = LiveFlights.states.reduce((acc: Record<string, FlightData[]>, flight: any[]) => {
       const [
         icao, 
@@ -88,7 +88,7 @@ const Live = ({ setVisible,setFlight,setSelectedLocation }: Props) => {
     <div key={icao} className='l3-wrapper'>
       <button className='l3' onClick={() => toggleAccordion(icao)}>
         <strong> ICAO : {icao}</strong>
-        <div className={`accordion-toggle-symbol-l1 ${isExpanded ? 'open' : ''}`}>
+        <div className={`accordion-toggle-symbol ${isExpanded ? 'open' : ''}`}>
           <img src={ICONS.accordianLogo} />
         </div>
       </button>

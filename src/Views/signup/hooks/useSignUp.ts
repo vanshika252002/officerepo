@@ -2,21 +2,21 @@ import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../../../Components/firebase';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { updateAuthTokenRedux } from '../../../Store/Common'; // ✅ make sure it's imported
+import { updateAuthTokenRedux } from '../../../Store/Common'; 
 
 const provider = new GoogleAuthProvider();
 
 const useSignUp = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch(); // ✅ dispatch
+  const dispatch = useDispatch(); 
 
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      const token = await result.user.getIdToken(); // ✅ get token
-      dispatch(updateAuthTokenRedux({ token })); // ✅ update Redux
+      const token = await result.user.getIdToken(); 
+      dispatch(updateAuthTokenRedux({ token }));
       console.log('Google sign-in successful:', result.user);
-      navigate('/home'); // ✅ navigate after setting auth
+      navigate('/home'); 
     } catch (error) {
       console.error('Google sign-in error:', error);
     }

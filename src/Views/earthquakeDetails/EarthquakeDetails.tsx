@@ -1,6 +1,6 @@
 import './EarthquakeDetails.css'
 import { Earthquake } from './Types/types'
-const EarthquakeDetails=({place,time,lat,lon,setSelectedEarthquake}:Earthquake)=>{
+const EarthquakeDetails=({place,time,lat,lon,setSelectedEarthquake,depth}:Earthquake)=>{
     console.log("displayed")
     return (
         <div className="earthquake-details-wrapper">
@@ -17,8 +17,8 @@ const EarthquakeDetails=({place,time,lat,lon,setSelectedEarthquake}:Earthquake)=
                     <div className="location-content"><h5>{`${lat} ${lon}`}</h5></div>
                 </div>
                 <div className="depth-detail">
-                    <div className="depth"><h5>depth</h5></div>
-                    <div className="depth-content"><h5>data</h5></div>
+                    <div className="depth"><h5>Depth</h5></div>
+                    <div className="depth-content"><h5>{depth}</h5></div>
                 </div>
                 <div className='close'><button onClick={()=>{setSelectedEarthquake(null)}}>Close</button></div>
             </div>

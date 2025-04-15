@@ -1,5 +1,5 @@
 .earthquake-details-wrapper{
-    width:18vw;
+    width:100%;
     right:0;
     height: auto;
     background-color:#fff;
@@ -7,43 +7,53 @@
     flex-direction:column;
     box-sizing:border-box;
     z-index:999;
-    margin-top:107px;
+   bottom:0;
     position:absolute;
-    background-color:blue;
+    background-color:white;
     overflow: hidden;
     z-index:2000;
+    border-radius: 10px;
+
 
 }
 .earthquake-content-header{
     display:flex;
     flex-direction: column;
     justify-content: center;
-    background-color: pink;
+   text-decoration: underline;
     height:auto;
-    width:100%;
+    width:auto;
     padding:6px;
+    padding-left:15px;
+    padding-top:12px;
+    font-size:25px;
+    color:#0071BC;
+    font-weight:600;
+    font-family:'Times New Roman', Times, serif;
 }
 .details-in-body{
  display:flex;
  flex-direction: column;
- background-color: beige;
+ 
 
 }
 .time-detail{
-    margin-top:7%;
+    margin-top:10px;
     display: flex;
     align-items: center;
     justify-content:left;
-    background-color: pink;
+  font-size: 1.2rem;
+   color:darkgray;
     
 }
 .time{
     height:auto;
-    width:40%;
-    background-color: azure;
+    width:33%;
+    color:#777777;
     display:flex;
     justify-content: center;
-   
+  
+
 }
 .time h5{
     margin:0;
@@ -54,24 +64,26 @@
     width:60%;
     height:auto;
     display:flex;
-    
-    background-color:grey;
+    color:#000000;
+   
 }
 .time-content h5{
     margin:0;
 }
 .location-detail{
-    margin-top:4%;
-    background-color: pink;
+    margin-top:5px;
+  
     justify-content:left;
     display: flex;
+    font-size: 1.2rem;
      
 }
 .location{
     height:auto;
-    width:40%;
+    width:33%;
     display:flex;
     justify-content: center;
+    color:#777777;
 }
 .location-content h5{
     margin:0;  
@@ -81,22 +93,25 @@
 }
 .location-content{
     width:60%;
+    color:#000000;
 }
 
 
 .depth-detail{
-    margin-top:4%;
-    background-color: pink;
+    margin-top:5px;
+    
     justify-content:left;
     display: flex;
+    font-size: 1.2rem;
     
 }
 .depth{
     height:auto;
-    width:40%;
-    background-color: azure;
+    width:33%;
+  
     display:flex;
     justify-content: center;
+    color:#777777;
  
 }
 .depth-content h5{
@@ -108,9 +123,22 @@
     margin:0;
 }
 .close{
-    margin-top:10px;
+    margin-top:8px;
+    margin-bottom:5px;
+    height:3vh;
     display:flex;
     justify-content: end;
+}
+.close button{
+    margin-right:20px;
+    margin-bottom:20px;
+    background-color: #3D5E80;
+    color:white;
+    width:65px;
+    height:2.5vh;
+    font-size: 1rem;
+    font-weight: 600;
+
 }
 @media  (max-width:545px) {
     .earthquake-details-wrapper {

@@ -79,7 +79,8 @@ margin-top:5px;
     
     background-color: white;
     border-radius: 8px;
-   border:none
+   border:none;
+   padding: 5px;
 }
 .airport-n1 button{
     height: auto;

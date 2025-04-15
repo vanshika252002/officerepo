@@ -1,4 +1,4 @@
-/* Full page styles */
+
 .login-wrapper-component {
   height:100vh;
   width:100vw;
@@ -15,7 +15,7 @@
     
   }
   
-  /* Centered Login Container */
+ 
   .signup-container {
     width: 320px;
     background: rgba(255, 255, 255, 0.75); ;
@@ -26,13 +26,13 @@
     text-align: center;
   }
   
-  /* Form Heading */
+ 
   .signup-container h1 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
   }
   
-  /* Labels */
+
   .signup-form label {
     display: block;
     font-size: 0.85rem;
@@ -41,7 +41,6 @@
     text-align: left;
   }
   
-  /* Input Fields */
   .signup-form input {
     width: 93%;
     padding: 10px;
@@ -53,7 +52,7 @@
     font-size: 1rem;
   }
   
-  /* Error Messages */
+
   .error {
     color: #ff4d4d;
     font-size: 0.8rem;
@@ -61,7 +60,7 @@
     text-align: left;
   }
   
-  /* Submit Button */
+
   .signup-form button {
     width: 100%;
     padding: 10px;
@@ -79,7 +78,7 @@
     background: #0056b3;
   }
   
-  /* Divider */
+
   .or-divider {
     text-align: center;
     margin: 15px 0;
@@ -87,7 +86,7 @@
     color: black;
   }
   
-  /* Google Button */
+
   .google-btn {
     width: 100%;
     display: flex;
@@ -110,8 +109,7 @@
   .google-btn:hover {
     background: #e0e0e0;
   }
-  
-  /* Responsive Design */
+
   @media screen and (max-width: 400px) {
     .signup-container {
       width: 90%;

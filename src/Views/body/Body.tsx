@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import * as L from 'leaflet';
 import { Tooltip } from 'react-leaflet';
 
-// import 'leaflet-rotatedmarker';
 
-// import {createFlightIcon} from './flight';
 import {
   MapContainer,
   useMap,
@@ -13,7 +11,7 @@ import {
   Popup,
   Marker,
 } from 'react-leaflet';
-// import 'leaflet-rotatedmarker';
+
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import { useLazyGetWeatherByCoordsQuery } from '../../Services/Api/weather';
 import MiniMapControl from '../minimapview/MiniMapView';
