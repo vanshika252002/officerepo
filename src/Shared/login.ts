@@ -34,7 +34,7 @@ export const onSubmit = async (
     );
     const token = await userCredential.user.getIdToken();
     dispatch(updateAuthTokenRedux({ token }));
-    toast.success('Login successful! Welcome back.', { position: 'top-right' });
+    toast.success('Login successful! Welcome', { position: 'top-right' });
     resetForm();
   } catch (error: any) {
     console.error('Firebase Auth Error:', error);

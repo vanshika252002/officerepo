@@ -60,6 +60,7 @@
     margin-bottom:15px;
     color:black;
 }
+
 .forgot-form button {
     width: 100%;
     padding: 10px;
@@ -105,8 +106,9 @@ width:19rem;
   
     height:3rem;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    
 }
 
 .forgot-label{
@@ -126,12 +128,13 @@ width:19rem;
 }
 
 .b1 {
-    width:14vw;
+    width:10vw;
     height:4.5vh;
-    border: none;
+   margin-right:18px;
+   margin-left:18px;
     border-radius: 9px;
-background-color: transparent;
-    color:blue;
+ background-color:  #0071BC;
+    color:white;
     font-size: 1rem;
     border: none;
     font-weight: 600;

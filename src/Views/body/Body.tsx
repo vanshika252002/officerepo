@@ -57,9 +57,9 @@ const Body = ({
   clickedLocation,
   setClickedLocation,
   flight,
-  setFlight,
+  setFlight,alert,setAlert
 }: Props) => {
-  const [alert, setAlert] = useState<boolean>(false);
+ 
 
   const chooseOption = {
     flight: { flight, setFlight },
@@ -114,6 +114,8 @@ const Body = ({
     return null;
   };
 
+
+  console.log("arabian sea",geolocation?.results[0]?.component?.formatted);
   return (
     <div className="linear-gradient-body">
       <MapContainer
@@ -201,7 +203,7 @@ const Body = ({
         </Marker>
       )}
 
-
+<MarkerClusterGroup>
         {alert &&
           earthquakeData?.features?.map((item: EarthquakeFeature) => {
             const [lng, lat] = item.geometry.coordinates;
@@ -226,24 +228,26 @@ const Body = ({
               </Marker>
             );
           })}
-
+</MarkerClusterGroup>
         {clickedLocation && (
           <Popup position={clickedLocation}>
             <div>
             
               {weatherData && (
                 <div className="popup">
-                  <h1>
+                 { geolocation?.results[0]?.annotations?.flag && geolocation?.results[0]?.components?.state ? <h2>
                     {geolocation?.results[0]?.annotations?.flag}{' '}
                     {geolocation?.results[0]?.components?.state}
-                  </h1>
+                  </h2>:<h2>{geolocation?.results[0]?.formatted} </h2>}
+               
                   <br />
-                  <strong>Weather:</strong> {weatherData.weather[0].description}
+                 <span> <strong>Weather:</strong> {weatherData.weather[0].description}</span>
                   <br />
-                  <strong>Temperature:</strong> {weatherData.main.temp}°C
+                  <span><strong>Temperature:</strong> {weatherData.main.temp}°C</span>
                   <br />
-                  <strong>Humidity:</strong> {weatherData.main.humidity}%<br />
-                  <strong>Wind Speed:</strong> {weatherData.wind.speed}
+                  <span><strong>Humidity:</strong> {weatherData.main.humidity}%</span>
+                  <br />
+                  <span><strong>Wind Speed:</strong> {weatherData.wind.speed}</span>
                   <br />
                 </div>
               )}
@@ -258,6 +262,7 @@ const Body = ({
           setFooterVisible={setFooterVisible}
           setEarthquakeVisible={setEarthquakeVisible}
           setAlert={setAlert}
+          setFlight={setFlight}
         />
       )}
       {earthquakeVisible && (

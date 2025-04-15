@@ -14,12 +14,13 @@ export default function Dashboard() {
 >(null);
   
   const [flight, setFlight] = useState<boolean>(false);
+   const [alert, setAlert] = useState<boolean>(false);
 return (
   <div>
  
      
-      <ToCheck selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setClickedLocation={setClickedLocation} setFlight={setFlight}/>
-      <Body selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} clickedLocation={clickedLocation} setClickedLocation={setClickedLocation}  flight={flight} setFlight={setFlight}/> 
+      <ToCheck selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setClickedLocation={setClickedLocation} setFlight={setFlight} setAlert={setAlert}/>
+      <Body selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} clickedLocation={clickedLocation} setClickedLocation={setClickedLocation}  flight={flight} setFlight={setFlight} alert={alert} setAlert={setAlert}/> 
 
   </div>
 );

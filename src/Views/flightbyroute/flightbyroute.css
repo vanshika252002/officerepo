@@ -134,7 +134,7 @@
   }
   
   .flight-by-route-search button:enabled {
-    background-color: blue;
+    background-color:  #0071BC;
   }
   
   .flight-by-route-search button:disabled {

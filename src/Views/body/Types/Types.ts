@@ -25,6 +25,8 @@ export interface Props {
     setFlight: (value: boolean) => void;
     clickedLocation: [number, number] | null;
     setClickedLocation: (location: [number, number] | null) => void;
+    alert:boolean;
+    setAlert:(value:boolean)=>void;
   }
 
   export type Details = [

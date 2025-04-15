@@ -49,6 +49,31 @@
   background-color: #f9d342;
   color: #2c2f33;
 }
-.popup h1{
-margin:0px;
+.leaflet-popup-content {
+  width: auto !important;
+  margin: 2px !important;
+  padding: 2px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 5px !important;
 }
+
+.popup  {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+.popup h2{
+  margin:2px;
+  padding: 2px;
+  color:green;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+  .popup span {
+    display: inline;
+    font-size: 14px;
+    line-height: 1.4;
+    white-space: nowrap; /* Optional: prevents line break if space is tight */
+  }

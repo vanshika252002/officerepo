@@ -22,8 +22,9 @@ interface Props{
   selectedLocation:{id:string,lat:number|null,lon:number|null}|null;
   setSelectedLocation:(location:{id:string,lat:number|null,lon:number|null}|null)=>void;
   setClickedLocation: (location: [number, number] | null) => void;
+  setAlert:(value:boolean)=>void;
 }
-const ToCheck = ({setSelectedLocation,setFlight}:Props) => {
+const ToCheck = ({setSelectedLocation,setFlight,setAlert}:Props) => {
   const dispatch = useDispatch();
 
 const [visible,setVisible]=useState<string>(""); //visibility
@@ -90,7 +91,7 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
       </div>
       <div className="h5">
         <div className="refrence-to-options" ref={inputRef}>
-          <div className="h7" onClick={() => { setVisible("searchbar")}}>
+          <div className="h7" onClick={() => { setVisible("searchbar"),setAlert(false)}}>
             {
               <div className="h3" ref={inputRef1}>
                 <img src={ICONS.search} alt="Search Icon" />
@@ -102,6 +103,7 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
             <SearchBar
               chooseOption={chooseOption}
               setVisible={setVisible}
+              
             />
           )}
           {visible=="weather" && (

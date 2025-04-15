@@ -8,6 +8,7 @@ export interface EarthquakeProps {
     setAlert:(value:boolean)=>void;
   }
  export  interface EarthquakeFeature {
+  id: string;
     properties: {
       mag: number;
       place: string;

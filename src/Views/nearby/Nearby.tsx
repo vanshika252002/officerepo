@@ -140,10 +140,10 @@ const Nearby = ({ setVisible, setSelectedLocation, setFlight }: NearbyProps) => 
             <div key={details[0]} className='nearby' >
               <div className='n11'><h2>{details[2]}</h2></div>
               
-              <div className='n1'><div className='n2'><span >ICAO Code :</span></div><div className='n3'><span>{details[0]}</span></div></div>
-              <div className='n1'><div className='n2'><span>Latitude :</span></div><div className='n3'><span>{details[6]}</span></div></div>
-              <div className='n1'><div className='n2'><span>Longitude:</span></div><div className='n3'><span>{details[5]}</span></div></div>
-              <div className='n1'><div className='n2'><span>Velocity:</span></div><div className='n3'><span>{details[9]}</span></div></div>
+              <div className='n1'><div className='n2'><span >ICAO Code</span></div><div className='n3'><span>{details[0]}</span></div></div>
+              <div className='n1'><div className='n2'><span>Latitude</span></div><div className='n3'><span>{details[6]}</span></div></div>
+              <div className='n1'><div className='n2'><span>Longitude</span></div><div className='n3'><span>{details[5]}</span></div></div>
+              <div className='n1'><div className='n2'><span>Velocity</span></div><div className='n3'><span>{details[9]}</span></div></div>
               <div className='n1'><div className='n2'><span className='n4'>Distance (km):</span></div><div className='n3'><span className='n4'>{distance.toFixed(2)}</span></div></div>
               <div className='acc-btn'><button onClick={() => {
               setSelectedLocation({ lat: details[6], lon: details[5], id: details[0] });
