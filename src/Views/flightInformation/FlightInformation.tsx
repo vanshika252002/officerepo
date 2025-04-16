@@ -41,8 +41,8 @@ const FlightInformation = ({chooseOption, setVisible ,setFlight,setSelectedLocat
       originCountry: tuple[2],
       timePosition: tuple[3],
       lastContact: tuple[4],
-      latitude: tuple[5],
-      longitude: tuple[6],
+      latitude: tuple[6],
+      longitude: tuple[5],
       baroAltitude: tuple[7],
       onGround: tuple[8],
       velocity: tuple[9],
@@ -52,6 +52,7 @@ const FlightInformation = ({chooseOption, setVisible ,setFlight,setSelectedLocat
   const filteredFlights = FlightDetails.filter(
     (flight) => flight.originCountry.toLowerCase() === originFilter && flight.latitude && flight.longitude
   );
+  console.log("filtered flights",filteredFlights);
 
   return (
     <div className="flightInformation-wrapper">

@@ -23,7 +23,7 @@ import 'leaflet/dist/leaflet.css';
 import './body.css';
 import Footer from '../footer/Footer';
 
-import { useGetEarthquakesQuery } from '../../Services/Api/earthquake';
+import { useLazyGetEarthquakesQuery } from '../../Services/Api/earthquake';
 import CustomZoom from '../customZoom/CustomZoom';
 import Earthquake from '../earthquake/Earthquake';
 
@@ -66,9 +66,13 @@ const Body = ({
     earthquake: { alert, setAlert },
   };
 
-  const [startTime, setStartTime] = useState<string|null>('2024-03-01'); //forearthquake
-  const [endTime, setEndTime] = useState<string|null>('2024-04-01');
-  console.log('start time and end time int the body ', startTime, ' ', endTime);
+  const [startTime, setStartTime] = useState<string|null>('2025-03-01'); //forearthquake
+  const [endTime, setEndTime] = useState<string|null>('2025-04-01');
+  const [clickedLocationEarthquake,setClickedLocationEarthquake]= useState<
+  [number, number,string,number] | null
+>(null);
+
+
   const [footerVisible, setFooterVisible] = useState<boolean>(true);
 
   const [earthquakeVisible, setEarthquakeVisible] = useState<boolean>(false);
@@ -81,12 +85,19 @@ const Body = ({
   const { data: liveflight} =
     useGetAllFlightsQuery(null);
   const FlightDetails = liveflight?.states || null;
+  const [triggerEarthquakeQuery, { data: earthquakeData }] = useLazyGetEarthquakesQuery();
 
-  const { data: earthquakeData } =
-    useGetEarthquakesQuery({ startTime, endTime });
+  useEffect(() => {
+    if (startTime && endTime) {
+      triggerEarthquakeQuery({ startTime, endTime });
+      setClickedLocationEarthquake(null);
+    }
+  }, [startTime, endTime]);
 
   //console.log("earthquakeData",earthquakeData);
   // console.log('selected angle is', selectedLocation?.angle);
+
+  
 
   const MapClickHandler = () => {
     useMapEvents({
@@ -139,7 +150,27 @@ const Body = ({
   // };
 
 
-  console.log("arabian sea",geolocation?.results[0]?.component?.formatted);
+  const FlyToSelectedEarthquake = () => {
+    const map = useMap();
+  
+    useEffect(() => {
+      if (clickedLocationEarthquake) {
+        const [lat, lon] = clickedLocationEarthquake;
+        map.flyTo([lat, lon], 8, {
+          duration: 1.5,
+        });
+      }
+    }, [clickedLocationEarthquake, map]);
+  
+    return null;
+  };
+  
+  // useEffect(() => {
+  //   if (earthquakeData?.length > 0) {
+  //     setClickedLocationEarthquake(null);
+  //   }
+  // }, [earthquakeData]);
+  
   return (
     <div className="linear-gradient-body">
       <MapContainer
@@ -149,7 +180,10 @@ const Body = ({
         style={{ height: '100%', width: '100%' }}
         zoomControl={false}
         minZoom={2}
-       
+        maxBounds={[
+          [85, -180],
+          [-85, 180],
+        ]}
        
         maxBoundsViscosity={1.0}
       >
@@ -225,32 +259,58 @@ const Body = ({
         </Marker>
       )}
 
-<MarkerClusterGroup>
-        {alert &&
-          earthquakeData?.features?.map((item: EarthquakeFeature) => {
-            const [lng, lat] = item.geometry.coordinates;
-            if (item.properties.mag == 5.5) {
-              console.log('present', item.properties.place);
-              console.log('start time ', startTime, 'and ', endTime);
-            }
-            return (
+{alert && clickedLocationEarthquake && <FlyToSelectedEarthquake />}
+
+{alert && earthquakeData?.features && (
+          <>
+            <MarkerClusterGroup showCoverageOnHover={false}>
+              {earthquakeData.features
+                .filter(
+                  (quake: EarthquakeFeature) =>
+                    !clickedLocationEarthquake ||
+                    (quake.geometry.coordinates[1] !== clickedLocationEarthquake[0] ||
+                      quake.geometry.coordinates[0] !== clickedLocationEarthquake[1])
+                )
+                .map((quake: EarthquakeFeature) => (
+                  <Marker
+                    key={quake.id}
+                    position={[
+                      quake.geometry.coordinates[1],
+                      quake.geometry.coordinates[0],
+                    ]}
+                    icon={EarthquakeAlert}
+                  >
+                    <Tooltip direction="top" offset={[0, -10]} opacity={1} permanent={false}>
+                    <div className='earthquake-tooltip'>
+                  
+                  <strong>{quake.properties.place}</strong>
+                
+                <p>Magnitude: {quake.properties.mag}</p>
+                </div>
+                    </Tooltip>
+                  </Marker>
+                ))}
+            </MarkerClusterGroup>
+
+       
+            {clickedLocationEarthquake  && (
               <Marker
-                key={`${lat}-${lng}`}
-                position={[lat, lng]}
+                position={[clickedLocationEarthquake[0],clickedLocationEarthquake[1]]}
                 icon={EarthquakeAlert}
               >
-                 <Tooltip direction="top" offset={[0, -20]} opacity={1} permanent={false}>
-                  <div className='earthquake-tooltip'>
+                <Tooltip direction="top" offset={[0, -10]} opacity={1} permanent>
+                <div className='earthquake-tooltip'>
                   
-                    <strong>{item.properties.place}</strong>
-                  
-                  <p>Magnitude: {item.properties.mag}</p>
-                  </div>
-              </Tooltip>
+                  <strong>{clickedLocationEarthquake[2]}</strong>
+                
+                <p>Magnitude: {clickedLocationEarthquake[3]}</p>
+                </div>
+                </Tooltip>
               </Marker>
-            );
-          })}
-</MarkerClusterGroup>
+            )}
+          </>
+        )}
+
         {clickedLocation && (
           <Popup position={clickedLocation}>
             <div>
@@ -296,6 +356,7 @@ const Body = ({
           startTime={startTime}
           endTime={endTime}
           setAlert={setAlert}
+          setClickedLocationEarthquake={setClickedLocationEarthquake}
         />
       )}
     </div>

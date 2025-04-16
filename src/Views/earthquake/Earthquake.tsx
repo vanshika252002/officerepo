@@ -8,6 +8,7 @@ import { useDebounce } from '../debouncing/useDebounce';
 import EarthquakeDetails from '../earthquakeDetails';
 import { EarthquakeProps, EarthquakeFeature } from './Types/types';
 import Loading from '../loading';
+import DraggableWrapper from '../Draggable/Draggable';
 
 const Earthquake = ({
   setFooterVisible,
@@ -16,7 +17,7 @@ const Earthquake = ({
   setEndTime,
   startTime,
   endTime,
-  setAlert
+  setAlert, setClickedLocationEarthquake
 }: EarthquakeProps) => {
 
   const [selectedEarthquake, setSelectedEarthquake] = useState<EarthquakeFeature | null>(null);
@@ -49,6 +50,7 @@ const Earthquake = ({
       const end = new Date(debouncedEndTime);
      console.log("tell me ",start , end , start>end)
       if (start > end) {
+        setClickedLocationEarthquake(null);
         setDateError('Start Time should be before End Time.');
       } else {
         setDateError('');
@@ -74,13 +76,15 @@ const Earthquake = ({
   });
 
   return (
-    <div className="earthquake-wrapper" onClick={(e)=>e.stopPropagation()}>
+    <DraggableWrapper>
+      <div className="earthquake-wrapper" onClick={(e)=>e.stopPropagation()}>
       <div className="earthquake-header">
         <button
           onClick={() => {
             setFooterVisible(true);
             setEarthquakeVisible(false);
             setAlert(false);
+            setClickedLocationEarthquake(null);
           }}
         >
           x
@@ -144,6 +148,7 @@ const Earthquake = ({
             className="earthquake-click-option"
             onClick={() => {
               setSelectedEarthquake(item);
+              setClickedLocationEarthquake([item?.geometry?.coordinates[1],item?.geometry?.coordinates[0],item.properties.place,item.properties.mag])
             }}
           >
             <div className="earthquake-magnitude">
@@ -166,7 +171,7 @@ const Earthquake = ({
 
 
 
-      {selectedEarthquake && (
+      {/* {selectedEarthquake && (
         <EarthquakeDetails
           setSelectedEarthquake={setSelectedEarthquake}
           place={selectedEarthquake.properties.place}
@@ -175,8 +180,9 @@ const Earthquake = ({
           lon={selectedEarthquake.geometry.coordinates[0]}
           depth={selectedEarthquake.geometry.coordinates[2]}
         />
-      )}
+      )} */}
     </div>
+    </DraggableWrapper>
   );
 };
 
