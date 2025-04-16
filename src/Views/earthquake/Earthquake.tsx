@@ -20,7 +20,7 @@ const Earthquake = ({
 }: EarthquakeProps) => {
 
   const [selectedEarthquake, setSelectedEarthquake] = useState<EarthquakeFeature | null>(null);
-  const [dateError, setDateError] = useState(''); // ✅ error state
+  const [dateError, setDateError] = useState(''); 
 
   const formatDate = (date: Date): string => {
     if (!(date instanceof Date) || isNaN(date.getTime())) return '';
@@ -47,9 +47,9 @@ const Earthquake = ({
     if (debouncedStartTime && debouncedEndTime) {
       const start = new Date(debouncedStartTime);
       const end = new Date(debouncedEndTime);
-
+     console.log("tell me ",start , end , start>end)
       if (start > end) {
-        setDateError('⚠️ Start Time should be before End Time.');
+        setDateError('Start Time should be before End Time.');
       } else {
         setDateError('');
         trigger({ startTime: debouncedStartTime, endTime: debouncedEndTime });
@@ -124,11 +124,11 @@ const Earthquake = ({
         </div>
       )}
 
-{filteredEarthquakes?.length === 0 ? (
+{filteredEarthquakes?.length === 0 && !dateError && 
         <div className="no-earthquakes">
           <h4>No Earthquakes Found in the Selected Date Range</h4>
         </div>
-      ) : (
+}
   <div className="earthquake-list">
     {earthquakeData?.features
       .filter((item: EarthquakeFeature) => {
@@ -163,7 +163,7 @@ const Earthquake = ({
         </div>
       ))}
   </div>
-)}
+
 
 
       {selectedEarthquake && (

@@ -24,7 +24,7 @@ interface Props{
   setClickedLocation: (location: [number, number] | null) => void;
   setAlert:(value:boolean)=>void;
 }
-const ToCheck = ({setSelectedLocation,setFlight,setAlert}:Props) => {
+const ToCheck = ({setSelectedLocation,setFlight,setAlert,setClickedLocation}:Props) => {
   const dispatch = useDispatch();
 
 const [visible,setVisible]=useState<string>(""); //visibility
@@ -103,11 +103,12 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
             <SearchBar
               chooseOption={chooseOption}
               setVisible={setVisible}
+              setSelectedLocation={setSelectedLocation}
               
             />
           )}
           {visible=="weather" && (
-            <Weather chooseOption={chooseOption} setVisible={setVisible} />
+            <Weather chooseOption={chooseOption} setVisible={setVisible} setClickedLocation={setClickedLocation}/>
           )}
           {visible=="weatherdetails" && weatherData && (
             <div

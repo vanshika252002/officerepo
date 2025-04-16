@@ -96,14 +96,22 @@ const Body = ({
         setClickedLocation([newLat, newLon]);
         triggerWeather({ lat: newLat, lon: newLon });
         triggerGeolocation({ lat: newLat, lng: newLon });
-        setSelectedLocation(null);
+        setSelectedLocation(null);         //flight
       },
     });
     return null;
   };
+   useEffect(() => {
+    if (clickedLocation) {
+      const [lat, lon] = clickedLocation;
+      triggerWeather({ lat, lon });
+      triggerGeolocation({ lat, lng: lon });
+    }
+  }, [clickedLocation]);
 
   const FlyToSelectedFlight = () => {
     const map = useMap();
+    setClickedLocation(null);
     useEffect(() => {
       if (selectedLocation?.lat && selectedLocation?.lon) {
         map.flyTo([selectedLocation.lat, selectedLocation.lon], 8, {
@@ -113,6 +121,22 @@ const Body = ({
     }, [selectedLocation, map]);
     return null;
   };
+  // const FlyToSelectedWeather = () => {
+  //   const map = useMap();
+  //  setSelectedLocation(null);
+  //   if(clickedLocation)
+  //   {const [lat, lon] = clickedLocation;
+  //   useEffect(() => {
+  //     if (lat && lon) {
+  //       map.flyTo([lat,lon], 8, {
+  //         duration: 1.5,
+  //       });
+  //     }
+  //   }, [clickedLocation,map]);
+  // }
+  //   return null;
+
+  // };
 
 
   console.log("arabian sea",geolocation?.results[0]?.component?.formatted);
@@ -141,7 +165,7 @@ const Body = ({
         <CustomZoom chooseOption={chooseOption} />
         <MarkerClusterGroup showCoverageOnHover={false}>
         
-        {flight &&
+        {flight && 
           FlightDetails?.map((details: Details) => {
             const isSelected =
               selectedLocation?.id === details[0] &&
@@ -166,7 +190,7 @@ const Body = ({
                         lat: details[6],
                         lon: details[5],
                         
-                      });
+                      }),setClickedLocation(null)
                     },
                   }}
                 >
@@ -232,7 +256,7 @@ const Body = ({
         {clickedLocation && (
           <Popup position={clickedLocation}>
             <div>
-            
+            {/* {clickedLocation && <FlyToSelectedWeather/>} */}
               {weatherData && (
                 <div className="popup">
                  { geolocation?.results[0]?.annotations?.flag && geolocation?.results[0]?.components?.state ? <h2>

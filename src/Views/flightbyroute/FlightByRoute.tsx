@@ -10,6 +10,7 @@ interface RouteProps {
     };
   };
   setVisible: (value:string) => void;
+  
 }
 
 const FlightByRoute = ({ chooseOption, setVisible}: RouteProps) => {

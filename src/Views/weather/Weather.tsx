@@ -9,9 +9,10 @@ import { ICONS } from '../../assets';
 interface weatherprops{
 chooseOption:any;
  setVisible:any;
+ setClickedLocation:any;
 
 }
-function Weather({chooseOption,setVisible}:weatherprops) {
+function Weather({chooseOption,setVisible,setClickedLocation}:weatherprops) {
   const [city, setCity] = useState(""); 
   const [locations, setLocations] = useState([]); 
  const debouncedCity = useDebounce(city, 400);
@@ -62,7 +63,7 @@ function Weather({chooseOption,setVisible}:weatherprops) {
       <button
         key={index} 
         className="custom-item" 
-        onClick={() =>{ chooseOption.weather.place.setPlace(location.formatted),chooseOption.weather.setClickedLocationWeather({lat:location.geometry.lat,lon:location.geometry.lng}),setVisible("weatherdetails")}
+        onClick={() =>{ chooseOption.weather.place.setPlace(location.formatted),chooseOption.weather.setClickedLocationWeather({lat:location.geometry.lat,lon:location.geometry.lng}),setVisible("weatherdetails"),setClickedLocation([location?.geometry?.lat,location?.geometry?.lng])}
    
       }
       >
