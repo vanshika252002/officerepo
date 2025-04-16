@@ -3,7 +3,7 @@ import { Earthquake } from './Types/types'
 const EarthquakeDetails=({place,time,lat,lon,setSelectedEarthquake,depth}:Earthquake)=>{
     console.log("displayed")
     return (
-        <div className="earthquake-details-wrapper">
+        <div className="earthquake-details-wrapper" onClick={(e)=>e.stopPropagation()}>
             <div className="earthquake-content-header">
                 {place}
             </div>

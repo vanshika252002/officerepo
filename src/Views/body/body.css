@@ -6,13 +6,23 @@
 } */
 
 /* Make the MapContainer fill the screen */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 .map-view{
-    height:calc(100%-5vh);
-    bottom:0;
+   
+    
    
 
     
+}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+  bottom:1px;
+  touch-action: none;
+  height:100%;
 }
 .earthquake-tooltip strong{
   font-size: 1rem;
@@ -77,3 +87,8 @@
     line-height: 1.4;
     white-space: nowrap; /* Optional: prevents line break if space is tight */
   }
+.linear-gradient-body{
+  padding:0;
+  margin:0;
+
+}

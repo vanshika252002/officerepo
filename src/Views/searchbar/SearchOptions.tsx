@@ -7,8 +7,9 @@ type SearchbarProps={
  chooseOption:any;
  setVisible:any;
  setSelectedLocation:any;
+ setFlight:any;
 }
-function SearchBar({chooseOption,setVisible,setSelectedLocation}:SearchbarProps) {
+function SearchBar({chooseOption,setVisible,setSelectedLocation,setFlight}:SearchbarProps) {
  
 console.log("weather visible in weather",chooseOption.weather.weatherVisible)
   return (
@@ -18,7 +19,7 @@ console.log("weather visible in weather",chooseOption.weather.weatherVisible)
       </div>
       <div className="searchbar-options">
         <ul>
-          <li onClick={(e) => {e.stopPropagation(); setVisible("weather") ;setSelectedLocation(null) }}>
+          <li onClick={(e) => {e.stopPropagation(); setVisible("weather") ;setSelectedLocation(null);setFlight(false) }}>
             <img src={ICONS.weather} />
             Weather
           </li>

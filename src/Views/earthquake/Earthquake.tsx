@@ -74,7 +74,7 @@ const Earthquake = ({
   });
 
   return (
-    <div className="earthquake-wrapper">
+    <div className="earthquake-wrapper" onClick={(e)=>e.stopPropagation()}>
       <div className="earthquake-header">
         <button
           onClick={() => {

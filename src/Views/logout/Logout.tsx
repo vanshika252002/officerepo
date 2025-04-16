@@ -3,8 +3,10 @@ import { auth } from '../../Components/firebase';
 import { Button } from '../../Components/Common';
 
 function Logout() {
-  console.log('logout');
+  //console.log('logout');
   const authLogout = async () => {
+    alert("want to logout");
+    return;
     try {
       await signOut(auth);
     } catch (error) {

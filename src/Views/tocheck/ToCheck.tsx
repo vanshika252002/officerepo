@@ -66,6 +66,8 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
   }, [clickedLocationWeather, triggerWeather]);
 
   const handleLogout = () => {
+    //console.log(alert("want to logout ?"));
+
     signOut(auth);
     dispatch(updateAuthTokenRedux({ token: null }));
   };
@@ -104,6 +106,7 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
               chooseOption={chooseOption}
               setVisible={setVisible}
               setSelectedLocation={setSelectedLocation}
+              setFlight={setFlight}
               
             />
           )}

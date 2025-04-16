@@ -14,7 +14,6 @@ export const earthquakeApi=createApi({
 }),
 });
 export const {useGetEarthquakesQuery,useLazyGetEarthquakesQuery}=earthquakeApi;
-//const earthquakeList = earthquakeData?.features?.map((item)=>{if(item.properties.type==="earthquake")
- //   console.log( ` earthquake magnitude ${item.properties.mag} place ${item.properties.place} time ${item.properties.time} `)})
+
 
 

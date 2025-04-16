@@ -2,7 +2,7 @@
 import { useState } from "react";
  import Body from "../body/Body";
 
-
+import './Dashboard.css';
 import ToCheck from "../tocheck/ToCheck";
 
 
@@ -15,13 +15,27 @@ export default function Dashboard() {
   
   const [flight, setFlight] = useState<boolean>(false);
    const [alert, setAlert] = useState<boolean>(false);
-return (
-  <div>
- 
-     
-      <ToCheck selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setClickedLocation={setClickedLocation} setFlight={setFlight} setAlert={setAlert}/>
-      <Body selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} clickedLocation={clickedLocation} setClickedLocation={setClickedLocation}  flight={flight} setFlight={setFlight} alert={alert} setAlert={setAlert}/> 
-
-  </div>
-);
+   return (
+    <div className="dashboard-wrapper">
+      <ToCheck
+        selectedLocation={selectedLocation}
+        setSelectedLocation={setSelectedLocation}
+        setClickedLocation={setClickedLocation}
+        setFlight={setFlight}
+        setAlert={setAlert}
+      />
+      <div className="body-wrapper">
+        <Body
+          selectedLocation={selectedLocation}
+          setSelectedLocation={setSelectedLocation}
+          clickedLocation={clickedLocation}
+          setClickedLocation={setClickedLocation}
+          flight={flight}
+          setFlight={setFlight}
+          alert={alert}
+          setAlert={setAlert}
+        />
+      </div>
+    </div>
+  );
 }

@@ -1,0 +1,17 @@
+.dashboard-wrapper {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden; 
+  }
+  
+  .body-wrapper {
+    margin-top: 72px; 
+    height: calc(100vh - 72px);
+    width: 100%;
+  }
+
+  .leaf1 {
+    height: calc(100vh - 72px) !important;
+  }
+  
