@@ -1,17 +1,8 @@
 import { useState } from 'react';
+
+import { RouteProps } from './Types/types';
 import { ICONS } from '../../assets';
 import './flightbyroute.css';
-
-interface RouteProps {
-  chooseOption: {
-    flight: {
-     
-      origin: { origin: string; setOrigin: (value: string) => void };
-    };
-  };
-  setVisible: (value:string) => void;
-  
-}
 
 const FlightByRoute = ({ chooseOption, setVisible}: RouteProps) => {
   const [originInput, setOriginInput] = useState('');

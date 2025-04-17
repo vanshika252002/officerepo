@@ -6,6 +6,8 @@ export interface EarthquakeProps {
     startTime:string|null;
     endTime:string|null;
     setAlert:(value:boolean)=>void;
+   setClickedLocationEarthquake:(value:[number,number,string,number]|null)=>void;
+    
   }
  export  interface EarthquakeFeature {
   id: string;

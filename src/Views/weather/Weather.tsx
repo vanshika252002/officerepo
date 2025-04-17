@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react';
-import { Input } from '../../Components/Common';
-import Loading from '../loading';
 import{ useLazyGetGeolocationByCoordsQuery } from "../../Services/Api/geolocation";
-import { useDebounce } from '../debouncing/useDebounce';
-// import { useGetWeatherByCoordsQuery } from "../../Services/Api/weather";
-import './weather.css'
-import { ICONS } from '../../assets';
-interface weatherprops{
-chooseOption:any;
- setVisible:any;
- setClickedLocation:any;
 
-}
-function Weather({chooseOption,setVisible,setClickedLocation}:weatherprops) {
+import Loading from '../loading';
+import { useDebounce } from '../debouncing/useDebounce';
+import { Input } from '../../Components/Common';
+
+
+
+import { Weatherprops } from './Types/types';
+import { ICONS } from '../../assets';
+import './weather.css'
+
+function Weather({chooseOption,setVisible,setClickedLocation}:Weatherprops) {
   const [city, setCity] = useState(""); 
   const [locations, setLocations] = useState([]); 
  const debouncedCity = useDebounce(city, 400);

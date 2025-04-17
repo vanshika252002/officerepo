@@ -1,14 +1,16 @@
-import './earthquake.css';
 import { useState, useEffect } from 'react';
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+
 import { useLazyGetEarthquakesQuery } from '../../Services/Api/earthquake';
 import { useDebounce } from '../debouncing/useDebounce';
 
-import EarthquakeDetails from '../earthquakeDetails';
+import "react-datepicker/dist/react-datepicker.css";
+import './earthquake.css';
+//import EarthquakeDetails from '../earthquakeDetails';
+//import DraggableWrapper from '../Draggable/Draggable';
+
 import { EarthquakeProps, EarthquakeFeature } from './Types/types';
 import Loading from '../loading';
-import DraggableWrapper from '../Draggable/Draggable';
 
 const Earthquake = ({
   setFooterVisible,
@@ -20,7 +22,7 @@ const Earthquake = ({
   setAlert, setClickedLocationEarthquake
 }: EarthquakeProps) => {
 
-  const [selectedEarthquake, setSelectedEarthquake] = useState<EarthquakeFeature | null>(null);
+  //const [selectedEarthquake, setSelectedEarthquake] = useState<EarthquakeFeature | null>(null);
   const [dateError, setDateError] = useState(''); 
 
   const formatDate = (date: Date): string => {
@@ -76,7 +78,7 @@ const Earthquake = ({
   });
 
   return (
-    <DraggableWrapper>
+    
       <div className="earthquake-wrapper" onClick={(e)=>e.stopPropagation()}>
       <div className="earthquake-header">
         <button
@@ -104,6 +106,10 @@ const Earthquake = ({
             onChange={(date: Date | null) => {
               setStartTime(date ? formatDate(date) : '');
             }}
+            showMonthDropdown
+            showYearDropdown
+            scrollableYearDropdown
+            scrollableMonthYearDropdown
             dateFormat="yyyy-MM-dd"
             placeholderText="YYYY-MM-DD"
           />
@@ -115,6 +121,10 @@ const Earthquake = ({
             onChange={(date: Date | null) => {
               setEndTime(date ? formatDate(date) : '');
             }}
+            showMonthDropdown
+            showYearDropdown  
+            scrollableYearDropdown
+            scrollableMonthYearDropdown
             dateFormat="yyyy-MM-dd"
             placeholderText="YYYY-MM-DD"
           />
@@ -147,7 +157,7 @@ const Earthquake = ({
           <button
             className="earthquake-click-option"
             onClick={() => {
-              setSelectedEarthquake(item);
+              // setSelectedEarthquake(item);
               setClickedLocationEarthquake([item?.geometry?.coordinates[1],item?.geometry?.coordinates[0],item.properties.place,item.properties.mag])
             }}
           >
@@ -182,7 +192,7 @@ const Earthquake = ({
         />
       )} */}
     </div>
-    </DraggableWrapper>
+  
   );
 };
 

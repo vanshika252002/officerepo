@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import * as L from 'leaflet';
 import { Tooltip } from 'react-leaflet';
 
-
 import {
   MapContainer,
   useMap,
@@ -84,6 +83,7 @@ const Body = ({
 
   const { data: liveflight} =
     useGetAllFlightsQuery(null);
+
   const FlightDetails = liveflight?.states || null;
   const [triggerEarthquakeQuery, { data: earthquakeData }] = useLazyGetEarthquakesQuery();
 
@@ -249,10 +249,10 @@ const Body = ({
           rotationAngle={0}
           rotationOrigin="center center "
         >
-         <Tooltip>
+         <Tooltip permanent>
          <strong>Flight ID:</strong> {selectedLocation.id} <br />
-            <strong>Lat:</strong> {selectedLocation.lat} <br />
-            <strong>Lon:</strong> {selectedLocation.lon}
+            {/* <strong>Lat:</strong> {selectedLocation.lat} <br />
+            <strong>Lon:</strong> {selectedLocation.lon} */}
          </Tooltip>
            
             

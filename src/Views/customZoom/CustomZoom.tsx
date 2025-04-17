@@ -3,9 +3,8 @@ import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { ICONS } from '../../assets';
 import './customZoom.css';
-interface Props{
-  chooseOption:{flight:{setFlight:(value:boolean)=>void,flight:boolean},earthquake:{setAlert:(value:boolean)=>void,alert:boolean}}
-}
+import { Props } from './Types/types';
+
 const CustomZoom = ({chooseOption}:Props) => {
   const map = useMap();
   const zoomControlRef = useRef<HTMLDivElement>(null);
@@ -22,10 +21,10 @@ const CustomZoom = ({chooseOption}:Props) => {
 
   return (
     <div className="custom-zoom" ref={zoomControlRef}>
-      <button title="Zoom In" onClick={() => map.zoomIn()}>+</button>
-      <button title="Zoom out" onClick={() => map.zoomOut()}>−</button>
-      <button title='Earthquake alert' className='alert1' onClick={()=>{earthquake.setAlert(!earthquake.alert),flight.setFlight(false)}}><img src={ICONS.earthquakealert}/></button>
-      <button title='LIVE flight' className='alert2' onClick={()=>{flight.setFlight(!flight.flight),earthquake.setAlert(false)}}><img src={ICONS.flightLogo}/></button>
+      <button title="Zoom In" className='btn' onClick={() => map.zoomIn()}>+</button>
+      <button title="Zoom out" className='btn' onClick={() => map.zoomOut()}>−</button>
+      <button title='Earthquake alert' className={`${earthquake.alert?"opacity-on":"opacity-off"}`} onClick={()=>{earthquake.setAlert(!earthquake.alert),flight.setFlight(false)}}><img src={ICONS.earthquakealert}/></button>
+      <button title='LIVE flight' className={`${flight.flight?"opacity-on":"opacity-off"}`} onClick={()=>{flight.setFlight(!flight.flight),earthquake.setAlert(false)}}><img src={ICONS.flightLogo}/></button>
     </div>
   );
 };

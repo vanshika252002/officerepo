@@ -1,13 +1,10 @@
 import { useMap } from 'react-leaflet';
-import 'leaflet-minimap/dist/Control.MiniMap.min.css';
-import 'leaflet-minimap';
-import './minimapview.css';
 import * as L from 'leaflet';
-
-
-
-
 import { useEffect } from 'react';
+import 'leaflet-minimap';
+
+import 'leaflet-minimap/dist/Control.MiniMap.min.css';
+import './minimapview.css';
 
 const MiniMapControl = () => {
   const map = useMap();

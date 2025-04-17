@@ -1,5 +1,6 @@
-import './EarthquakeDetails.css'
 import { Earthquake } from './Types/types'
+import './EarthquakeDetails.css';
+
 const EarthquakeDetails=({place,time,lat,lon,setSelectedEarthquake,depth}:Earthquake)=>{
     console.log("displayed")
     return (

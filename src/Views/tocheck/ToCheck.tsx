@@ -1,33 +1,24 @@
 import { useState, useEffect, useRef } from 'react';
-import { signOut } from 'firebase/auth';
-import { useDispatch } from 'react-redux';
-import { auth } from '../../Components/firebase';
-
 import { useLazyGetWeatherByCoordsQuery } from '../../Services/Api/weather';
-import { updateAuthTokenRedux } from '../../Store/Common';
-import './tocheck.css';
-import { ICONS } from '../../assets';
+
+
 import SearchBar from '../searchbar/SearchOptions';
 import Weather from '../weather/Weather';
 import FlightByRoute from '../flightbyroute';
 import FlightInformation from '../flightInformation';
-import Nearby from '../nearby';
+import Nearby from '../nearby';                                                    //components
 import Airports from '../airports';
 import AirportCountryFlights from '../airportCountryFlights';
-//import Searching from '../searching';
 import Live from '../live';
 
-interface Props{
-  setFlight:(value:boolean)=>void;
-  selectedLocation:{id:string,lat:number|null,lon:number|null}|null;
-  setSelectedLocation:(location:{id:string,lat:number|null,lon:number|null}|null)=>void;
-  setClickedLocation: (location: [number, number] | null) => void;
-  setAlert:(value:boolean)=>void;
-}
-const ToCheck = ({setSelectedLocation,setFlight,setAlert,setClickedLocation}:Props) => {
-  const dispatch = useDispatch();
+import { Props } from './Types/types';                                         //types+css
+import { ICONS } from '../../assets';
+import './tocheck.css';
+import Confirmation from '../Confirmation';
 
+const ToCheck = ({setSelectedLocation,setFlight,setAlert,setClickedLocation}:Props) => {
 const [visible,setVisible]=useState<string>(""); //visibility
+const [logout,setLogout]=useState<boolean>(false);
 const [clickedLocationWeather, setClickedLocationWeather] = useState<
 {lat:number,lon:number} | null
 >(null);
@@ -67,9 +58,9 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
 
   const handleLogout = () => {
     //console.log(alert("want to logout ?"));
-
-    signOut(auth);
-    dispatch(updateAuthTokenRedux({ token: null }));
+      setLogout(true);
+    // signOut(auth);
+    // dispatch(updateAuthTokenRedux({ token: null }));
   };
 
   const inputRef = useRef<HTMLDivElement>(null);
@@ -119,7 +110,7 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
               onClick={(e) => e.stopPropagation()}
             >
                <div className='weather-btn'>
-      <button onClick={()=>{setVisible("weather")}}> <img src={ICONS.arrow}/></button>
+      <button onClick={()=>{setVisible("weatheyr")}}> <img src={ICONS.arrow}/></button>
       <div className='w1'><span>Weather</span></div>
       </div>
               <div className='weather-ww1'>
@@ -173,6 +164,7 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
         <div className="h4">
           <button onClick={handleLogout}>Logout</button>
         </div>
+        {logout && <Confirmation setLogout={setLogout}/>}
       </div>
     </div>
   );

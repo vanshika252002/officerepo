@@ -13,7 +13,7 @@ export default function Dashboard() {
   [number, number] | null
 >(null);
   
-  const [flight, setFlight] = useState<boolean>(false);
+  const [flight, setFlight] = useState<boolean>(true);
    const [alert, setAlert] = useState<boolean>(false);
    return (
     <div className="dashboard-wrapper">

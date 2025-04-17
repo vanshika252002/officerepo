@@ -1,12 +1,7 @@
-import './searching.css';
 import { useGetAllFlightsQuery } from '../../Services/Api/liveflight';
-interface Props{
-  chooseOption:{searching:{searchedData:string,setSearchingVisible:(value:boolean)=>void}
-}
-}
-type Details=[
-  string,string,string,number,number,number,number,number,boolean,number
-]
+import { Props,Details } from './Types/types';
+import './searching.css';
+
 const Searching = ({ chooseOption }:Props) => {
   const { searching } = chooseOption;
   const { searchedData, setSearchingVisible } = searching;

@@ -1,34 +1,12 @@
 import { useEffect, useState, useMemo } from 'react';
-import {NearbyFlight} from './Types/types';
+import { useLazyGetAllFlightsQuery } from '../../Services/Api/liveflight';
+
+import Loading from '../loading';
+
+import {NearbyFlight,Details,NearbyProps} from './Types/types';
+import {getDistanceFromLatLonInKm} from './Util/Util';
 import { ICONS } from '../../assets';
 import './nearby.css';
-import { useLazyGetAllFlightsQuery } from '../../Services/Api/liveflight';
-import Loading from '../loading';
-//import Loading from '../loading/Loading';
-
-type details = [string, string, string, number, number, number, number, number, boolean, number];
-
-interface NearbyProps {
-  setVisible: (value:string) => void;
-  setFlight: (value: boolean) => void;
-  setSelectedLocation: (
-    location: { lat: number; lon: number; id: string } | null
-  ) => void;
-  
-}
-
-function getDistanceFromLatLonInKm(lat1: number, lon1: number, lat2: number, lon2: number) {
-  const R = 6371;
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLon = ((lon2 - lon1) * Math.PI) / 180;
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos((lat1 * Math.PI) / 180) *
-    Math.cos((lat2 * Math.PI) / 180) *
-    Math.sin(dLon / 2) * Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c;
-}
 
 const Nearby = ({ setVisible, setSelectedLocation, setFlight }: NearbyProps) => {
   const [lat, setLat] = useState<number | null>(null);
@@ -80,7 +58,7 @@ const Nearby = ({ setVisible, setSelectedLocation, setFlight }: NearbyProps) => 
   const nearbyFlights = useMemo(() => {
     if (!FlightDetails || lat === null || lon === null) return [];
     return FlightDetails
-      .map((details: details) => {
+      .map((details: Details) => {
         const flightLat = details[6];
         const flightLon = details[5];
         if (!flightLat || !flightLon) return null;

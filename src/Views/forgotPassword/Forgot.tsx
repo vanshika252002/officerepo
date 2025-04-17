@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import {  toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import { forgotPassword } from './Utils/forgot';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Input } from '../../Components/Common';
+import 'react-toastify/dist/ReactToastify.css';
 import './forgot.css';
 import { ICONS } from '../../assets';
 function Forgot() {

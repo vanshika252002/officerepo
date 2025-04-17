@@ -5,3 +5,10 @@ export interface FlightData {
     lat: number;
   }
   
+export interface Props {
+  setVisible: (value: string) => void;
+  setFlight:(value:boolean)=>void;
+  setSelectedLocation: (
+    location: { lat: number; lon: number; id: string } | null
+  ) => void;
+}

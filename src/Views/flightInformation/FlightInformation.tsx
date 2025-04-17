@@ -1,35 +1,9 @@
 import { useGetAllFlightsQuery } from '../../Services/Api/liveflight';
 import Loading from '../loading/Loading';
+
+import { FlightInformationProps,FlightDetail } from './Types/types';
 import { ICONS } from '../../assets';
 import './flightInformation.css';
-
-interface FlightDetail {
-  icao24: string;
-  callSign: string;
-  originCountry: string;
-  timePosition: number;
-  lastContact: number;
-  latitude: number;
-  longitude: number;
-  baroAltitude: number;
-  onGround: boolean;
-  velocity: number;
-}
-
-interface FlightInformationProps {
-  chooseOption: {
-    flight: {
-      origin: { origin: string; setOrigin: (value: string) => void };
-    };
-
-  };
-  setVisible:(value:string)=>void;
-      setFlight: (value: boolean) => void;
-  setSelectedLocation: (
-    location: { lat: number; lon: number; id: string } | null
-  ) => void;
-  
-}
 
 const FlightInformation = ({chooseOption, setVisible ,setFlight,setSelectedLocation}: FlightInformationProps) => {
   const { data: liveflight, isLoading, error } = useGetAllFlightsQuery(null);

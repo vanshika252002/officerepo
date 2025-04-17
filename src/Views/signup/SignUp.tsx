@@ -11,6 +11,7 @@ import {
 import { Button, FormInput } from '../../Components/Common';
 import useSignUp from './hooks/useSignUp';
 
+
 import { ICONS } from '../../assets';
 import { DATA } from '../index';
 import './signup.css';

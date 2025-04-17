@@ -92,3 +92,21 @@ html, body, #root {
   margin:0;
 
 }
+
+@keyframes moveMarker {
+  from {
+    left: var(--start-left);
+    top: var(--start-top);
+  }
+  to {
+    left: var(--end-left);
+    top: var(--end-top);
+  }
+}
+
+
+.leaflet-marker-icon {
+  position: absolute; 
+  animation: moveMarker 1s ease-in-out forwards; 
+  will-change: left, top;
+}

@@ -1,16 +1,9 @@
-import './live.css';
-import { ICONS } from '../../assets';
 import { useMemo, useState } from 'react';
 import { useGetAllFlightsQuery } from '../../Services/Api/liveflight';
-import { FlightData } from './Types/types';
 
-interface Props {
-  setVisible: (value: string) => void;
-  setFlight:(value:boolean)=>void;
-  setSelectedLocation: (
-    location: { lat: number; lon: number; id: string } | null
-  ) => void;
-}
+import { FlightData,Props} from './Types/types';
+import { ICONS } from '../../assets';
+import './live.css';
 
 const Live = ({ setVisible,setFlight,setSelectedLocation }: Props) => {
   const { data: LiveFlights } = useGetAllFlightsQuery(null);
