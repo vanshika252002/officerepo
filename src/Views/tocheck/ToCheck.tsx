@@ -16,8 +16,8 @@ import { ICONS } from '../../assets';
 import './tocheck.css';
 import Confirmation from '../Confirmation';
 
-const ToCheck = ({setSelectedLocation,setFlight,setAlert,setClickedLocation}:Props) => {
-const [visible,setVisible]=useState<string>(""); //visibility
+const ToCheck = ({setSelectedLocation,setFlight,setAlert,setClickedLocation,visible,setVisible}:Props) => {
+// const [visible,setVisible]=useState<string>(""); //visibility
 const [logout,setLogout]=useState<boolean>(false);
 const [clickedLocationWeather, setClickedLocationWeather] = useState<
 {lat:number,lon:number} | null
@@ -67,7 +67,7 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
   const inputRef1 = useRef<HTMLDivElement>(null);
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (!inputRef.current?.contains(event.target as Node)) {
+      if (!inputRef.current?.contains(event.target as Node) && visible!="earthquake-list") {
         setVisible("");
       }
     }
@@ -75,7 +75,7 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [visible]);
 
   return (
     <div className="h1">

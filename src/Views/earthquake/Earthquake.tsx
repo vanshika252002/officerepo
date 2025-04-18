@@ -19,7 +19,7 @@ const Earthquake = ({
   setEndTime,
   startTime,
   endTime,
-  setAlert, setClickedLocationEarthquake
+  setAlert, setClickedLocationEarthquake,setVisible
 }: EarthquakeProps) => {
 
   //const [selectedEarthquake, setSelectedEarthquake] = useState<EarthquakeFeature | null>(null);
@@ -83,8 +83,7 @@ const Earthquake = ({
       <div className="earthquake-header">
         <button
           onClick={() => {
-            setFooterVisible(true);
-            setEarthquakeVisible(false);
+           setVisible("");
             setAlert(false);
             setClickedLocationEarthquake(null);
           }}

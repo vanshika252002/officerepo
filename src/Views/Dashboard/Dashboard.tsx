@@ -15,6 +15,7 @@ export default function Dashboard() {
   
   const [flight, setFlight] = useState<boolean>(true);
    const [alert, setAlert] = useState<boolean>(false);
+   const [visible,setVisible]=useState<string>("");
    return (
     <div className="dashboard-wrapper">
       <ToCheck
@@ -23,6 +24,8 @@ export default function Dashboard() {
         setClickedLocation={setClickedLocation}
         setFlight={setFlight}
         setAlert={setAlert}
+        setVisible={setVisible}
+          visible={visible}
       />
       <div className="body-wrapper">
         <Body
@@ -34,6 +37,8 @@ export default function Dashboard() {
           setFlight={setFlight}
           alert={alert}
           setAlert={setAlert}
+          setVisible={setVisible}
+          visible={visible}
         />
       </div>
     </div>

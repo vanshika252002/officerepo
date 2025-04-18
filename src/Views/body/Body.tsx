@@ -56,7 +56,7 @@ const Body = ({
   clickedLocation,
   setClickedLocation,
   flight,
-  setFlight,alert,setAlert
+  setFlight,alert,setAlert,visible,setVisible
 }: Props) => {
  
 
@@ -339,24 +339,24 @@ const Body = ({
         <MiniMapControl />
       </MapContainer>
 
-      {footerVisible && (
+      
         <Footer
-          setFooterVisible={setFooterVisible}
-          setEarthquakeVisible={setEarthquakeVisible}
+          
           setAlert={setAlert}
           setFlight={setFlight}
+          setVisible={setVisible}
         />
-      )}
-      {earthquakeVisible && (
+      
+      {visible==="earthquake-list" && (
         <Earthquake
-          setFooterVisible={setFooterVisible}
-          setEarthquakeVisible={setEarthquakeVisible}
+          
           setStartTime={setStartTime}
           setEndTime={setEndTime}
           startTime={startTime}
           endTime={endTime}
           setAlert={setAlert}
           setClickedLocationEarthquake={setClickedLocationEarthquake}
+          setVisible={setVisible}
         />
       )}
     </div>
