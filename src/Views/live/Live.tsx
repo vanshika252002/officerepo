@@ -5,7 +5,7 @@ import { FlightData,Props} from './Types/types';
 import { ICONS } from '../../assets';
 import './live.css';
 
-const Live = ({ setVisible,setFlight,setSelectedLocation }: Props) => {
+const Live = ({ setVisible,setFlight,setSelectedLocation ,setFly,setFlyToTarget}: Props) => {
   const { data: LiveFlights } = useGetAllFlightsQuery(null);
   const [expandedIcao, setExpandedIcao] = useState<string | null>(null);
 
@@ -94,6 +94,8 @@ const Live = ({ setVisible,setFlight,setSelectedLocation }: Props) => {
           <div className='acc-btn'><button onClick={() => {
               setSelectedLocation({ lat: lat, lon:lon, id:icao });
               setFlight(true);
+              setFly(true);
+              setFlyToTarget([lat,lon])
             }}><img src={ICONS.showonmap}/><span>Show on Map</span></button></div>
 
           <p><strong>ICAO Code:</strong> {icao}</p>

@@ -23,7 +23,7 @@ interface AirportCountryFlightsProps {
 }
 type Details = [string, string, string, number, number, number, number, number, boolean, number];
 
-const AirportCountryFlights = ({ chooseOption,setVisible ,setSelectedLocation,setFlight}: AirportCountryFlightsProps) => {
+const AirportCountryFlights = ({ chooseOption,setVisible ,setSelectedLocation,setFlight,setFly,setFlyToTarget}: AirportCountryFlightsProps) => {
   const { airport } = chooseOption;
   const { code } = airport;
   const { country } = airport;
@@ -102,7 +102,7 @@ const AirportCountryFlights = ({ chooseOption,setVisible ,setSelectedLocation,se
                   <div className="accordion-content">
                   <div className='acc-btn'><button onClick={() => {
               setSelectedLocation({ lat: latitude, lon:longitude, id:icaoCode });
-              setFlight(true);
+              setFlight(true);setFly(true);setFlyToTarget([latitude,longitude])
             }}><img src={ICONS.showonmap}/><span>Show on Map</span></button></div>
                   <div className='data-flight'>
                     <p><strong>ICAO Code:</strong> {icaoCode}</p>

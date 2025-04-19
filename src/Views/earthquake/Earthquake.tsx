@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useRef } from 'react';
 import DatePicker from "react-datepicker";
 
 import { useLazyGetEarthquakesQuery } from '../../Services/Api/earthquake';
@@ -19,11 +19,28 @@ const Earthquake = ({
   setEndTime,
   startTime,
   endTime,
-  setAlert, setClickedLocationEarthquake,setVisible
+  setAlert, setClickedLocationEarthquake,setVisible,setFly,setFlyToTarget,visible
 }: EarthquakeProps) => {
 
   //const [selectedEarthquake, setSelectedEarthquake] = useState<EarthquakeFeature | null>(null);
   const [dateError, setDateError] = useState(''); 
+
+  const inputRef1 = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+      function handleClickOutside(event: MouseEvent) {
+        if (!inputRef1.current?.contains(event.target as Node) ) {
+          setVisible("");
+          setFly(false);
+          setAlert(false);
+          setClickedLocationEarthquake(null);
+          
+        }
+      }
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [visible]);
 
   const formatDate = (date: Date): string => {
     if (!(date instanceof Date) || isNaN(date.getTime())) return '';
@@ -79,13 +96,14 @@ const Earthquake = ({
 
   return (
     
-      <div className="earthquake-wrapper" onClick={(e)=>e.stopPropagation()}>
+      <div className="earthquake-wrapper" ref={inputRef1} onClick={(e)=>e.stopPropagation()}>
       <div className="earthquake-header">
         <button
           onClick={() => {
            setVisible("");
             setAlert(false);
             setClickedLocationEarthquake(null);
+            setFly(false);
           }}
         >
           x
@@ -157,6 +175,8 @@ const Earthquake = ({
             className="earthquake-click-option"
             onClick={() => {
               // setSelectedEarthquake(item);
+              setFly(true);
+              setFlyToTarget([item?.geometry?.coordinates[1],item?.geometry?.coordinates[0]])
               setClickedLocationEarthquake([item?.geometry?.coordinates[1],item?.geometry?.coordinates[0],item.properties.place,item.properties.mag])
             }}
           >

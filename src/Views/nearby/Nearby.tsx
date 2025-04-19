@@ -8,7 +8,7 @@ import {getDistanceFromLatLonInKm} from './Util/Util';
 import { ICONS } from '../../assets';
 import './nearby.css';
 
-const Nearby = ({ setVisible, setSelectedLocation, setFlight }: NearbyProps) => {
+const Nearby = ({ setVisible, setSelectedLocation, setFlight,setFly,setFlyToTarget }: NearbyProps) => {
   const [lat, setLat] = useState<number | null>(null);
   const [lon, setLon] = useState<number | null>(null);
   const [errorMsg, setErrorMsg] = useState('');
@@ -126,6 +126,8 @@ const Nearby = ({ setVisible, setSelectedLocation, setFlight }: NearbyProps) => 
               <div className='acc-btn'><button onClick={() => {
               setSelectedLocation({ lat: details[6], lon: details[5], id: details[0] });
               setFlight(true);
+              setFly(true);
+              setFlyToTarget([details[6],details[5]])
             }}><img src={ICONS.showonmap}/><span>Show on Map</span></button></div>            
             </div>
           ))}

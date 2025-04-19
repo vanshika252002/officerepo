@@ -11,7 +11,7 @@ import { Weatherprops } from './Types/types';
 import { ICONS } from '../../assets';
 import './weather.css'
 
-function Weather({chooseOption,setVisible,setClickedLocation}:Weatherprops) {
+function Weather({chooseOption,setVisible,setClickedLocation,setFly,setFlyToTarget}:Weatherprops) {
   const [city, setCity] = useState(""); 
   const [locations, setLocations] = useState([]); 
  const debouncedCity = useDebounce(city, 400);
@@ -62,8 +62,8 @@ function Weather({chooseOption,setVisible,setClickedLocation}:Weatherprops) {
       <button
         key={index} 
         className="custom-item" 
-        onClick={() =>{ chooseOption.weather.place.setPlace(location.formatted),chooseOption.weather.setClickedLocationWeather({lat:location.geometry.lat,lon:location.geometry.lng}),setVisible("weatherdetails"),setClickedLocation([location?.geometry?.lat,location?.geometry?.lng])}
-   
+        onClick={() =>{ chooseOption.weather.place.setPlace(location.formatted),chooseOption.weather.setClickedLocationWeather({lat:location.geometry.lat,lon:location.geometry.lng}),setVisible("weatherdetails"),setClickedLocation([location?.geometry?.lat,location?.geometry?.lng]) ,setFly(true),setFlyToTarget([location?.geometry?.lat,location?.geometry?.lng])}
+        
       }
       >
         <strong>{location.formatted}</strong>  ({location.geometry.lat}, {location.geometry.lng})

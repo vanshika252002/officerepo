@@ -16,6 +16,12 @@ export default function Dashboard() {
   const [flight, setFlight] = useState<boolean>(true);
    const [alert, setAlert] = useState<boolean>(false);
    const [visible,setVisible]=useState<string>("");
+
+   const [flyToTarget, setFlyToTarget] = useState<[number, number] | null>(null);
+const [fly,setFly]=useState<boolean>(false);
+
+
+
    return (
     <div className="dashboard-wrapper">
       <ToCheck
@@ -26,6 +32,9 @@ export default function Dashboard() {
         setAlert={setAlert}
         setVisible={setVisible}
           visible={visible}
+          flyToTarget={flyToTarget}
+          setFlyToTarget={setFlyToTarget}
+          setFly={setFly}
       />
       <div className="body-wrapper">
         <Body
@@ -38,8 +47,14 @@ export default function Dashboard() {
           alert={alert}
           setAlert={setAlert}
           setVisible={setVisible}
+
           visible={visible}
-        />
+             fly={fly}
+             setFly={setFly}
+             flyToTarget={flyToTarget}
+             setFlyToTarget={setFlyToTarget}
+
+/>
       </div>
     </div>
   );

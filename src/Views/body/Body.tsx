@@ -56,7 +56,7 @@ const Body = ({
   clickedLocation,
   setClickedLocation,
   flight,
-  setFlight,alert,setAlert,visible,setVisible
+  setFlight,alert,setAlert,visible,setVisible,setFlyToTarget,flyToTarget,fly,setFly
 }: Props) => {
  
 
@@ -120,50 +120,22 @@ const Body = ({
     }
   }, [clickedLocation]);
 
-  const FlyToSelectedFlight = () => {
-    const map = useMap();
-    setClickedLocation(null);
-    useEffect(() => {
-      if (selectedLocation?.lat && selectedLocation?.lon) {
-        map.flyTo([selectedLocation.lat, selectedLocation.lon], 8, {
-          duration: 1.5,
-        });
-      }
-    }, [selectedLocation, map]);
-    return null;
-  };
-  // const FlyToSelectedWeather = () => {
-  //   const map = useMap();
-  //  setSelectedLocation(null);
-  //   if(clickedLocation)
-  //   {const [lat, lon] = clickedLocation;
-  //   useEffect(() => {
-  //     if (lat && lon) {
-  //       map.flyTo([lat,lon], 8, {
-  //         duration: 1.5,
-  //       });
-  //     }
-  //   }, [clickedLocation,map]);
-  // }
-  //   return null;
-
-  // };
-
-
-  const FlyToSelectedEarthquake = () => {
+  const FlyToTarget = () => {
     const map = useMap();
   
     useEffect(() => {
-      if (clickedLocationEarthquake) {
-        const [lat, lon] = clickedLocationEarthquake;
-        map.flyTo([lat, lon], 8, {
-          duration: 1.5,
-        });
+      if (flyToTarget) {
+        map.flyTo(flyToTarget, 8, { duration: 1.5 });
       }
-    }, [clickedLocationEarthquake, map]);
+    }, [flyToTarget, map]);
   
     return null;
   };
+  
+
+  
+
+
   
   // useEffect(() => {
   //   if (earthquakeData?.length > 0) {
@@ -192,7 +164,7 @@ const Body = ({
           attribution='&copy;<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
 
-        {flight && selectedLocation && <FlyToSelectedFlight />}
+       
         <MapClickHandler />
         <CustomZoom chooseOption={chooseOption} />
         <MarkerClusterGroup showCoverageOnHover={false}>
@@ -259,7 +231,7 @@ const Body = ({
         </Marker>
       )}
 
-{alert && clickedLocationEarthquake && <FlyToSelectedEarthquake />}
+
 
 {alert && earthquakeData?.features && (
           <>
@@ -310,6 +282,10 @@ const Body = ({
             )}
           </>
         )}
+            {fly && flyToTarget &&  <FlyToTarget/>}
+
+
+
 
         {clickedLocation && (
           <Popup position={clickedLocation}>
@@ -341,7 +317,7 @@ const Body = ({
 
       
         <Footer
-          
+          setFly={setFly}
           setAlert={setAlert}
           setFlight={setFlight}
           setVisible={setVisible}
@@ -349,7 +325,7 @@ const Body = ({
       
       {visible==="earthquake-list" && (
         <Earthquake
-          
+        setFly={setFly}
           setStartTime={setStartTime}
           setEndTime={setEndTime}
           startTime={startTime}
@@ -357,6 +333,8 @@ const Body = ({
           setAlert={setAlert}
           setClickedLocationEarthquake={setClickedLocationEarthquake}
           setVisible={setVisible}
+          setFlyToTarget={setFlyToTarget}
+          visible={visible}
         />
       )}
     </div>

@@ -16,7 +16,7 @@ import { ICONS } from '../../assets';
 import './tocheck.css';
 import Confirmation from '../Confirmation';
 
-const ToCheck = ({setSelectedLocation,setFlight,setAlert,setClickedLocation,visible,setVisible}:Props) => {
+const ToCheck = ({setSelectedLocation,setFlight,setAlert,setClickedLocation,visible,setVisible,setFly,setFlyToTarget,flyToTarget}:Props) => {
 // const [visible,setVisible]=useState<string>(""); //visibility
 const [logout,setLogout]=useState<boolean>(false);
 const [clickedLocationWeather, setClickedLocationWeather] = useState<
@@ -69,6 +69,10 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
     function handleClickOutside(event: MouseEvent) {
       if (!inputRef.current?.contains(event.target as Node) && visible!="earthquake-list") {
         setVisible("");
+        setFly(false);
+        setSelectedLocation(null);
+        setClickedLocationWeather(null);
+        setClickedLocation(null);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -102,7 +106,8 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
             />
           )}
           {visible=="weather" && (
-            <Weather chooseOption={chooseOption} setVisible={setVisible} setClickedLocation={setClickedLocation}/>
+            <Weather chooseOption={chooseOption} setVisible={setVisible} setClickedLocation={setClickedLocation}  setFly={setFly}
+            setFlyToTarget={setFlyToTarget}/>
           )}
           {visible=="weatherdetails" && weatherData && (
             <div
@@ -138,11 +143,12 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
              setVisible={setVisible}
             />
           )}
-          {visible=="flight-details" && <FlightInformation chooseOption={chooseOption} setVisible={setVisible}  setFlight={setFlight} setSelectedLocation={setSelectedLocation} />}
+          {visible=="flight-details" && <FlightInformation setFly={setFly}
+            setFlyToTarget={setFlyToTarget} chooseOption={chooseOption} setVisible={setVisible}  setFlight={setFlight} setSelectedLocation={setSelectedLocation} />}
           {visible=="nearby" && (
             <Nearby
-            
-              
+             setFly={setFly}
+              setFlyToTarget={setFlyToTarget}
               setSelectedLocation={setSelectedLocation}
               setFlight={setFlight}
               setVisible={setVisible}
@@ -153,12 +159,14 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
           )}
           {visible=="airport-by-code" && (
             <AirportCountryFlights chooseOption={chooseOption} setVisible={setVisible} setSelectedLocation={setSelectedLocation}
-            setFlight={setFlight}/>
+            setFlight={setFlight}    setFly={setFly}
+            setFlyToTarget={setFlyToTarget}/>
           )}
           
           {visible=="live-flight" && (
             <Live setVisible={setVisible}    setSelectedLocation={setSelectedLocation}
-            setFlight={setFlight} />
+            setFlight={setFlight}  setFly={setFly}
+            setFlyToTarget={setFlyToTarget} />
           )}
         </div>
         <div className="h4">

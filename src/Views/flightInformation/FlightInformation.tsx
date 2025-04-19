@@ -5,7 +5,7 @@ import { FlightInformationProps,FlightDetail } from './Types/types';
 import { ICONS } from '../../assets';
 import './flightInformation.css';
 
-const FlightInformation = ({chooseOption, setVisible ,setFlight,setSelectedLocation}: FlightInformationProps) => {
+const FlightInformation = ({chooseOption, setVisible ,setFlight,setSelectedLocation,setFly,setFlyToTarget}: FlightInformationProps) => {
   const { data: liveflight, isLoading, error } = useGetAllFlightsQuery(null);
 
   const FlightDetails: FlightDetail[] =
@@ -53,6 +53,7 @@ const FlightInformation = ({chooseOption, setVisible ,setFlight,setSelectedLocat
                 <button onClick={() => {
               setSelectedLocation({ lat: flight.latitude, lon:flight.longitude, id:flight.icao24 });
               setFlight(true);
+              setFly(true);setFlyToTarget([flight.latitude,flight.longitude])
             }}><img src={ICONS.showonmap}/><span>Show on Map</span></button>
                 </div>
 
