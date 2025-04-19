@@ -4,4 +4,15 @@ export interface Props{
     setSelectedLocation:(location:{id:string,lat:number|null,lon:number|null}|null)=>void;
     setClickedLocation: (location: [number, number] | null) => void;
     setAlert:(value:boolean)=>void;
+  
+   
+
+  
+   
+    setVisible:(value:string)=>void;
+    setFly:(value:boolean)=>void;
+    setFlyToTarget:(value:[number,number]|null)=>void;
+    visible:string;
+    
+    flyToTarget:[number,number]|null;
   }

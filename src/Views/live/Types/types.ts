@@ -11,4 +11,7 @@ export interface Props {
   setSelectedLocation: (
     location: { lat: number; lon: number; id: string } | null
   ) => void;
+  setFly:(value:boolean)=>void;
+  setFlyToTarget:(value:[number,number]|null)=>void;
+ 
 }

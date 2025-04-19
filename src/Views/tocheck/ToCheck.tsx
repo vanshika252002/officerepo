@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useLazyGetWeatherByCoordsQuery } from '../../Services/Api/weather';
+//import { useLazyGetWeatherByCoordsQuery } from '../../Services/Api/weather';
 
 
 import SearchBar from '../searchbar/SearchOptions';
@@ -16,12 +16,10 @@ import { ICONS } from '../../assets';
 import './tocheck.css';
 import Confirmation from '../Confirmation';
 
-const ToCheck = ({setSelectedLocation,setFlight,setAlert,setClickedLocation,visible,setVisible,setFly,setFlyToTarget,flyToTarget}:Props) => {
+const ToCheck = ({setSelectedLocation,setFlight,setAlert,setClickedLocation,visible,setVisible,setFly,setFlyToTarget}:Props) => {
 // const [visible,setVisible]=useState<string>(""); //visibility
 const [logout,setLogout]=useState<boolean>(false);
-const [clickedLocationWeather, setClickedLocationWeather] = useState<
-{lat:number,lon:number} | null
->(null);
+//const [clickedLocationWeather, setClickedLocationWeather] = useState<{lat:number,lon:number} | null>(null);
 
   const [place, setPlace] = useState('');
    const [origin, setOrigin] = useState('');
@@ -31,7 +29,7 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
 
   const chooseOption = {
     weather: {
-      setClickedLocationWeather,
+     
       place: { place, setPlace },
     },
     flight: {
@@ -47,14 +45,14 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
     },
   };
 
-  const [triggerWeather, { data: weatherData }] =
-    useLazyGetWeatherByCoordsQuery();
+  // const [triggerWeather, { data: weatherData }] =
+  //   useLazyGetWeatherByCoordsQuery();
 
-  useEffect(() => {
-    if (clickedLocationWeather) {
-      triggerWeather({ lat: clickedLocationWeather.lat, lon: clickedLocationWeather.lon });
-    }
-  }, [clickedLocationWeather, triggerWeather]);
+  // useEffect(() => {
+  //   if (clickedLocationWeather) {
+  //     triggerWeather({ lat: clickedLocationWeather.lat, lon: clickedLocationWeather.lon });
+  //   }
+  // }, [clickedLocationWeather, triggerWeather]);
 
   const handleLogout = () => {
     //console.log(alert("want to logout ?"));
@@ -71,7 +69,7 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
         setVisible("");
         setFly(false);
         setSelectedLocation(null);
-        setClickedLocationWeather(null);
+    
         setClickedLocation(null);
       }
     }

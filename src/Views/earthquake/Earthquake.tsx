@@ -13,8 +13,7 @@ import { EarthquakeProps, EarthquakeFeature } from './Types/types';
 import Loading from '../loading';
 
 const Earthquake = ({
-  setFooterVisible,
-  setEarthquakeVisible,
+ 
   setStartTime,
   setEndTime,
   startTime,

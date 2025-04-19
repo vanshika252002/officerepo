@@ -72,9 +72,7 @@ const Body = ({
 >(null);
 
 
-  const [footerVisible, setFooterVisible] = useState<boolean>(true);
-
-  const [earthquakeVisible, setEarthquakeVisible] = useState<boolean>(false);
+  
 
   const [triggerWeather, { data: weatherData }] =
     useLazyGetWeatherByCoordsQuery();
