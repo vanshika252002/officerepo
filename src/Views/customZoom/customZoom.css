@@ -44,9 +44,9 @@
     background-color:white;
     color:yellow;
     border-radius: 25px;
-    width: 47px;
-    height: 47px;
-    box-shadow: 3px 4px 3px black;
+    width: 49px;
+    height: 49px;
+    box-shadow: 4px 4px 6px black;
     transition: transform 0.2s ease;
   }
   .opacity-off{

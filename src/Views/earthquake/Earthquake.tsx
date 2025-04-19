@@ -19,7 +19,7 @@ const Earthquake = ({
   setEndTime,
   startTime,
   endTime,
-  setAlert, setClickedLocationEarthquake,setVisible,setFly,setFlyToTarget,visible
+  setAlert, setClickedLocationEarthquake,setVisible,setFly,setFlyToTarget,visible,setClickedLocation
 }: EarthquakeProps) => {
 
   //const [selectedEarthquake, setSelectedEarthquake] = useState<EarthquakeFeature | null>(null);
@@ -176,6 +176,7 @@ const Earthquake = ({
             onClick={() => {
               // setSelectedEarthquake(item);
               setFly(true);
+              setClickedLocation(null);
               setFlyToTarget([item?.geometry?.coordinates[1],item?.geometry?.coordinates[0]])
               setClickedLocationEarthquake([item?.geometry?.coordinates[1],item?.geometry?.coordinates[0],item.properties.place,item.properties.mag])
             }}

@@ -10,7 +10,7 @@ export default function Dashboard() {
   const [selectedLocation, setSelectedLocation] = useState<{ id: string; lat: number | null; lon: number | null } | null>(null);
 
   const [clickedLocation, setClickedLocation] = useState<
-  [number, number] | null
+  [number, number,string] | null
 >(null);
   
   const [flight, setFlight] = useState<boolean>(true);

@@ -109,7 +109,7 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
             <Weather chooseOption={chooseOption} setVisible={setVisible} setClickedLocation={setClickedLocation}  setFly={setFly}
             setFlyToTarget={setFlyToTarget}/>
           )}
-          {visible=="weatherdetails" && weatherData && (
+          {/* {visible=="weatherdetails" && weatherData && (
             <div
               className="weather-details-ww"
               onClick={(e) => e.stopPropagation()}
@@ -136,7 +136,7 @@ const [clickedLocationWeather, setClickedLocationWeather] = useState<
               </p>
                 </div>
             </div>
-          )}
+          )} */}
           {visible=="flight-by-route" && (
             <FlightByRoute
               chooseOption={chooseOption}

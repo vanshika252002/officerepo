@@ -1,4 +1,6 @@
 .earthquake-wrapper {
+   
+
     position:absolute; 
     top: 107px;      
     left:10px;           
@@ -13,6 +15,7 @@
     border-radius: 10px;
     cursor: move;
 }
+
 
 .earthquake-header{
     width:100%;

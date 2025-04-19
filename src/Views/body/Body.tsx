@@ -297,8 +297,9 @@ const Body = ({
                     {geolocation?.results[0]?.annotations?.flag}{' '}
                     {geolocation?.results[0]?.components?.state}
                   </h2>:<h2>{geolocation?.results[0]?.formatted} </h2>}
-               
+                
                   <br />
+                 
                  <span> <strong>Weather:</strong> {weatherData.weather[0].description}</span>
                   <br />
                   <span><strong>Temperature:</strong> {weatherData.main.temp}°C</span>
@@ -321,6 +322,7 @@ const Body = ({
           setAlert={setAlert}
           setFlight={setFlight}
           setVisible={setVisible}
+          
         />
       
       {visible==="earthquake-list" && (
@@ -332,6 +334,7 @@ const Body = ({
           endTime={endTime}
           setAlert={setAlert}
           setClickedLocationEarthquake={setClickedLocationEarthquake}
+          setClickedLocation={setClickedLocation}
           setVisible={setVisible}
           setFlyToTarget={setFlyToTarget}
           visible={visible}
