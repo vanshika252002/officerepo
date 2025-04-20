@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import flight from './flight';
 import { combineReducers } from 'redux';
 import {
   persistStore,
@@ -27,6 +28,7 @@ const rootPersistConfig = {
 const reducers = combineReducers({
   common,
   loader,
+  flight,
   [weatherApi.reducerPath]: weatherApi.reducer,
   [openSkyApi.reducerPath]:openSkyApi.reducer,
   [geoLocationApi.reducerPath]:geoLocationApi.reducer,

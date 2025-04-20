@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setFlights } from '../../Store/flight';
 import * as L from 'leaflet';
 import { Tooltip } from 'react-leaflet';
 
@@ -61,6 +63,8 @@ const Body = ({
 }: Props) => {
  
 
+  const dispatch = useDispatch();
+
   const chooseOption = {
     flight: { flight, setFlight },
     earthquake: { alert, setAlert },
@@ -82,13 +86,17 @@ const Body = ({
     useLazyGetGeolocationByLatLngQuery();
 
   const { data: liveflight,isLoading:loadingFlights} =
-    useGetAllFlightsQuery(null);
+    useGetAllFlightsQuery(null,{pollingInterval:5000});
 
   const FlightDetails = liveflight?.states || null;
 
   const [triggerEarthquakeQuery, { data: earthquakeData }] = useLazyGetEarthquakesQuery();
 
-
+  useEffect(() => {
+    if (liveflight?.states) {
+      dispatch(setFlights(liveflight.states));
+    }
+  }, [liveflight]);
 
 
   useEffect(() => {
@@ -140,6 +148,25 @@ const Body = ({
 
   
 
+useEffect(() => {
+  if (selectedLocation && FlightDetails) {
+    const updated = FlightDetails.find(
+      (details: Details) => details[0] === selectedLocation.id
+    );
+
+    if (updated) { 
+      setSelectedLocation({
+        id: updated[0],
+        lat: updated[6],
+        lon: updated[5],
+        angle: updated[10],
+      });
+    }else {
+      setSelectedLocation(null);
+    }
+  }                                    
+}, [FlightDetails]);
+
 
   
   // useEffect(() => {
@@ -177,10 +204,8 @@ const Body = ({
         {loadingFlights && <Loading/>}
         {flight && 
           FlightDetails?.map((details: Details) => {
-            const isSelected =
-              selectedLocation?.id === details[0] &&
-              selectedLocation?.lat === details[6] &&
-              selectedLocation?.lon === details[5];
+            const isSelected = selectedLocation?.id === details[0];
+
 
             if (isSelected) return null;
 
@@ -229,8 +254,8 @@ const Body = ({
         >
          <Tooltip permanent>
          <strong>Flight ID:</strong> {selectedLocation.id} <br />
-            {/* <strong>Lat:</strong> {selectedLocation.lat} <br />
-            <strong>Lon:</strong> {selectedLocation.lon} */}
+            <strong>Lat:</strong> {selectedLocation.lat} <br />
+            <strong>Lon:</strong> {selectedLocation.lon}
          </Tooltip>
            
             
