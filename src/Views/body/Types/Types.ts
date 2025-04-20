@@ -13,13 +13,13 @@ export interface Props {
       id: string;
       lat: number|null;
       lon: number|null;
-      
+      angle:number|null;
     } | null;
     setSelectedLocation: (location: {
       id: string;
       lat: number|null;
       lon: number|null;
-
+      angle:number|null;
     } | null) => void;
     flight: boolean;
     setFlight: (value: boolean) => void;

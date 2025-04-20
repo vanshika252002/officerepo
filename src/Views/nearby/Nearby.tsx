@@ -124,7 +124,7 @@ const Nearby = ({ setVisible, setSelectedLocation, setFlight,setFly,setFlyToTarg
               <div className='n1'><div className='n2'><span>Velocity</span></div><div className='n3'><span>{details[9]}</span></div></div>
               <div className='n1'><div className='n2'><span className='n4'>Distance (km):</span></div><div className='n3'><span className='n4'>{distance.toFixed(2)}</span></div></div>
               <div className='acc-btn'><button onClick={() => {
-              setSelectedLocation({ lat: details[6], lon: details[5], id: details[0] });
+              setSelectedLocation({ lat: details[6], lon: details[5], id: details[0],angle:details[10] });
               setFlight(true);
               setFly(true);
               setFlyToTarget([details[6],details[5]])

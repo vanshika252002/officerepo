@@ -21,6 +21,7 @@ import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './body.css';
 import Footer from '../footer/Footer';
+import 'leaflet-rotatedmarker';
 
 import { useLazyGetEarthquakesQuery } from '../../Services/Api/earthquake';
 import CustomZoom from '../customZoom/CustomZoom';
@@ -28,16 +29,16 @@ import Earthquake from '../earthquake/Earthquake';
 
 import { useLazyGetGeolocationByLatLngQuery } from '../../Services/Api/geolocation';
 import { EarthquakeFeature, Props, Details } from './Types/Types';
+import Loading from '../loading';
 
 const createFlightIcon = (fillColor: string, size = 38) =>
   new L.DivIcon({
     html: `
       <svg xmlns="http://www.w3.org/2000/svg"
-     width="${size}" height="${size}"
-     viewBox="0 0 24 24"
-     style="transform: rotate(${45}deg);">
-  <path fill="${fillColor}" d="M21 16v-2l-8-5V3.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5V9L3 14v2l8-1.5v3L9.5 19v1l2.5-.5 2.5.5v-1L13 17.5v-3L21 16z"/>
-</svg>
+        width="${size}" height="${size}"
+        viewBox="0 0 24 24">
+        <path fill="${fillColor}" d="M21 16v-2l-8-5V3.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5V9L3 14v2l8-1.5v3L9.5 19v1l2.5-.5 2.5.5v-1L13 17.5v-3L21 16z"/>
+      </svg>
     `,
     className: '',
     iconSize: [size, size],
@@ -63,6 +64,7 @@ const Body = ({
   const chooseOption = {
     flight: { flight, setFlight },
     earthquake: { alert, setAlert },
+    visibility:{setVisible}
   };
 
   const [startTime, setStartTime] = useState<string|null>('2025-03-01'); //forearthquake
@@ -79,19 +81,24 @@ const Body = ({
   const [triggerGeolocation, { data: geolocation }] =
     useLazyGetGeolocationByLatLngQuery();
 
-  const { data: liveflight} =
+  const { data: liveflight,isLoading:loadingFlights} =
     useGetAllFlightsQuery(null);
 
   const FlightDetails = liveflight?.states || null;
+
   const [triggerEarthquakeQuery, { data: earthquakeData }] = useLazyGetEarthquakesQuery();
+
+
+
 
   useEffect(() => {
     if (startTime && endTime) {
-      triggerEarthquakeQuery({ startTime, endTime });
-      setClickedLocationEarthquake(null);
+      if (alert || visible === "earthquake-list") {
+        triggerEarthquakeQuery({ startTime, endTime });
+        setClickedLocationEarthquake(null);
+      }
     }
-  }, [startTime, endTime]);
-
+  }, [startTime, endTime, alert, visible, triggerEarthquakeQuery]);
   //console.log("earthquakeData",earthquakeData);
   // console.log('selected angle is', selectedLocation?.angle);
 
@@ -167,6 +174,7 @@ const Body = ({
         <CustomZoom chooseOption={chooseOption} />
         <MarkerClusterGroup showCoverageOnHover={false}>
         
+        {loadingFlights && <Loading/>}
         {flight && 
           FlightDetails?.map((details: Details) => {
             const isSelected =
@@ -183,7 +191,7 @@ const Body = ({
                   key={details[0]}
                   position={[details[6], details[5]]}
                   icon={createFlightIcon('green', 42)}
-                  rotationAngle={0}
+                  rotationAngle={details[10] || 0}
                   rotationOrigin="center center"
                   eventHandlers={{
                     click: () => {
@@ -191,7 +199,7 @@ const Body = ({
                         id: details[0],
                         lat: details[6],
                         lon: details[5],
-                        
+                        angle:details[10]
                       }),setClickedLocation(null)
                     },
                   }}
@@ -216,7 +224,7 @@ const Body = ({
           position={[selectedLocation.lat, selectedLocation.lon]}
           icon={createFlightIcon('red', 42)}
           zIndexOffset={1000}
-          rotationAngle={0}
+          rotationAngle={selectedLocation.angle||0}
           rotationOrigin="center center "
         >
          <Tooltip permanent>

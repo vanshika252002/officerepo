@@ -24,7 +24,7 @@ interface AirportCountryFlightsProps {
   setFlyToTarget:(value:[number,number]|null)=>void;
  
 }
-type Details = [string, string, string, number, number, number, number, number, boolean, number];
+type Details = [string, string, string, number, number, number, number, number, boolean, number,number];
 
 const AirportCountryFlights = ({ chooseOption,setVisible ,setSelectedLocation,setFlight,setFly,setFlyToTarget}: AirportCountryFlightsProps) => {
   const { airport } = chooseOption;
@@ -75,6 +75,7 @@ const AirportCountryFlights = ({ chooseOption,setVisible ,setSelectedLocation,se
           const flightCountry = detail[2];
           const longitude = detail[5];
           const latitude = detail[6];
+          const angle=detail[10];
      
           const isExpanded = expandedIcao === icaoCode;
 
@@ -104,7 +105,7 @@ const AirportCountryFlights = ({ chooseOption,setVisible ,setSelectedLocation,se
                   
                   <div className="accordion-content">
                   <div className='acc-btn'><button onClick={() => {
-              setSelectedLocation({ lat: latitude, lon:longitude, id:icaoCode });
+              setSelectedLocation({ lat: latitude, lon:longitude, id:icaoCode,angle:angle });
               setFlight(true);setFly(true);setFlyToTarget([latitude,longitude])
             }}><img src={ICONS.showonmap}/><span>Show on Map</span></button></div>
                   <div className='data-flight'>

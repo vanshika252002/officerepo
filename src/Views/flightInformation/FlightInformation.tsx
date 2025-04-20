@@ -20,6 +20,7 @@ const FlightInformation = ({chooseOption, setVisible ,setFlight,setSelectedLocat
       baroAltitude: tuple[7],
       onGround: tuple[8],
       velocity: tuple[9],
+      angle: tuple[10] ||0
     })) || [];
 
   const originFilter = chooseOption?.flight?.origin?.origin.trim().toLowerCase();
@@ -51,7 +52,7 @@ const FlightInformation = ({chooseOption, setVisible ,setFlight,setSelectedLocat
             <div key={flight.icao24} className="wrapper-for-flight-information">
               <div className='acc-btn'>
                 <button onClick={() => {
-              setSelectedLocation({ lat: flight.latitude, lon:flight.longitude, id:flight.icao24 });
+              setSelectedLocation({ lat: flight.latitude, lon:flight.longitude, id:flight.icao24 ,angle:flight.angle});
               setFlight(true);
               setFly(true);setFlyToTarget([flight.latitude,flight.longitude])
             }}><img src={ICONS.showonmap}/><span>Show on Map</span></button>

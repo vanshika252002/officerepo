@@ -1,6 +1,6 @@
 import { useState, useEffect,useRef } from 'react';
 import DatePicker from "react-datepicker";
-
+import React from 'react';
 import { useLazyGetEarthquakesQuery } from '../../Services/Api/earthquake';
 import { useDebounce } from '../debouncing/useDebounce';
 
@@ -11,6 +11,25 @@ import './earthquake.css';
 
 import { EarthquakeProps, EarthquakeFeature } from './Types/types';
 import Loading from '../loading';
+const CustomDatePickerInput = React.forwardRef<HTMLDivElement, { value?: string; onClick?: () => void; placeholder?: string }>(
+  ({ value, onClick, placeholder }, ref) => (
+    <div
+      onClick={onClick}
+      ref={ref}
+      className="datepicker-custom-input"
+      style={{
+        padding: "8px 12px",
+        border: "1px solid #ccc",
+        borderRadius: "4px",
+        backgroundColor: "#fff",
+        cursor: "pointer",
+        minWidth: "120px"
+      }}
+    >
+      {value || <span style={{ color: '#aaa' }}>{placeholder}</span>}
+    </div>
+  )
+);
 
 const Earthquake = ({
  
@@ -120,7 +139,16 @@ const Earthquake = ({
           <DatePicker
             selected={formattedStartTime}
             onChange={(date: Date | null) => {
-              setStartTime(date ? formatDate(date) : '');
+              if (date) {
+                const start = new Date(date);
+                const end = new Date(date);
+                end.setMonth(end.getMonth() + 1); 
+                setStartTime(formatDate(start));
+                setEndTime(formatDate(end));
+              } else {
+                setStartTime('');
+                setEndTime('');
+              }
             }}
             showMonthDropdown
             showYearDropdown
@@ -128,6 +156,7 @@ const Earthquake = ({
             scrollableMonthYearDropdown
             dateFormat="yyyy-MM-dd"
             placeholderText="YYYY-MM-DD"
+            customInput={<CustomDatePickerInput />}
           />
         </div>
         <div className="end">
@@ -143,6 +172,7 @@ const Earthquake = ({
             scrollableMonthYearDropdown
             dateFormat="yyyy-MM-dd"
             placeholderText="YYYY-MM-DD"
+            customInput={<CustomDatePickerInput />}
           />
         </div>
       </div>

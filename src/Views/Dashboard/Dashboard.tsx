@@ -7,7 +7,7 @@ import ToCheck from "../tocheck/ToCheck";
 
 
 export default function Dashboard() {
-  const [selectedLocation, setSelectedLocation] = useState<{ id: string; lat: number | null; lon: number | null } | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<{ id: string; lat: number | null; lon: number | null;angle:number|null } | null>(null);
 
   const [clickedLocation, setClickedLocation] = useState<
   [number, number] | null

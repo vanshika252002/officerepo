@@ -9,7 +9,7 @@ const CustomZoom = ({chooseOption}:Props) => {
   const map = useMap();
   const zoomControlRef = useRef<HTMLDivElement>(null);
    
-  const {earthquake,flight}=chooseOption;
+  const {earthquake,flight,visibility}=chooseOption;
 
   
   useEffect(() => {
@@ -24,7 +24,7 @@ const CustomZoom = ({chooseOption}:Props) => {
       <button title="Zoom In" className='btn' onClick={() => map.zoomIn()}>+</button>
       <button title="Zoom out" className='btn' onClick={() => map.zoomOut()}>−</button>
       <button title='Earthquake alert' className={`${earthquake.alert?"opacity-on":"opacity-off"}`} onClick={()=>{earthquake.setAlert(!earthquake.alert),flight.setFlight(false)}}><img src={ICONS.earthquakealert}/></button>
-      <button title='LIVE flight' className={`${flight.flight?"opacity-on":"opacity-off"}`} onClick={()=>{flight.setFlight(!flight.flight),earthquake.setAlert(false)}}><img src={ICONS.flightLogo}/></button>
+      <button title='LIVE flight' className={`${flight.flight?"opacity-on":"opacity-off"}`} onClick={()=>{flight.setFlight(!flight.flight),earthquake.setAlert(false),visibility.setVisible("")}}><img src={ICONS.flightLogo}/></button>
     </div>
   );
 };
