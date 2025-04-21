@@ -150,8 +150,10 @@ const Earthquake = ({
                 setEndTime('');
               }
             }}
+ 
             showMonthDropdown
             showYearDropdown
+            yearDropdownItemNumber={50}
             scrollableYearDropdown
             scrollableMonthYearDropdown
             dateFormat="yyyy-MM-dd"
@@ -166,10 +168,12 @@ const Earthquake = ({
             onChange={(date: Date | null) => {
               setEndTime(date ? formatDate(date) : '');
             }}
+        
             showMonthDropdown
             showYearDropdown  
             scrollableYearDropdown
             scrollableMonthYearDropdown
+            yearDropdownItemNumber={50}
             dateFormat="yyyy-MM-dd"
             placeholderText="YYYY-MM-DD"
             customInput={<CustomDatePickerInput />}
