@@ -16,6 +16,9 @@ function Weather({chooseOption,setVisible,setClickedLocation,setFly,setFlyToTarg
   const [locations, setLocations] = useState([]); 
  const debouncedCity = useDebounce(city, 400);
 
+
+
+
  const [triggerGeolocationQuery, { data,isLoading }] = useLazyGetGeolocationByCoordsQuery();
  useEffect(() => {
   const trimmedCity = debouncedCity.trim();
@@ -39,7 +42,7 @@ function Weather({chooseOption,setVisible,setClickedLocation,setFly,setFlyToTarg
   return (
     <div className="weather-container-wrapper" onClick={(e)=>e.stopPropagation()}>
       <div className='weather-btn'>
-      <button onClick={()=>{setVisible("searchbar");setFly(false)}}> <img src={ICONS.arrow}/></button>
+      <button onClick={()=>{setVisible("searchbar");setFly(false);setClickedLocation(null)}}> <img src={ICONS.arrow}/></button>
       <div className='w1'><span>Weather</span></div>
       </div>
       
@@ -62,7 +65,7 @@ function Weather({chooseOption,setVisible,setClickedLocation,setFly,setFlyToTarg
       <button
         key={index} 
         className="custom-item" 
-        onClick={() =>{ chooseOption.weather.place.setPlace(location.formatted),chooseOption.weather.setClickedLocationWeather({lat:location.geometry.lat,lon:location.geometry.lng}),setClickedLocation([location?.geometry?.lat,location?.geometry?.lng,chooseOption.weather.place.place]) ,setFly(true),setFlyToTarget([location?.geometry?.lat,location?.geometry?.lng])}
+        onClick={() =>{ chooseOption.weather.place.setPlace(location.formatted),setClickedLocation([location?.geometry?.lat,location?.geometry?.lng,chooseOption.weather.place.place]) ,setFly(true),setFlyToTarget([location?.geometry?.lat,location?.geometry?.lng])}
         
       }
       >

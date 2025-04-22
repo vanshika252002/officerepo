@@ -17,7 +17,7 @@ import './tocheck.css';
 import Confirmation from '../Confirmation';
 
 const ToCheck = ({setSelectedLocation,setFlight,setAlert,setClickedLocation,visible,setVisible,setFly,setFlyToTarget}:Props) => {
-// const [visible,setVisible]=useState<string>(""); //visibility
+// const [visible,setVisible]=useState<string>(""); //visibility,
 const [logout,setLogout]=useState<boolean>(false);
 //const [clickedLocationWeather, setClickedLocationWeather] = useState<{lat:number,lon:number} | null>(null);
 
@@ -104,7 +104,7 @@ const [logout,setLogout]=useState<boolean>(false);
             />
           )}
           {visible=="weather" && (
-            <Weather chooseOption={chooseOption} setVisible={setVisible} setClickedLocation={setClickedLocation}  setFly={setFly}
+            <Weather   chooseOption={chooseOption} setVisible={setVisible} setClickedLocation={setClickedLocation}  setFly={setFly}
             setFlyToTarget={setFlyToTarget}/>
           )}
           {/* {visible=="weatherdetails" && weatherData && (
