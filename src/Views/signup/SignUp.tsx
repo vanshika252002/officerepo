@@ -45,6 +45,7 @@ const SignUp: React.FC = () => {
             label={DATA.SignUp}
             type={DATA.Submit as any}
             showImage={false}
+            className={DATA.GoggleButton}
           />
           <div className={DATA.OrDivider}>{DATA.Or}</div>
           <Button
@@ -53,15 +54,16 @@ const SignUp: React.FC = () => {
             onClick={handleGoogleSignIn}
             showImage
             imageSrc={ICONS.google}
+            
           />
           <p>
             {DATA.AlreadyHave}
-            <span
+            <button
               onClick={() => navigate(ROUTES.LOGIN)}
               style={{ color: '#007bff' }}
             >
               {DATA.Login}
-            </span>
+            </button>
           </p>
         </Form>
       </Formik>

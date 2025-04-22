@@ -32,12 +32,11 @@ import Earthquake from '../earthquake/Earthquake';
 import { useLazyGetGeolocationByLatLngQuery } from '../../Services/Api/geolocation';
 import { EarthquakeFeature, Props, Details } from './Types/Types';
 import Loading from '../loading';
-import InterpolatedMarker from './InterpolatedMarker';
 
 const createFlightIcon = (fillColor: string, size = 38) =>
   new L.DivIcon({
      html: `
-      <div style="transition: transform 0.3s ease-in-out;">
+      <div style="transition: transform 0.5s ease-in-out;">
         <svg xmlns="http://www.w3.org/2000/svg"
           width="${size}" height="${size}"
           viewBox="0 0 24 24">
@@ -79,9 +78,6 @@ const Body = ({
   const [clickedLocationEarthquake,setClickedLocationEarthquake]= useState<
   [number, number,string,number] | null
 >(null);
-const [interpolatedFlights, setInterpolatedFlights] = useState<{
-  [id: string]: { start: [number, number]; end: [number, number] };
-}>({});
 
 
   
@@ -154,28 +150,25 @@ const [interpolatedFlights, setInterpolatedFlights] = useState<{
 
   
 
-  useEffect(() => {
-    if (FlightDetails) {
-      setInterpolatedFlights((prev) => {
-        const updated: typeof prev = {};
-  
-        FlightDetails.forEach((d: Details) => {
-          const id = d[0];
-          const newEnd: [number, number] = [d[6], d[5]]; // [lat, lon]
-  
-          if (!newEnd[0] || !newEnd[1]) return;
-  
-          const prevFlight = prev[id];
-          const start = prevFlight ? prevFlight.end : newEnd;
-  
-          updated[id] = { start, end: newEnd };
-        });
-  
-        return updated;
+useEffect(() => {
+  if (selectedLocation && FlightDetails) {
+    const updated = FlightDetails.find(
+      (details: Details) => details[0] === selectedLocation.id
+    );
+
+    if (updated) { 
+      setSelectedLocation({
+        id: updated[0],
+        lat: updated[6],
+        lon: updated[5],
+        angle: updated[10],
       });
+    }else {
+      setSelectedLocation(null);
     }
-  }, [FlightDetails]);
-  
+  }                                    
+}, [FlightDetails]);
+
 
   
   // useEffect(() => {
@@ -183,7 +176,6 @@ const [interpolatedFlights, setInterpolatedFlights] = useState<{
   //     setClickedLocationEarthquake(null);
   //   }
   // }, [earthquakeData]);
-  
   
   return (
     <div className="linear-gradient-body">
@@ -212,54 +204,69 @@ const [interpolatedFlights, setInterpolatedFlights] = useState<{
         <MarkerClusterGroup showCoverageOnHover={false}>
         
         {loadingFlights && <Loading/>}
-        {flight &&
-  Object.entries(interpolatedFlights).map(([id, { start, end }]) => {
-    if (selectedLocation?.id === id) return null;
-    const flightInfo = FlightDetails?.find((d: Details) => d[0] === id);
-    if (!flightInfo) return null;
+        {flight && 
+          FlightDetails?.map((details: Details) => {
+            const isSelected = selectedLocation?.id === details[0];
 
-    const angle = flightInfo[10] || 0;
 
-    return (
-      <InterpolatedMarker
-        key={id}
-        start={start}
-        end={end}
-        duration={60000}
-        angle={angle}
-        icon={createFlightIcon('green', 42)}
-        isSelected={false}
-        onClick={() => {
-          setSelectedLocation({
-            id,
-            lat: end[0],
-            lon: end[1],
-            angle,
-          });
-          setClickedLocation(null);
-        }}
-        flightid={id}
-      />
-    );
-  })}
+            if (isSelected) return null;
 
+            if (details[5] !== null && details[6] !== null) {
+             
+              return (
+                <Marker
+                  key={details[0]}
+                  position={[details[6], details[5]]}
+                  icon={createFlightIcon('green', 42)}
+                  rotationAngle={details[10] || 0}
+                  rotationOrigin="center center"
+                  eventHandlers={{
+                    click: () => {
+                      setSelectedLocation({
+                        id: details[0],
+                        lat: details[6],
+                        lon: details[5],
+                        angle:details[10]
+                      }),setClickedLocation(null)
+                    },
+                  }}
+                 
+                >
+            <Tooltip>
+         <strong>Flight ID:</strong> {details[0]}<br />
+            <strong>Lat:</strong>  {details[6]} <br />
+            <strong>Lon:</strong> {details[5]}
+         </Tooltip>
+           
+
+                </Marker>
+              );
+            }
+            return null;
+          })}
       </MarkerClusterGroup>
 
-      {flight && selectedLocation?.id && interpolatedFlights[selectedLocation.id] && (
-  <InterpolatedMarker
-    key={selectedLocation.id}
-    start={interpolatedFlights[selectedLocation.id].start}
-    end={interpolatedFlights[selectedLocation.id].end}
-    duration={60000}
-    angle={selectedLocation.angle || 0}
-    icon={createFlightIcon('red', 42)}
-    isSelected={true}
-    flightid={selectedLocation.id}
-  />
-)}
+      {flight && selectedLocation?.lat && selectedLocation?.lon && (
+        <Marker
+          key={selectedLocation.id}
+          position={[selectedLocation.lat, selectedLocation.lon]}
+          icon={createFlightIcon('red', 42)}
+          zIndexOffset={1000}
+          rotationAngle={selectedLocation.angle||0}
+          rotationOrigin="center center "
+       
+        >
+         <Tooltip permanent>
+         <strong>Flight ID:</strong> {selectedLocation.id} <br />
+            <strong>Lat:</strong> {selectedLocation.lat} <br />
+            <strong>Lon:</strong> {selectedLocation.lon}
+         </Tooltip>
+           
+            
+        </Marker>
+      )}
 
 
-  {/* <InterpolatedMarker start={[26.9124,75.7873]} end={[19.0760,72.8777]} duration={60000} /> */}
 
 {alert && earthquakeData?.features && (
           <>
