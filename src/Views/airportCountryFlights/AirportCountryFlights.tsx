@@ -105,7 +105,7 @@ const AirportCountryFlights = ({ chooseOption,setVisible ,setSelectedLocation,se
                   
                   <div className="accordion-content">
                   <div className='acc-btn'><button onClick={() => {
-              setSelectedLocation({ lat: latitude, lon:longitude, id:icaoCode,angle:angle });
+              setSelectedLocation({ lat: latitude, lon:longitude, id:icaoCode,angle:angle,origin:flightCountry });
               setFlight(true);setFly(true);setFlyToTarget([latitude,longitude])
             }}><img src={ICONS.showonmap}/><span>Show on Map</span></button></div>
                   <div className='data-flight'>

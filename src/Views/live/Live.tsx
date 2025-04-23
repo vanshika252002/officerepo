@@ -38,7 +38,8 @@ const Live = ({ setVisible,setFlight,setSelectedLocation ,setFly,setFlyToTarget}
           lon,
           lat,
           alt,
-          angle
+          angle,
+          originCountry
         });
       }
 
@@ -76,7 +77,7 @@ const Live = ({ setVisible,setFlight,setSelectedLocation ,setFly,setFlyToTarget}
             <div key={country} style={{ marginBottom: '20px' }} className='l1'>
               <div className='l2'><span>{country}</span>  </div>
               
-              {flights.map(({ icao, alt, lon ,lat,angle}: FlightData) => {
+              {flights.map(({ icao, alt, lon ,lat,angle,originCountry}: FlightData) => {
   const isExpanded = expandedIcao === icao;
   return (
     <div key={icao} className='l3-wrapper'>
@@ -93,7 +94,7 @@ const Live = ({ setVisible,setFlight,setSelectedLocation ,setFly,setFlyToTarget}
         <div className="accordion-content-l1">
           
           <div className='acc-btn'><button onClick={() => {
-              setSelectedLocation({ lat: lat, lon:lon, id:icao,angle:angle });
+              setSelectedLocation({ lat: lat, lon:lon, id:icao,angle:angle,origin:originCountry });
               setFlight(true);
               setFly(true);
               setFlyToTarget([lat,lon])

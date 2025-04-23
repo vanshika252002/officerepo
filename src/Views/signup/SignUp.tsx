@@ -58,12 +58,12 @@ const SignUp: React.FC = () => {
           />
           <p>
             {DATA.AlreadyHave}
-            <button
+            <span
               onClick={() => navigate(ROUTES.LOGIN)}
               style={{ color: '#007bff' }}
             >
               {DATA.Login}
-            </button>
+            </span>
           </p>
         </Form>
       </Formik>

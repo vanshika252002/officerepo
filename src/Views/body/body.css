@@ -116,3 +116,11 @@ html, body, #root {
 
 
 */
+
+.leaflet-marker-icon {
+  
+}
+.flight-wrapper {
+  transition: 60s ease !important;
+  transform-origin: center center;
+}

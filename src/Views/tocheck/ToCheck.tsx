@@ -100,6 +100,7 @@ const [logout,setLogout]=useState<boolean>(false);
               setVisible={setVisible}
               setSelectedLocation={setSelectedLocation}
               setFlight={setFlight}
+              setClickedLocation={setClickedLocation}
               
             />
           )}

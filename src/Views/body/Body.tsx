@@ -35,8 +35,8 @@ import Loading from '../loading';
 
 const createFlightIcon = (fillColor: string, size = 38) =>
   new L.DivIcon({
-     html: `
-      <div style="transition: transform 0.5s ease-in-out;">
+    html: `
+      <div class="flight-wrapper">
         <svg xmlns="http://www.w3.org/2000/svg"
           width="${size}" height="${size}"
           viewBox="0 0 24 24">
@@ -48,6 +48,7 @@ const createFlightIcon = (fillColor: string, size = 38) =>
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
   });
+
 
 const EarthquakeAlert = new Icon({
   iconUrl: ICONS.earthquakealert,
@@ -146,9 +147,7 @@ const Body = ({
   
   //   return null;
   // };
-  
 
-  
 
 useEffect(() => {
   if (selectedLocation && FlightDetails) {
@@ -162,6 +161,7 @@ useEffect(() => {
         lat: updated[6],
         lon: updated[5],
         angle: updated[10],
+        origin:updated[2]
       });
     }else {
       setSelectedLocation(null);
@@ -226,16 +226,17 @@ useEffect(() => {
                         id: details[0],
                         lat: details[6],
                         lon: details[5],
-                        angle:details[10]
+                        angle:details[10],
+                        origin:details[2]
                       }),setClickedLocation(null)
                     },
                   }}
                  
                 >
             <Tooltip>
+              <strong>Origin:</strong>{details[2]}<br/>
          <strong>Flight ID:</strong> {details[0]}<br />
-            <strong>Lat:</strong>  {details[6]} <br />
-            <strong>Lon:</strong> {details[5]}
+           
          </Tooltip>
            
 
@@ -258,8 +259,8 @@ useEffect(() => {
         >
          <Tooltip permanent>
          <strong>Flight ID:</strong> {selectedLocation.id} <br />
-            <strong>Lat:</strong> {selectedLocation.lat} <br />
-            <strong>Lon:</strong> {selectedLocation.lon}
+            <strong>Origin:</strong> {selectedLocation.origin} <br />
+            
          </Tooltip>
            
             
