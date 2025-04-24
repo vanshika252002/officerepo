@@ -3,7 +3,7 @@
 
     position:absolute; 
     top: 107px;      
-    left:10px;           
+    left: 43px;         
     width: 22vw;
     height: auto;
     background-color: rgba(255, 255, 255, 0.85);
@@ -113,7 +113,8 @@
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;      
     background-color: rgba(255, 255, 255, 0.85);    
-    background: transparent;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+    background: transparent;    
+    border-top: none;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 }
 .items{
     display: flex;
@@ -156,11 +157,11 @@ color:red;
  
 }
 .place-earthquake h4{
-    margin-top:0.75rem;
+  
    
     width: 100%;
     margin-bottom: 0;
-    margin-left:0;
+    margin:0;
     align-self: start;
     font-size:1.2rem;
 }
@@ -171,6 +172,7 @@ color:red;
     align-items: center;
     margin-left:0%;
     width:100%;
+    margin-bottom: 8px;
 }
 .time-earthquake h5{
     margin-top: 0;
@@ -205,9 +207,13 @@ color:red;
  
   .react-datepicker__month-container {
     height: auto; 
+    
   }
   
- 
+ .react-datepicker{
+    margin-left: 25px;
+    padding:5px;
+ }
   .react-datepicker__input-container input {
     font-size: 16px; 
     padding: 10px;  

@@ -21,6 +21,7 @@ function Forgot() {
     try {
       await forgotPassword(email);
       toast.success("Password reset link sent!");
+      navigate('/login')
     } catch (error) {
       console.error("Forgot Password Error:", error);
       toast.error("Failed to send reset link. Please try again.");
@@ -58,7 +59,7 @@ function Forgot() {
             className="b1"
             onClick={handleForgotPassword}
           />
-          <Button className="b1" label="Sign up" onClick={()=>navigate('/signup')} />
+        
         </div>
       </div>
     </div>

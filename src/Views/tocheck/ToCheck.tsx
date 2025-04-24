@@ -89,7 +89,7 @@ const [logout,setLogout]=useState<boolean>(false);
           <div className="h7" onClick={() => { setVisible("searchbar"),setAlert(false)}}>
             {
               <div className="h3" ref={inputRef1}>
-                <img src={ICONS.search} alt="Search Icon" />
+                <img src={ICONS.searching} alt="Search Icon" />
                {/* <span>Search</span> */}
               </div>
             }

@@ -79,8 +79,13 @@ html, body, #root {
   color:green;
   font-size: 1.2rem;
   line-height: 1.2;
+  margin-top: 16px;
 }
-
+.leaflet-container a.leaflet-popup-close-button {
+  font-size: 1.5rem;
+  color:#121212;
+ 
+}
   .popup span {
     display: inline;
     font-size: 14px;
@@ -105,21 +110,20 @@ html, body, #root {
 }
 
 
-.leaflet-marker-icon {
+.my-custom-marker-class {
   position: absolute; 
   animation: moveMarker 1s ease-in-out forwards; 
   will-change: left, top;
+  /* transition: 60s ease !important; */
 }
 
-
+ 
 /* 
 
 
 */
 
-.leaflet-marker-icon {
-  
-}
+
 .flight-wrapper {
   transition: 60s ease !important;
   transform-origin: center center;

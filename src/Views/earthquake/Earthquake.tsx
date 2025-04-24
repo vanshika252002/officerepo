@@ -135,7 +135,7 @@ const Earthquake = ({
 
       <div className="earthquake-timer">
         <div className="start">
-          <h3>Start Time</h3>
+          <h3>Start Date</h3>
           <DatePicker
             selected={formattedStartTime}
             onChange={(date: Date | null) => {
@@ -150,30 +150,31 @@ const Earthquake = ({
                 setEndTime('');
               }
             }}
- 
-            showMonthDropdown
-            showYearDropdown
-            yearDropdownItemNumber={50}
-            scrollableYearDropdown
-            scrollableMonthYearDropdown
+            minDate={new Date('1960-01-01')}
+  maxDate={new Date('2030-12-31')}
+  showMonthDropdown
+  showYearDropdown
+  scrollableYearDropdown
+  yearDropdownItemNumber={71}  
             dateFormat="yyyy-MM-dd"
             placeholderText="YYYY-MM-DD"
             customInput={<CustomDatePickerInput />}
           />
         </div>
         <div className="end">
-          <h3>End Time</h3>
+          <h3>End Date</h3>
           <DatePicker
             selected={formattedEndTime}
             onChange={(date: Date | null) => {
               setEndTime(date ? formatDate(date) : '');
             }}
         
+            minDate={new Date('1960-01-01')}
+            maxDate={new Date('2030-12-31')}
             showMonthDropdown
-            showYearDropdown  
+            showYearDropdown
             scrollableYearDropdown
-            scrollableMonthYearDropdown
-            yearDropdownItemNumber={50}
+            yearDropdownItemNumber={71}  
             dateFormat="yyyy-MM-dd"
             placeholderText="YYYY-MM-DD"
             customInput={<CustomDatePickerInput />}

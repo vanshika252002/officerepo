@@ -17,7 +17,11 @@ export const validationSchema = Yup.object({
   email: Yup.string().email(DATA.InvalidEmail).required(DATA.EmailRequired),
   password: Yup.string()
     .min(6, DATA.PasswordLength)
+    .max(10,"Password cannot be more than 10 characters")
     .required(DATA.PasswordRequired),
+    
+    
+
   confirmPassword: Yup.string()
     .oneOf([Yup.ref(DATA.Password)], DATA.PasswordMatching)
     .required(DATA.ConfirmPasswordRequired),

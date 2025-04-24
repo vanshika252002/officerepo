@@ -18,6 +18,7 @@ export const validationSchema = Yup.object({
   email: Yup.string().email(DATA.InvalidEmail).required(DATA.EmailRequired),
   password: Yup.string()
     .min(6, DATA.PasswordLength)
+    .max(10,"Password cannot be more than 10 characters")
     .required(DATA.PasswordRequired),
 });
 
@@ -38,11 +39,12 @@ export const onSubmit = async (
     resetForm();
   } catch (error: any) {
     console.error('Firebase Auth Error:', error);
-    if (error.code === 'auth/wrong-password') {
+    if (error.code === 'auth/invalid-credential') {
       toast.error('Incorrect password. Please try again.', {
         position: 'top-right',
       });
     } else {
+      console.log("error",error)
       toast.error(`Login failed: ${error.message}`, { position: 'top-right' });
     }
   }

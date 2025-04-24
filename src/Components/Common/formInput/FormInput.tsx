@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
+import './forminput.css'
 
 interface FormInputProps {
   label: string;
@@ -14,7 +15,11 @@ const FormInput: React.FC<FormInputProps> = ({
 }) => {
   return (
     <div className="form-group">
-      <label htmlFor={name}>{label}</label>
+     <div className='label-with-aestrick'>
+     <label htmlFor={name}>{label }</label>
+     <label style={{color:"red"}}>*</label>
+     
+     </div>
       <Field type={type} name={name} id={name} />
       <ErrorMessage name={name} component="div" className="error" />
     </div>

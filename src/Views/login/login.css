@@ -60,10 +60,11 @@
     text-align: left;
   }
   
-  .signup-form button {
+  .signup-form-btn {
+
     width: 100%;
     padding: 10px;
-    margin-top: 10px;
+    font-weight: 600;
     background:#0056b3;
     color: #fff;
     border: none;
@@ -72,10 +73,40 @@
     cursor: pointer;
     transition: background 0.3s ease;
   }
-  .signup-form button:hover {
+  .signup-form-btn:hover {
     background: #0056b3;
   }
   
+  .signup-form-btn1 img{
+    width: 30px;
+    height: 32px;
+    border-radius: 4px;
+  }
+
+  .signup-form-btn1 {
+    border: 1px solid grey;
+    width: 100%;
+    background: white;
+    color: #595757;
+
+   
+    
+  
+   
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: flex
+;
+    align-items: center;
+    justify-content:start;
+    padding: 5px;
+  }
+  .signup-form-btn1 span {
+    font-weight: 600;
+    margin-left: 19%;
+}
 
   .or-divider {
     text-align: center;
@@ -84,8 +115,11 @@
     color: black;
   }
   
-
-  .google-btn {
+  .signup-form-btn1:hover{
+    background-color: #0056b3;
+    color:white
+  }
+  /* .google-btn {
     width: 100%;
     display: flex;
     align-items: center;
@@ -97,15 +131,23 @@
     font-size: 1rem;
     cursor: pointer;
     transition: background 0.3s ease;
-  }
+  } */
   
   .google-btn img {
     width: 18px;
     margin-right: 8px;
   }
   
+.form-group {
+  margin-bottom: 16px;
+}
   .google-btn:hover {
     background: #e0e0e0;
+  }
+  .login-signup-btn{
+    border:none;
+    background-color:transparent;
+    font-size: 1rem;
   }
 
   @media screen and (max-width: 400px) {

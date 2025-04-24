@@ -25,7 +25,11 @@ import trackitlive from './icons/trackitlive.png';
 import search1 from './icons/search1.svg';
 import flightbyroute from './icons/flightbyroute.svg';
 import flightbyroute1 from './icons/flightbyroute1.svg';
+import s from './icons/s.svg';
+import searching from './icons/searching.png';
 export const ICONS = {
+  searching,
+  s,
   flightbyroute1,
   flightbyroute,
   search1,

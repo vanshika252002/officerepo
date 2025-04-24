@@ -39,31 +39,30 @@ const SignUp: React.FC = () => {
           <FormInput
             name={DATA.ConfirmPassword}
             type={DATA.Password}
-            label="ConfirmPassword"
+            label="Confirm Password"
           />
           <Button
             label={DATA.SignUp}
             type={DATA.Submit as any}
             showImage={false}
-            className={DATA.GoggleButton}
+            className='signup-form-btn '
           />
           <div className={DATA.OrDivider}>{DATA.Or}</div>
-          <Button
-            type={DATA.TypeButton as any}
-            className={DATA.GoggleButton}
+          <button
+         
+          className='signup-form-btn1 '
             onClick={handleGoogleSignIn}
-            showImage
-            imageSrc={ICONS.google}
-            
-          />
+  
+        > <img src={ICONS.google}/><span>Sign up with Google</span></button>
           <p>
             {DATA.AlreadyHave}
-            <span
+            <button
+             className='login-signup-btn'
               onClick={() => navigate(ROUTES.LOGIN)}
               style={{ color: '#007bff' }}
             >
               {DATA.Login}
-            </span>
+            </button>
           </p>
         </Form>
       </Formik>

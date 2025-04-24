@@ -10,7 +10,7 @@ export const DATA = {
   TypeButton: 'button',
   GoggleButton: 'google-btn',
   SignUp: 'Sign Up',
-  DontHave: "Don't have an account?",
+  DontHave: "Don't have an account? ",
   AlreadyHave: 'Already have an account?',
   HeaderContainer: 'header-container',
   SearchContainer: 'search-container',
@@ -22,6 +22,6 @@ export const DATA = {
   PasswordLength: 'Password must be at least 6 characters',
   EmailRequired: 'Email is required',
   PasswordRequired: 'Password is required',
-  PasswordMatching: 'Paswords must match',
+  PasswordMatching: 'Passwords must match',
   ConfirmPasswordRequired: 'Confirm Password is required',
 };

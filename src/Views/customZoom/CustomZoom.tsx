@@ -21,8 +21,8 @@ const CustomZoom = ({chooseOption}:Props) => {
 
   return (
     <div className="custom-zoom" ref={zoomControlRef}>
-      <button title="Zoom In" className='btn' onClick={() => map.zoomIn()}>+</button>
-      <button title="Zoom out" className='btn' onClick={() => map.zoomOut()}>−</button>
+      <button title="Zoom In" className='btn-zoom' onClick={() => map.zoomIn()}>+</button>
+      <button title="Zoom out" className='btn-zoom' onClick={() => map.zoomOut()}>−</button>
       <button title='Earthquake alert' className={`${earthquake.alert?"opacity-on":"opacity-off"}`} onClick={()=>{earthquake.setAlert(!earthquake.alert),flight.setFlight(false)}}><img src={ICONS.earthquakealert}/></button>
       <button title='LIVE flight' className={`${flight.flight?"opacity-on":"opacity-off"}`} onClick={()=>{flight.setFlight(!flight.flight),earthquake.setAlert(false),visibility.setVisible("")}}><img src={ICONS.flightLogo}/></button>
     </div>
@@ -30,3 +30,8 @@ const CustomZoom = ({chooseOption}:Props) => {
 };
 
 export default CustomZoom;
+
+
+/*
+
+*/ 

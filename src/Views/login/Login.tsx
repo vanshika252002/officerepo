@@ -20,7 +20,7 @@ const Login: React.FC = () => {
   return (
     <div className='login-wrapper-component'>
        <div className='login-image'><img src={ICONS.login} /></div>
-      <div className={DATA.FormContainer}>
+      <div className="signup-container">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -40,32 +40,32 @@ const Login: React.FC = () => {
             label={DATA.Login}
             type={DATA.Submit as any}
             showImage={false}
+            className='signup-form-btn '
           />
           <div className={DATA.OrDivider}>{DATA.Or}</div>
-          <Button
-            type={DATA.TypeButton as any}
-            className={DATA.GoggleButton}
+          <button
+          className='signup-form-btn1 '
             onClick={handleGoogleLogin}
-            showImage
-            imageSrc={ICONS.google}
-          />
+          > <img src={ICONS.google}/> <span>Login with Google</span></button>
           <p>
             {DATA.DontHave}
-            <span
+            <button 
+             className='login-signup-btn'
               onClick={() => navigate(ROUTES.SIGNUP)}
               style={{ color: '#007bff' }}
             >
               {DATA.SignUp}
-            </span>
+            </button>
           </p>
           <p>
             
-            <span
+            <button
+            className='login-signup-btn'
               onClick={() => navigate(ROUTES.FORGOT)}
               style={{ color: '#007bff' }}
             >
               Forgot Password?
-            </span>
+            </button>
           </p>
         </Form>
       </Formik>
