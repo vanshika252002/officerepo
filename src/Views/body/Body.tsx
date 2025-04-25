@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setFlights } from '../../Store/flight';
 import * as L from 'leaflet';
-import { Tooltip,useMap } from 'react-leaflet';
+import { Tooltip} from 'react-leaflet';
 import FlyToTarget from './FlightToTarget';
 
 import {
@@ -66,9 +66,9 @@ const Body = ({
   setAlert,
   visible,
   setVisible,
-  setFlyToTarget,
+
   flyToTarget,
-  fly,
+  
   setFly,
 }: Props) => {
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ const Body = ({
     earthquake: { alert, setAlert },
     visibility: { setVisible },
   };
-
+  const [loadingMap, setLoadingMap] = useState<boolean>(true);
   const [startTime, setStartTime] = useState<string | null>('2025-03-01'); //forearthquake
   const [endTime, setEndTime] = useState<string | null>('2025-04-01');
   const [clickedLocationEarthquake, setClickedLocationEarthquake] = useState<
@@ -116,6 +116,7 @@ const Body = ({
   // console.log('selected angle is', selectedLocation?.angle);
 
   const MapClickHandler = () => {
+  
     useMapEvents({
       click(e) {
         const newLat = e.latlng.lat;
@@ -136,17 +137,7 @@ const Body = ({
     }
   }, [clickedLocation]);
 
-  const FlyToTargetWeather = () => {
-    const map = useMap();
-   console.log("")
-    useEffect(() => {
-      if (flyToTarget) {
-        map.flyTo(flyToTarget, 8, { duration: 1.5 });
-      }
-    }, [flyToTarget, map]);
-
-    return null;
-  };
+  
 
   useEffect(() => {
     if (selectedLocation && FlightDetails) {
@@ -173,10 +164,12 @@ const Body = ({
   //     setClickedLocationEarthquake(null);
   //   }
   // }, [earthquakeData]);
-
+  
+console.log(loadingMap)
   return (
     <div className="linear-gradient-body">
-      <div className="outermap-style"> </div>
+ 
+    
       <MapContainer
         className="leaf1"
         center={[20.5937, 78.9629] as [number, number]}
@@ -189,6 +182,10 @@ const Body = ({
           [-85, 180],
         ]}
         maxBoundsViscosity={1.0}
+        whenReady={() => {
+          setLoadingMap(false); 
+        }}
+    
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -196,6 +193,11 @@ const Body = ({
         />
 
         <MapClickHandler />
+        {loadingMap && (
+        <div className="loading-overlay">
+          <Loading />
+        </div>
+      )}
         <CustomZoom chooseOption={chooseOption} />
         <MarkerClusterGroup showCoverageOnHover={false}>
           {loadingFlights && <Loading />}
@@ -207,7 +209,6 @@ const Body = ({
 
               if (details[5] !== null && details[6] !== null) {
                 return (
-                  <div className="to-check">
                     <Marker
                       key={details[0]}
                       position={[details[6], details[5]]}
@@ -235,12 +236,14 @@ const Body = ({
                         <br />
                       </Tooltip>
                     </Marker>
-                  </div>
+                  
                 );
               }
               return null;
             })}
         </MarkerClusterGroup>
+
+        { flyToTarget && <FlyToTarget flyToTarget={flyToTarget}/>} 
 
         {flight && selectedLocation?.lat && selectedLocation?.lon && (
           <Marker
@@ -251,6 +254,7 @@ const Body = ({
             rotationAngle={selectedLocation.angle || 0}
             rotationOrigin="center center "
           >
+           
             <Tooltip permanent>
             <strong>Origin:</strong> {selectedLocation.origin} <br />
               <strong>Flight ID:</strong> {selectedLocation.id} <br />
@@ -280,6 +284,7 @@ const Body = ({
                     ]}
                     icon={EarthquakeAlert}
                   >
+                    
                     <Tooltip
                       direction="top"
                       offset={[0, -10]}
@@ -320,13 +325,13 @@ const Body = ({
             )}
           </>
         )}
-        {fly && flyToTarget && <FlyToTarget flyToTarget={flyToTarget} />}
-        {flyToTarget && clickedLocation && <FlyToTargetWeather />}
-
+        {/* {fly && flyToTarget && <FlyToTarget flyToTarget={flyToTarget} />}  */}
+      
+     
         {clickedLocation && (
           <Popup position={clickedLocation}>
             <div>
-              {/* {clickedLocation && <FlyToSelectedWeather/>} */}
+               
               {weatherData && (
                 <div className="popup">
                   {geolocation?.results[0]?.annotations?.flag &&
@@ -365,7 +370,7 @@ const Body = ({
           </Popup>
         )}
         <MiniMapControl />
-      </MapContainer>
+     
 
       <Footer
         setFly={setFly}
@@ -374,22 +379,26 @@ const Body = ({
         setVisible={setVisible}
         setClickedLocation={setClickedLocation}
       />
+   
+   {visible === 'earthquake-list' && (
+  <>
+    <div className="map-click-blocker" />
+    <Earthquake
+      setStartTime={setStartTime}
+      setEndTime={setEndTime}
+      startTime={startTime}
+      endTime={endTime}
+      setAlert={setAlert}
+      setClickedLocationEarthquake={setClickedLocationEarthquake}
+      setClickedLocation={setClickedLocation}
+      setVisible={setVisible}
+      visible={visible}
+    />
+  </>
+)}
 
-      {visible === 'earthquake-list' && (
-        <Earthquake
-          setFly={setFly}
-          setStartTime={setStartTime}
-          setEndTime={setEndTime}
-          startTime={startTime}
-          endTime={endTime}
-          setAlert={setAlert}
-          setClickedLocationEarthquake={setClickedLocationEarthquake}
-          setClickedLocation={setClickedLocation}
-          setVisible={setVisible}
-          setFlyToTarget={setFlyToTarget}
-          visible={visible}
-        />
-      )}
+  
+       </MapContainer>
     </div>
   );
 };

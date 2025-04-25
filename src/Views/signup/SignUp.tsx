@@ -19,6 +19,7 @@ import './signup.css';
 const SignUp: React.FC = () => {
   const { handleGoogleSignIn } = useSignUp();
   const navigate = useNavigate();
+
   return (
    <div className='signup-wrapper-component'>
     <div className='login-image'><img src={ICONS.login} /></div>
@@ -28,7 +29,8 @@ const SignUp: React.FC = () => {
         validationSchema={validationSchema}
         onSubmit={(values, actions) => handleSignUpSubmit(values, actions, navigate)}
       >
-        <Form className={DATA.Form}>
+        {({isSubmitting})=>(
+          <Form className={DATA.Form}>
           <h1>{DATA.SignUp}</h1>
           <FormInput name={DATA.Email} type={DATA.Email} label="Email" />
           <FormInput
@@ -46,12 +48,14 @@ const SignUp: React.FC = () => {
             type={DATA.Submit as any}
             showImage={false}
             className='signup-form-btn '
+            disabled={isSubmitting}
           />
           <div className={DATA.OrDivider}>{DATA.Or}</div>
           <button
          
           className='signup-form-btn1 '
             onClick={handleGoogleSignIn}
+            disabled={isSubmitting}
   
         > <img src={ICONS.google}/><span>Sign up with Google</span></button>
           <p>
@@ -65,6 +69,7 @@ const SignUp: React.FC = () => {
             </button>
           </p>
         </Form>
+        )}
       </Formik>
     </div>
 

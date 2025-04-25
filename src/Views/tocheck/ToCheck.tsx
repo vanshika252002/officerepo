@@ -16,7 +16,7 @@ import { ICONS } from '../../assets';
 import './tocheck.css';
 import Confirmation from '../Confirmation';
 
-const ToCheck = ({setSelectedLocation,setFlight,setAlert,setClickedLocation,visible,setVisible,setFly,setFlyToTarget}:Props) => {
+const ToCheck = ({clickedLocation,setSelectedLocation,setFlight,setAlert,setClickedLocation,visible,setVisible,setFly,setFlyToTarget}:Props) => {
 // const [visible,setVisible]=useState<string>(""); //visibility,
 const [logout,setLogout]=useState<boolean>(false);
 //const [clickedLocationWeather, setClickedLocationWeather] = useState<{lat:number,lon:number} | null>(null);
@@ -26,6 +26,9 @@ const [logout,setLogout]=useState<boolean>(false);
   const [country, setCountry] = useState<string>('');
   const [icaoCode, setIcaoCode] = useState<string>('');
 
+
+
+  
 
   const chooseOption = {
     weather: {
@@ -105,37 +108,10 @@ const [logout,setLogout]=useState<boolean>(false);
             />
           )}
           {visible=="weather" && (
-            <Weather   chooseOption={chooseOption} setVisible={setVisible} setClickedLocation={setClickedLocation}  setFly={setFly}
+            <Weather  clickedLocation={clickedLocation} chooseOption={chooseOption} setVisible={setVisible} setClickedLocation={setClickedLocation}  setFly={setFly}
             setFlyToTarget={setFlyToTarget}/>
           )}
-          {/* {visible=="weatherdetails" && weatherData && (
-            <div
-              className="weather-details-ww"
-              onClick={(e) => e.stopPropagation()}
-            >
-               <div className='weather-btn'>
-      <button onClick={()=>{setVisible("weatheyr")}}> <img src={ICONS.arrow}/></button>
-      <div className='w1'><span>Weather</span></div>
-      </div>
-              <div className='weather-ww1'>
-              <h3>
-                <strong>{place}</strong>
-              </h3>
-              <p>
-                <strong>Weather:</strong> {weatherData.weather[0]?.description}
-              </p>
-              <p>
-                <strong>Temperature:</strong> {weatherData.main?.temp}°C
-              </p>
-              <p>
-                <strong>Humidity:</strong> {weatherData.main?.humidity}%
-              </p>
-              <p>
-                <strong>Wind Speed:</strong> {weatherData.wind?.speed} m/s
-              </p>
-                </div>
-            </div>
-          )} */}
+          
           {visible=="flight-by-route" && (
             <FlightByRoute
               chooseOption={chooseOption}

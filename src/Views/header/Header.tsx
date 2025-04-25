@@ -1,90 +1,144 @@
-// import { ReactNode, useState, useRef ,useEffect} from 'react';
-// import { signOut } from 'firebase/auth';
-// import { useDispatch } from 'react-redux';
-// import { auth } from '../../Components/firebase';
-// import { useGetWeatherByCoordsQuery } from "../../Services/Api/weather";
-// import { updateAuthTokenRedux } from '../../Store/Common';
-// import { Button, Input } from '../../Components/Common';
-// import Weather from '../weather/Weather';
-// import { ICONS } from '../../assets';
-// import { DATA } from '..';
-// import './header.css';
-// import SearchOptions from '../searchbar/SearchOptions';
-// const API_KEY = import.meta.env.VITE_GEOLOCATION_API_KEY;
-// type HeaderProps = {
-//   children?: ReactNode;
-// };
-// const Header: React.FC<HeaderProps> = () => {
-//   console.log("key",API_KEY);
-//   const dispatch = useDispatch();
-//   const [weatherVisible,setWeatherVisible]=useState<boolean>(false);
-//   const inputRef = useRef<HTMLDivElement>(null);
-//   const [searchBar, setSearchBar] = useState<boolean>(false);
-//   const [weatherDetails, setWeatherDetails] = useState<boolean>(false);
-//   const [selectedLocation, setSelectedLocation] = useState<{ lat: number; lon: number } | null>(null);
-//   const { data: weatherData } = useGetWeatherByCoordsQuery(
-//       { lat: selectedLocation?.lat, lon: selectedLocation?.lon },
-//       { skip: !selectedLocation }
-//     );
-//   console.log("searchbar",searchBar);
-
-//   const handleLogout = () => {
-//     // first approach
-//     // localStorage.clear();
-//     // window.location.reload();
-//     // console.log("localstorage is cleared");
-// signOut(auth);
-// dispatch(updateAuthTokenRedux({ token: null }));
-
-//   };
-
-//   useEffect(() => {
-//    // console.log('input refrence ', inputRef.current);
-//     function handleClickOutside(event: MouseEvent) {
-//       if (!inputRef.current?.contains(event.target as Node)) {
-//         setSearchBar(false);
-//       }
-//     }
-// document.addEventListener('mousedown', handleClickOutside);
-// return ()=>{
-//   document.removeEventListener('mousedown', handleClickOutside);
-// }}, []);
-
-//   return (
-//     <div className={DATA.HeaderContainer}>
-//       <img src={ICONS.headerLogo} alt={DATA.Logo} />
-//       <div  className="tocheck" ref={inputRef}>
-//         <div 
-//           className='search-container'
-//           onClick={() => { console.log("searchcontainer in header");
-
-//             !weatherVisible &&   setSearchBar(true)}}
-//         >
-// <img src={ICONS.searchLogo} alt={DATA.Logo} />
-//           <Input type={DATA.TypeText as any}  />
-//           {searchBar && <SearchOptions setSearchBar={setSearchBar} setWeatherVisible={setWeatherVisible} weatherVisible={weatherVisible}/>}
-//           {weatherVisible && <Weather setSearchBar={setSearchBar} setWeatherVisible={setWeatherVisible} setSelectedLocation={setSelectedLocation} setWeatherDetails={setWeatherDetails}/>}
+import { useState, useEffect, useRef } from 'react';
+//import { useLazyGetWeatherByCoordsQuery } from '../../Services/Api/weather';
 
 
-//         {selectedLocation && weatherData && weatherData.weather && weatherDetails && (
+import SearchBar from '../searchbar/SearchOptions';
+import Weather from '../weather/Weather';
+import FlightByRoute from '../flightbyroute';
+import FlightInformation from '../flightInformation';
+import Nearby from '../nearby';                                                    //components
+import Airports from '../airports';
+import AirportCountryFlights from '../airportCountryFlights';
+import Live from '../live';
 
-// <div className='weather-details' onClick={(e)=>e.stopPropagation()}>
-//   <div><Button  onClick={()=>{setWeatherDetails(false); setWeatherVisible(true)}} label="x"/></div>
-//   <h2><strong>Weather</strong></h2>
-//   <p><strong>Weather:</strong> {weatherData.weather[0].description}</p>
-//   <p><strong>Temperature:</strong> {weatherData.main.temp}°C</p>
-//   <p><strong>Humidity:</strong> {weatherData.main.humidity}%</p>
-//   <p><strong>Wind Speed:</strong> {weatherData.wind.speed} m/s</p>
-// </div>
-// )}
+import { Props } from './Types/types';                                         //types+css
+import { ICONS } from '../../assets';
+import './header.css';
+import Confirmation from '../Confirmation';
 
-//         </div>
-//       </div>
-//       <div className="user-profile">
-//         <Button label="Logout" onClick={handleLogout} />
-//       </div>
-//     </div>
-//   );
-// };
+const Header = ({clickedLocation ,setSelectedLocation,setFlight,setAlert,setClickedLocation,visible,setVisible,setFly,setFlyToTarget}:Props) => {
 
-// export default Header;
+const [logout,setLogout]=useState<boolean>(false);
+
+
+  const [place, setPlace] = useState('');
+   const [origin, setOrigin] = useState('');
+  const [country, setCountry] = useState<string>('');
+  const [icaoCode, setIcaoCode] = useState<string>('');
+
+
+  const chooseOption = {
+    weather: {
+     
+      place: { place, setPlace },
+    },
+    flight: {
+    
+      origin: { origin, setOrigin },
+    },
+   
+   
+    airport: {
+  
+      country: { country, setCountry },
+      code: { icaoCode, setIcaoCode },
+    },
+  };
+
+
+  const handleLogout = () => {
+  
+      setLogout(true);
+   
+  };
+
+  const inputRef = useRef<HTMLDivElement>(null);
+  const inputRef1 = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (!inputRef.current?.contains(event.target as Node) && visible!="earthquake-list") {
+        setVisible("");
+        setFly(false);
+        setSelectedLocation(null);
+    
+        setClickedLocation(null);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [visible]);
+
+  return (
+    <div className="h1">
+      <div className="h2">
+        <img src={ICONS.trackitlive} alt="Header Logo" />
+      </div>
+      <div className="h5">
+        <div className="refrence-to-options" ref={inputRef}>
+          <div className="h7" onClick={() => { setVisible("searchbar"),setAlert(false)}}>
+            {
+              <div className="h3" ref={inputRef1}>
+                <img src={ICONS.searching} alt="Search Icon" />
+               {/* <span>Search</span> */}
+              </div>
+            }
+          </div>
+          {visible=="searchbar"  && (
+            <SearchBar
+              chooseOption={chooseOption}
+              setVisible={setVisible}
+              setSelectedLocation={setSelectedLocation}
+              setFlight={setFlight}
+              setClickedLocation={setClickedLocation}
+              
+            />
+          )}
+          {visible=="weather" && (
+            <Weather   chooseOption={chooseOption} setVisible={setVisible}  clickedLocation={clickedLocation} setClickedLocation={setClickedLocation}  setFly={setFly}
+            setFlyToTarget={setFlyToTarget}/>
+          )}
+        
+          {visible=="flight-by-route" && (
+            <FlightByRoute
+              chooseOption={chooseOption}
+             setVisible={setVisible}
+            />
+          )}
+          {visible=="flight-details" && <FlightInformation setFly={setFly}
+            setFlyToTarget={setFlyToTarget} chooseOption={chooseOption} setVisible={setVisible}  setFlight={setFlight} setSelectedLocation={setSelectedLocation} />}
+          {visible=="nearby" && (
+            <Nearby
+             setFly={setFly}
+              setFlyToTarget={setFlyToTarget}
+              setSelectedLocation={setSelectedLocation}
+              setFlight={setFlight}
+              setVisible={setVisible}
+            />
+          )}
+          {visible=="airports" && (
+            <Airports chooseOption={chooseOption} setVisible={setVisible} />
+          )}
+          {visible=="airport-by-code" && (
+            <AirportCountryFlights chooseOption={chooseOption} setVisible={setVisible} setSelectedLocation={setSelectedLocation}
+            setFlight={setFlight}    setFly={setFly}
+            setFlyToTarget={setFlyToTarget}/>
+          )}
+          
+          {visible=="live-flight" && (
+            <Live setVisible={setVisible}    setSelectedLocation={setSelectedLocation}
+            setFlight={setFlight}  setFly={setFly}
+            setFlyToTarget={setFlyToTarget} />
+          )}
+        </div>
+        <div className="h4">
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+        {logout && <Confirmation setLogout={setLogout}/>}
+      </div>
+    </div>
+  );
+};
+
+export default Header;

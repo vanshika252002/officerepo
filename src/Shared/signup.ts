@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { FormikHelpers } from 'formik';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -33,9 +33,12 @@ export const handleSignUpSubmit = async (
   navigate: (path: string) => void
 
 ) => {
+ 
   try {
-    await createUserWithEmailAndPassword(auth, values.email, values.password);
-    toast.success('Signup successful! Welcome!', {
+  const userCredential=  await createUserWithEmailAndPassword(auth, values.email, values.password);
+    const {user}=userCredential;
+    await sendEmailVerification(user);
+    toast.success('Signup successful. Please verify your email !', {
       position: 'top-right',
     });
     navigate('/login');

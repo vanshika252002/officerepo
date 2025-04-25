@@ -34,6 +34,7 @@ const [fly,setFly]=useState<boolean>(false);
           visible={visible}
           flyToTarget={flyToTarget}
           setFlyToTarget={setFlyToTarget}
+          clickedLocation={clickedLocation}
           setFly={setFly}
       />
       <div className="body-wrapper">

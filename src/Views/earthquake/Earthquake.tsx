@@ -11,6 +11,7 @@ import './earthquake.css';
 
 import { EarthquakeProps, EarthquakeFeature } from './Types/types';
 import Loading from '../loading';
+import { useMap } from 'react-leaflet';
 const CustomDatePickerInput = React.forwardRef<HTMLDivElement, { value?: string; onClick?: () => void; placeholder?: string }>(
   ({ value, onClick, placeholder }, ref) => (
     <div
@@ -37,18 +38,20 @@ const Earthquake = ({
   setEndTime,
   startTime,
   endTime,
-  setAlert, setClickedLocationEarthquake,setVisible,setFly,setFlyToTarget,visible,setClickedLocation
+  setAlert, setClickedLocationEarthquake,setVisible,visible,setClickedLocation
 }: EarthquakeProps) => {
 
   //const [selectedEarthquake, setSelectedEarthquake] = useState<EarthquakeFeature | null>(null);
   const [dateError, setDateError] = useState(''); 
+const map=useMap();
+
 
   const inputRef1 = useRef<HTMLDivElement>(null);
     useEffect(() => {
       function handleClickOutside(event: MouseEvent) {
         if (!inputRef1.current?.contains(event.target as Node) ) {
           setVisible("");
-          setFly(false);
+          
           setAlert(false);
           setClickedLocationEarthquake(null);
           
@@ -114,14 +117,14 @@ const Earthquake = ({
 
   return (
     
-      <div className="earthquake-wrapper" ref={inputRef1} onClick={(e)=>e.stopPropagation()}>
+      <div className="earthquake-wrapper" ref={inputRef1} onClick={(e) => e.stopPropagation()}>
       <div className="earthquake-header">
         <button
           onClick={() => {
            setVisible("");
             setAlert(false);
             setClickedLocationEarthquake(null);
-            setFly(false);
+            
           }}
         >
           x
@@ -209,9 +212,10 @@ const Earthquake = ({
             className="earthquake-click-option"
             onClick={() => {
               // setSelectedEarthquake(item);
-              setFly(true);
+              
               setClickedLocation(null);
-              setFlyToTarget([item?.geometry?.coordinates[1],item?.geometry?.coordinates[0]])
+              map.flyTo([item?.geometry?.coordinates[1],item?.geometry?.coordinates[0]], 8, { duration: 1 });
+              
               setClickedLocationEarthquake([item?.geometry?.coordinates[1],item?.geometry?.coordinates[0],item.properties.place,item.properties.mag])
             }}
           >
@@ -235,16 +239,6 @@ const Earthquake = ({
 
 
 
-      {/* {selectedEarthquake && (
-        <EarthquakeDetails
-          setSelectedEarthquake={setSelectedEarthquake}
-          place={selectedEarthquake.properties.place}
-          time={Timestamp(selectedEarthquake.properties.time)}
-          lat={selectedEarthquake.geometry.coordinates[1]}
-          lon={selectedEarthquake.geometry.coordinates[0]}
-          depth={selectedEarthquake.geometry.coordinates[2]}
-        />
-      )} */}
     </div>
   
   );

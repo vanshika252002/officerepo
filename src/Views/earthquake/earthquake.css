@@ -6,7 +6,7 @@
     left: 43px;         
     width: 22vw;
     height: auto;
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255);
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -14,6 +14,7 @@
     box-shadow: 5px 5px 10px black;
     border-radius: 10px;
     cursor: move;
+    pointer-events: auto;
 }
 
 
@@ -164,7 +165,10 @@ color:red;
     margin:0;
     align-self: start;
     font-size:1.2rem;
+    text-align: start;
+    color: rgba(0, 0, 0, 0.8);
 }
+
 .time-earthquake{
     margin-top:8px;
     display: flex;
@@ -179,7 +183,12 @@ color:red;
     width:100%;
     height:2px;
     font-size:0.75rem;
+    margin-bottom: 0;
+    text-align: start;
+    height:auto;
+    color: rgba(0, 0, 0, 0.6);
 }
+
 .earthquake-click-option {
     width: 100%;
     height: auto;
@@ -193,8 +202,11 @@ color:red;
     transition: background-color 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
     padding: 3px;
+    gap:3%;
 }
-
+.earthquake-properties:hover .place-earthquake > h4, .earthquake-properties:hover .time-earthquake > h5   {
+    color:white
+}
 .earthquake-click-option:hover {
     background-color: #3395D1;
     color: white;

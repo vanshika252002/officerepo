@@ -11,7 +11,7 @@ import { Weatherprops } from './Types/types';
 import { ICONS } from '../../assets';
 import './weather.css'
 
-function Weather({chooseOption,setVisible,setClickedLocation,setFly,setFlyToTarget}:Weatherprops) {
+function Weather({chooseOption,setVisible,setClickedLocation,setFly,setFlyToTarget,clickedLocation}:Weatherprops) {
   const [city, setCity] = useState(""); 
   const [locations, setLocations] = useState([]); 
  const debouncedCity = useDebounce(city, 400);
@@ -38,11 +38,18 @@ function Weather({chooseOption,setVisible,setClickedLocation,setFly,setFlyToTarg
     }
   }, [data]);
 
+  useEffect(()=>{
+    if(clickedLocation)
+   { console.log("workin fine",clickedLocation); 
+    setFlyToTarget([clickedLocation[0],clickedLocation[1]])
+  }
+  },[clickedLocation])
+
 //console.log("setWeathervisible",weatherVisible)
   return (
     <div className="weather-container-wrapper" onClick={(e)=>e.stopPropagation()}>
       <div className='weather-btn'>
-      <button onClick={()=>{setVisible("searchbar");setFly(false);setClickedLocation(null)}}> <img src={ICONS.arrow}/></button>
+      <button onClick={()=>{setVisible("searchbar");setClickedLocation(null)}}> <img src={ICONS.arrow}/></button>
       <div className='w1'><span>Weather</span></div>
       </div>
       
@@ -65,7 +72,7 @@ function Weather({chooseOption,setVisible,setClickedLocation,setFly,setFlyToTarg
       <button
         key={index} 
         className="custom-item" 
-        onClick={() =>{ chooseOption.weather.place.setPlace(location.formatted),setClickedLocation([location?.geometry?.lat,location?.geometry?.lng,chooseOption.weather.place.place]) ,setFly(true),setFlyToTarget([location?.geometry?.lat,location?.geometry?.lng])}
+        onClick={() =>{ chooseOption.weather.place.setPlace(location.formatted),setClickedLocation([location?.geometry?.lat,location?.geometry?.lng,chooseOption.weather.place.place]) ,setFly(true)}
         
       }
       >

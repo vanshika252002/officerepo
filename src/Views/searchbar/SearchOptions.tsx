@@ -12,22 +12,22 @@ console.log("weather visible in weather",chooseOption.weather.weatherVisible)
       </div>
       <div className="searchbar-options">
         <ul onClick={(e) => {e.stopPropagation()}}>
-          <li onClick={() => { setVisible("weather") ;setSelectedLocation(null);setClickedLocation(null),setFlight(false) }}>
+          <li onClick={() => { console.log("weather searchbar");setVisible("weather") ;setSelectedLocation(null),setClickedLocation(null);setFlight(false)}}>
             <img src={ICONS.weather} />
             Weather
           </li>
-          <li onClick={() =>{setVisible("flight-by-route")}}>
+          <li onClick={() =>{setVisible("flight-by-route");setClickedLocation(null)}}>
             <img src={ICONS.flightroute} />
             Flight by route
           </li>
-          <li onClick={()=>{ setVisible("live-flight")}}>
+          <li onClick={()=>{ setVisible("live-flight");setClickedLocation(null)}}>
             <img src={ICONS.liveairplane} />
             LIVE flight by airplane
           </li>
-          <li onClick={()=>{setVisible("airports")}}>
+          <li onClick={()=>{setVisible("airports");setClickedLocation(null)}}>
             <img src={ICONS.airports} /> Airports
           </li>
-          <li onClick={()=>{setVisible("nearby")}}>
+          <li onClick={()=>{setVisible("nearby");setClickedLocation(null)}}>
             <img src={ICONS.nearby} /> Nearby
           </li>
         </ul>

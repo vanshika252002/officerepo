@@ -32,10 +32,10 @@ export interface Props {
     
     setVisible:(value:string)=>void;
     setFly:(value:boolean)=>void;
-    setFlyToTarget:(value:[number,number]|null)=>void;
+    setFlyToTarget?:(value:[number,number]|null)=>void;
     visible:string;
     
-    flyToTarget:[number,number]|null,fly:boolean;
+    flyToTarget?:[number,number]|null,fly?:boolean;
   }
 
   export type Details = [
