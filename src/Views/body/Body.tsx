@@ -91,7 +91,7 @@ const Body = ({
     useLazyGetGeolocationByLatLngQuery();
 
   const { data: liveflight, isLoading: loadingFlights } =
-    useGetAllFlightsQuery(null);
+    useGetAllFlightsQuery(null,{pollingInterval:60000});
 
   const FlightDetails = liveflight?.states || null;
 

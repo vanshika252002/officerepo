@@ -1,5 +1,5 @@
 export interface Weatherprops{
-    chooseOption:any;
+   
      setVisible:any;
      setClickedLocation:any;
      setFly:(value:boolean)=>void;

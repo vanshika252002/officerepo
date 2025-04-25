@@ -4,14 +4,9 @@ import { ICONS } from '../../assets';
 
 import './airports.css';
 interface Airports {
-  chooseOption: {
-    airport: {
-      country: {
-        setCountry: (countryName: string) => void;
-      };
-    };
-  };
+ 
   setVisible: (value:string) => void;
+  setOrigin:(value:string)=>void;
 }
 interface Data {
   components: {
@@ -22,7 +17,7 @@ interface Data {
   };
 }
 
-const Airports = ({ chooseOption, setVisible }: Airports) => {
+const Airports = ({ setVisible,setOrigin }: Airports) => {
   const { data: airports, isLoading } =
     useGetGeolocationByCoordsQuery('airport');
 
@@ -55,7 +50,7 @@ const Airports = ({ chooseOption, setVisible }: Airports) => {
             <button
               className="airport-n1"
               onClick={() => {
-                chooseOption.airport.country.setCountry(
+                setOrigin(
                   item.components.country
                 );
              setVisible("airport-by-code")

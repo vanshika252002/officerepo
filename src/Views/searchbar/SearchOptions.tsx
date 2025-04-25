@@ -2,9 +2,9 @@ import { SearchbarProps } from './Types/types';
 import './searchoptions.css';
 import { ICONS } from '../../assets';
 
-function SearchBar({chooseOption,setVisible,setSelectedLocation,setFlight,setClickedLocation}:SearchbarProps) {
+function SearchBar({setVisible,setSelectedLocation,setFlight,setClickedLocation}:SearchbarProps) {
  
-console.log("weather visible in weather",chooseOption.weather.weatherVisible)
+
   return (
     <div className="searchbar-wrapper">
       <div className="search_shortcuts">

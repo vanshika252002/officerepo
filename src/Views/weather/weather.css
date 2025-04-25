@@ -106,6 +106,12 @@
   background-color: rgb(255, 255, 255);
   border:none;
 }
+.Location{
+text-align: start;
+}
+.latitude-longitude{
+text-align:end;
+}
 
 
 .custom-item:hover {

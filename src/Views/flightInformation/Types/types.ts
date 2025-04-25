@@ -13,12 +13,7 @@
   }
   
    export interface FlightInformationProps {
-    chooseOption: {
-      flight: {
-        origin: { origin: string; setOrigin: (value: string) => void };
-      };
-  
-    };
+     origin: string;
     setVisible:(value:string)=>void;
         setFlight: (value: boolean) => void;
     setSelectedLocation: (

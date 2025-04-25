@@ -6,11 +6,13 @@ interface Props {
 }
 
 const FlyToTarget = ({ flyToTarget }: Props) => {
+
   const map = useMap();
   const prevTargetPosition = useRef<[number, number] | null>(null);
   const tileLoadCount = useRef<number>(0);
 
   useEffect(() => {
+    if (!flyToTarget) return;
     const shouldFly =
       !prevTargetPosition.current ||
       prevTargetPosition.current[0] !== flyToTarget[0] ||
@@ -39,7 +41,8 @@ const FlyToTarget = ({ flyToTarget }: Props) => {
    
     map.on('tileloadstart', handleTileLoadStart);
     map.on('tileload', handleTileLoad);
-
+     
+    if(flyToTarget[0]!=null && flyToTarget[1]!=null)
     map.setView(flyToTarget,6, { animate: false });
 
     return () => {

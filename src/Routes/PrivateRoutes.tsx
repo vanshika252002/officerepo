@@ -4,7 +4,7 @@ import { CustomRouter } from './RootRoutes';
 // import Logout from '../Views/logout/Logout';
 // import SignUp from '../Views/signup/SignUp';
 import Dashboard from '../Views/Dashboard';
-import Logout from '../Views/logout/Logout';
+
 
 // eslint-disable-next-line import/prefer-default-export
 export const PRIVATE_ROUTES: Array<CustomRouter> = [
@@ -19,11 +19,11 @@ export const PRIVATE_ROUTES: Array<CustomRouter> = [
     element: '<ABOUT />',
     title: ROUTES_CONFIG.ABOUT.title,
   },
-  {
-    path: ROUTES_CONFIG.LOGOUT.path,
-    element: <Logout />,
-    title: ROUTES_CONFIG.LOGOUT.title,
-  },
+  // {
+  //   path: ROUTES_CONFIG.LOGOUT.path,
+  //   element: <Logout />,
+  //   title: ROUTES_CONFIG.LOGOUT.title,
+  // },
   {
     path: '*',
     element: <Navigate to={WILDCARD_ROUTES.PRIVATE} />,

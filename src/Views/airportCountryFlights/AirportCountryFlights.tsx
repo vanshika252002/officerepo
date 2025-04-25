@@ -5,18 +5,8 @@ import Loading from '../loading/Loading';
 import { useState } from 'react';
 
 interface AirportCountryFlightsProps {
-  chooseOption: {
-    airport: {
-    
-      country: { country: string };
-      code: {
-        setIcaoCode: (value: string) => void;
-        icaoCode: string;
-      };
-     
-    };
-    
-  };
+  
+  origin:string;
   setVisible:(value:string)=>void;
   setSelectedLocation:any;
   setFlight:any;
@@ -26,10 +16,8 @@ interface AirportCountryFlightsProps {
 }
 type Details = [string, string, string, number, number, number, number, number, boolean, number,number];
 
-const AirportCountryFlights = ({ chooseOption,setVisible ,setSelectedLocation,setFlight,setFly,setFlyToTarget}: AirportCountryFlightsProps) => {
-  const { airport } = chooseOption;
-  const { code } = airport;
-  const { country } = airport;
+const AirportCountryFlights = ({origin,setVisible ,setSelectedLocation,setFlight,setFly,setFlyToTarget}: AirportCountryFlightsProps) => {
+
 
   const [expandedIcao, setExpandedIcao] = useState<string | null>(null);
 
@@ -40,7 +28,7 @@ const AirportCountryFlights = ({ chooseOption,setVisible ,setSelectedLocation,se
   const { data: flightData, isLoading } = useGetAllFlightsQuery(null);
 
   const filteredFlights = flightData?.states?.filter(
-    (detail:Details) => country.country.toLowerCase() === detail[2]?.toLowerCase()
+    (detail:Details) => origin.toLowerCase() === detail[2]?.toLowerCase()
   );
 
   return (
@@ -65,7 +53,7 @@ const AirportCountryFlights = ({ chooseOption,setVisible ,setSelectedLocation,se
       {flightData?.states==null &&  <div className="fi-no-results"> Data is not Available right now  </div>}
         {!isLoading && filteredFlights?.length === 0 && (
           <div className='no-flights-found'>
-            <p>No flights found for <strong>{country.country}</strong>.</p>
+            <p>No flights found for <strong>{origin}</strong>.</p>
           </div>
         )}
 
@@ -85,7 +73,7 @@ const AirportCountryFlights = ({ chooseOption,setVisible ,setSelectedLocation,se
                 className='airport-country-n1'
                 onClick={() => {
                   toggleAccordion(icaoCode);
-                  code.setIcaoCode(icaoCode);
+                 
                 }}
               >
                 <div className='logo' >
@@ -105,9 +93,19 @@ const AirportCountryFlights = ({ chooseOption,setVisible ,setSelectedLocation,se
                   
                   <div className="accordion-content">
                   <div className='acc-btn'><button onClick={() => {
-              setSelectedLocation({ lat: latitude, lon:longitude, id:icaoCode,angle:angle,origin:flightCountry });
-              setFlight(true);setFly(true);setFlyToTarget([latitude,longitude])
-            }}><img src={ICONS.showonmap}/><span>Show on Map</span></button></div>
+  if (latitude !== null && longitude !== null) {
+    setSelectedLocation({ 
+      lat: latitude, 
+      lon: longitude, 
+      id: icaoCode,
+      angle: angle || 0,
+      origin: flightCountry 
+    });
+    setFlight(true);
+    setFly(true);
+    setFlyToTarget([latitude, longitude]);
+  } 
+}}><img src={ICONS.showonmap}/><span>Show on Map</span></button></div>
                   <div className='data-flight'>
                     <p><strong>ICAO Code:</strong> {icaoCode}</p>
                   <p><strong>Country:</strong> {flightCountry}</p>

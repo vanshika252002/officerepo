@@ -11,14 +11,10 @@ import { Weatherprops } from './Types/types';
 import { ICONS } from '../../assets';
 import './weather.css'
 
-function Weather({chooseOption,setVisible,setClickedLocation,setFly,setFlyToTarget,clickedLocation}:Weatherprops) {
+function Weather({setVisible,setClickedLocation,setFly,setFlyToTarget,clickedLocation}:Weatherprops) {
   const [city, setCity] = useState(""); 
   const [locations, setLocations] = useState([]); 
  const debouncedCity = useDebounce(city, 400);
-
-
-
-
  const [triggerGeolocationQuery, { data,isLoading }] = useLazyGetGeolocationByCoordsQuery();
  useEffect(() => {
   const trimmedCity = debouncedCity.trim();
@@ -33,6 +29,7 @@ function Weather({chooseOption,setVisible,setClickedLocation,setFly,setFlyToTarg
   useEffect(() => {
     if (data?.results) {
       setLocations(data.results);
+      
     }else{
       setLocations([])
     }
@@ -45,7 +42,7 @@ function Weather({chooseOption,setVisible,setClickedLocation,setFly,setFlyToTarg
   }
   },[clickedLocation])
 
-//console.log("setWeathervisible",weatherVisible)
+console.log("location",locations)
   return (
     <div className="weather-container-wrapper" onClick={(e)=>e.stopPropagation()}>
       <div className='weather-btn'>
@@ -72,11 +69,16 @@ function Weather({chooseOption,setVisible,setClickedLocation,setFly,setFlyToTarg
       <button
         key={index} 
         className="custom-item" 
-        onClick={() =>{ chooseOption.weather.place.setPlace(location.formatted),setClickedLocation([location?.geometry?.lat,location?.geometry?.lng,chooseOption.weather.place.place]) ,setFly(true)}
+        onClick={() =>{setClickedLocation([location?.geometry?.lat,location?.geometry?.lng,location.formatted]) ,setFly(true)}
         
       }
       >
-        <strong>{location.formatted}</strong>  ({location.geometry.lat}, {location.geometry.lng})
+        <div className='Location'>
+        <strong>{location.formatted}</strong> 
+          </div> 
+          <div className='latitude-longitude'>
+         <span>({location.geometry.lat}, {location.geometry.lng})</span> 
+          </div>
       </button>
     ))}
     </div>

@@ -4,13 +4,14 @@ import { RouteProps } from './Types/types';
 import { ICONS } from '../../assets';
 import './flightbyroute.css';
 
-const FlightByRoute = ({ chooseOption, setVisible}: RouteProps) => {
+const FlightByRoute = ({ setVisible,setOrigin}: RouteProps) => {
   const [originInput, setOriginInput] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setOriginInput(value);
-    chooseOption.flight.origin.setOrigin(value);
+  setOrigin(value);
+    
   };
 
   const handleSearch = () => {

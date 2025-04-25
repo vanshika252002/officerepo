@@ -5,7 +5,7 @@ import { FlightInformationProps,FlightDetail } from './Types/types';
 import { ICONS } from '../../assets';
 import './flightInformation.css';
 
-const FlightInformation = ({chooseOption, setVisible ,setFlight,setSelectedLocation,setFly,setFlyToTarget}: FlightInformationProps) => {
+const FlightInformation = ({origin, setVisible ,setFlight,setSelectedLocation,setFly,setFlyToTarget}: FlightInformationProps) => {
   const { data: liveflight, isLoading, error } = useGetAllFlightsQuery(null);
 
   const FlightDetails: FlightDetail[] =
@@ -23,7 +23,7 @@ const FlightInformation = ({chooseOption, setVisible ,setFlight,setSelectedLocat
       angle: tuple[10] ||0
     })) || [];
 
-  const originFilter = chooseOption?.flight?.origin?.origin.trim().toLowerCase();
+  const originFilter = origin.trim().toLowerCase();
   const filteredFlights = FlightDetails.filter(
     (flight) => flight.originCountry.toLowerCase() === originFilter && flight.latitude && flight.longitude
   );
@@ -47,7 +47,7 @@ const FlightInformation = ({chooseOption, setVisible ,setFlight,setSelectedLocat
       {liveflight?.states==null &&  <div className="fi-no-results"> Data is not Available right now  </div>}
       {filteredFlights.length > 0 && (
         <div className="fd">
-           <div className='flight-place'><img src={ICONS.flightbyroute}/><span>{chooseOption.flight.origin.origin.charAt(0).toUpperCase()+chooseOption.flight.origin.origin.slice(1).toLowerCase()}</span> </div>
+           <div className='flight-place'><img src={ICONS.flightbyroute}/><span>{origin.charAt(0).toUpperCase()+origin.slice(1).toLowerCase()}</span> </div>
           {filteredFlights.map((flight) => (
             <div key={flight.icao24} className="wrapper-for-flight-information">
               <div className='acc-btn'>
