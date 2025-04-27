@@ -11,7 +11,7 @@ const MiniMapControl = () => {
 
   useEffect(() => {
     const miniMapLayer = new L.TileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      minZoom: 0,
+      minZoom: 1,
       maxZoom: 13,
       attribution: '',
     });
@@ -22,10 +22,17 @@ const MiniMapControl = () => {
       position: 'bottomright',
       width:300,
       height:300,
-      zoomLevelOffset: -5,
+      zoomLevelOffset:-3,
       zoomAnimation: true,
       aimingRectOptions: { color: '#ff7800', weight: 1, clickable: false },
       shadowRectOptions: { color: '#000000', weight: 1, clickable: false, opacity: 0, fillOpacity: 0 },
+      mapOptions: {
+        maxBounds: [
+          [85, -180],  // North-West corner (max latitude, min longitude)
+          [-85, 180],  // South-East corner (min latitude, max longitude)
+        ],
+        maxBoundsViscosity: 1.0,  // Prevents the mini-map from dragging outside the bounds
+      },
     });
 
     miniMap.addTo(map);

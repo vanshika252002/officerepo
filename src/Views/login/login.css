@@ -139,7 +139,7 @@
   }
   
 .form-group {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
   .google-btn:hover {
     background: #e0e0e0;
@@ -149,7 +149,20 @@
     background-color:transparent;
     font-size: 1rem;
   }
+.remember-me-container{
+  display: flex;
 
+  justify-content: end;
+  align-items: center;
+  font-size:12px;
+gap:0;
+margin-bottom: 3px;
+}
+.remember-me-container input{
+  background-color: green;
+  width:6%;
+
+}
   @media screen and (max-width: 400px) {
     .signup-container {
       width: 90%;

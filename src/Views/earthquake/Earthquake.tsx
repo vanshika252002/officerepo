@@ -46,22 +46,22 @@ const Earthquake = ({
 const map=useMap();
 
 
-  const inputRef1 = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-      function handleClickOutside(event: MouseEvent) {
-        if (!inputRef1.current?.contains(event.target as Node) ) {
-          setVisible("");
+  // const inputRef1 = useRef<HTMLDivElement>(null);
+  //   useEffect(() => {
+  //     function handleClickOutside(event: MouseEvent) {
+  //       if (!inputRef1.current?.contains(event.target as Node) ) {
+  //         setVisible("");
           
-          setAlert(false);
-          setClickedLocationEarthquake(null);
+  //         setAlert(false);
+  //         setClickedLocationEarthquake(null);
           
-        }
-      }
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    }, [visible]);
+  //       }
+  //     }
+  //     document.addEventListener('mousedown', handleClickOutside);
+  //     return () => {
+  //       document.removeEventListener('mousedown', handleClickOutside);
+  //     };
+  //   }, [visible]);
 
   const formatDate = (date: Date): string => {
     if (!(date instanceof Date) || isNaN(date.getTime())) return '';
@@ -117,7 +117,7 @@ const map=useMap();
 
   return (
     
-      <div className="earthquake-wrapper" ref={inputRef1} onClick={(e) => e.stopPropagation()}>
+      <div className="earthquake-wrapper" onClick={(e) => e.stopPropagation()}>
       <div className="earthquake-header">
         <button
           onClick={() => {
@@ -125,6 +125,8 @@ const map=useMap();
             setAlert(false);
             setClickedLocationEarthquake(null);
             
+
+           
           }}
         >
           x

@@ -17,12 +17,23 @@ interface SignUpFormValues {
 }
 export const initialValues = { email: '', password: '', confirmPassword: '' };
 export const validationSchema = Yup.object({
-  email: Yup.string().email(DATA.InvalidEmail).required(DATA.EmailRequired),
+  email: Yup.string()
+  .email(DATA.InvalidEmail)
+  .required(DATA.EmailRequired),
+  
   password: Yup.string()
-    .min(6, DATA.PasswordLength)
-    .max(10, 'Password cannot be more than 10 characters')
-    .required(DATA.PasswordRequired),
-
+  .required("Required")
+  .matches(/^\S*$/, "Password cannot contain spaces")
+  .min(6, "Password must have at least 6 characters")
+  .max(10, 'Password cannot be more than 10 characters')
+  .matches(/[A-Z]/, "Must contain at least one uppercase")
+  .matches(/[a-z]/, "Must contain at least one lowercase")
+  
+  .matches(
+    /[!@#$%^&*()<>?:"{}]/,
+    "Must contain at least one special character"
+  )
+  .matches(/[0-9]/, "Must contain at least one number"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref(DATA.Password)], DATA.PasswordMatching)
     .required(DATA.ConfirmPasswordRequired),
