@@ -4,7 +4,7 @@ import { ROUTES_CONFIG, WILDCARD_ROUTES } from '../Shared/Constants';
 import { CustomRouter } from './RootRoutes';
 import SignUp from '../Views/signup/SignUp';
 import Login from '../Views/login/Login';
-import Forgot from '../Views/forgotPassword/Forgot';
+import Forgot from '../Views/forgotpassword/Forgot';
 
 export const PUBLIC_ROUTES: Array<CustomRouter> = [
   {

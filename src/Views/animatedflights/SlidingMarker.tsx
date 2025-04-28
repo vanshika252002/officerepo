@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useMap } from 'react-leaflet';
 import * as L from 'leaflet';
-import 'leaflet.marker.slideto'; // This must come after importing Leaflet
+import 'leaflet.marker.slideto'; 
 
 const SlidingMarker = ({ position, icon, onClick }: any) => {
   const markerRef = useRef<any>(null);

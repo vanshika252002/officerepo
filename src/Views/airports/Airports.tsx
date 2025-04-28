@@ -1,30 +1,17 @@
 import { useGetGeolocationByCoordsQuery } from '../../Services/Api/geolocation';
 import Loading from '../loading/Loading';
 import { ICONS } from '../../assets';
-
+import { Data, Airport } from './Types/types';
 import './airports.css';
-interface Airports {
- 
-  setVisible: (value:string) => void;
-  setOrigin:(value:string)=>void;
-}
-interface Data {
-  components: {
-    country: string;
-  };
-  annotations: {
-    flag: string;
-  };
-}
 
-const Airports = ({ setVisible,setOrigin }: Airports) => {
+const Airports = ({ setVisible, setOrigin }: Airport) => {
   const { data: airports, isLoading } =
     useGetGeolocationByCoordsQuery('airport');
 
   const uniqueSortedCountries = Array.from(
     new Map(
-      airports?.results?.map((item:Data) => [item.components.country, item])
-    ).values()as Iterable<Data>
+      airports?.results?.map((item: Data) => [item.components.country, item])
+    ).values() as Iterable<Data>
   ).sort((a, b) => a.components.country.localeCompare(b.components.country));
 
   return (
@@ -34,7 +21,7 @@ const Airports = ({ setVisible,setOrigin }: Airports) => {
         <div className="airport-f1">
           <button
             onClick={() => {
-             setVisible("searchbar")
+              setVisible('searchbar');
             }}
           >
             <img src={ICONS.arrow} />
@@ -50,10 +37,8 @@ const Airports = ({ setVisible,setOrigin }: Airports) => {
             <button
               className="airport-n1"
               onClick={() => {
-                setOrigin(
-                  item.components.country
-                );
-             setVisible("airport-by-code")
+                setOrigin(item.components.country);
+                setVisible('airport-by-code');
               }}
             >
               <div className="flag">

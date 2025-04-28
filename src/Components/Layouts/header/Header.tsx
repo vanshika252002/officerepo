@@ -1,21 +1,21 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react'; //third-party
 //import { useLazyGetWeatherByCoordsQuery } from '../../Services/Api/weather';
 
-import SearchBar from '../searchbar/SearchOptions';
-import Weather from '../weather/Weather';
-import FlightByRoute from '../flightbyroute';
-import FlightInformation from '../flightInformation';
-import Nearby from '../nearby'; //components
-import Airports from '../airports';
-import AirportCountryFlights from '../airportCountryFlights';
-import Live from '../live';
+import SearchBar from '../../../Views/searchbar/SearchOptions';
+import Weather from '../../../Views/weather/Weather';
+import FlightByRoute from '../../../Views/flightbyroute';
+import FlightInformation from '../../../Views/flightinformation';
+import Nearby from '../../../Views/nearby'; //components
+import Airports from '../../../Views/airports';
+import AirportCountryFlights from '../../../Views/airportcountryflights';
+import Live from '../../../Views/live';
 
 import { Props } from './Types/types'; //types+css
-import { ICONS } from '../../assets';
-import './tocheck.css';
-import Confirmation from '../Confirmation';
+import { ICONS } from '../../../assets';
+import './header.css';
+import Confirmation from '../../../Views/confirmation';
 
-const ToCheck = ({
+const Header = ({
   clickedLocation,
   setSelectedLocation,
   setFlight,
@@ -26,21 +26,17 @@ const ToCheck = ({
   setFly,
   setFlyToTarget,
 }: Props) => {
-
-
   // const [filterData, setFilterData] = useState({
-  //   origin: null,  
+  //   origin: null,
   //   country:null,
-  //   code: null 
+  //   code: null
   // });
   const [logout, setLogout] = useState<boolean>(false);
 
   const [origin, setOrigin] = useState('');
 
-
   const handleLogout = () => {
     setLogout(true);
-
   };
 
   const inputRef = useRef<HTMLDivElement>(null);
@@ -86,7 +82,6 @@ const ToCheck = ({
           </div>
           {visible == 'searchbar' && (
             <SearchBar
-              
               setVisible={setVisible}
               setSelectedLocation={setSelectedLocation}
               setFlight={setFlight}
@@ -104,17 +99,12 @@ const ToCheck = ({
           )}
 
           {visible == 'flight-by-route' && (
-            <FlightByRoute
-             
-              setOrigin={setOrigin}
-              setVisible={setVisible}
-            />
+            <FlightByRoute setOrigin={setOrigin} setVisible={setVisible} />
           )}
           {visible == 'flight-details' && (
             <FlightInformation
               setFly={setFly}
               setFlyToTarget={setFlyToTarget}
-              
               origin={origin}
               setVisible={setVisible}
               setFlight={setFlight}
@@ -131,12 +121,11 @@ const ToCheck = ({
             />
           )}
           {visible == 'airports' && (
-            <Airports  setVisible={setVisible}  setOrigin={setOrigin}/>
+            <Airports setVisible={setVisible} setOrigin={setOrigin} />
           )}
           {visible == 'airport-by-code' && (
             <AirportCountryFlights
               origin={origin}
-             
               setVisible={setVisible}
               setSelectedLocation={setSelectedLocation}
               setFlight={setFlight}
@@ -164,4 +153,4 @@ const ToCheck = ({
   );
 };
 
-export default ToCheck;
+export default Header;

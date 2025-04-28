@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setFlights } from '../../Store/flight';
+import { setFlights } from '../../../Store/flight';
 import * as L from 'leaflet';
-import { Tooltip} from 'react-leaflet';
+import { Tooltip } from 'react-leaflet';
 import FlyToTarget from './FlightToTarget';
 
 import {
@@ -14,24 +14,24 @@ import {
 } from 'react-leaflet';
 
 import MarkerClusterGroup from 'react-leaflet-cluster';
-import { useLazyGetWeatherByCoordsQuery } from '../../Services/Api/weather';
-import MiniMapControl from '../minimapview/MiniMapView';
+import { useLazyGetWeatherByCoordsQuery } from '../../../Services/Api/weather';
+import MiniMapControl from '../../../Views/minimapview/MiniMapView';
 
-import { useGetAllFlightsQuery } from '../../Services/Api/liveflight';
-import { ICONS } from '../../assets';
+import { useGetAllFlightsQuery } from '../../../Services/Api/liveflight';
+import { ICONS } from '../../../assets';
 import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './body.css';
-import Footer from '../footer/Footer';
+import Footer from '../../../Views/footer/Footer';
 import 'leaflet-rotatedmarker';
 
-import { useLazyGetEarthquakesQuery } from '../../Services/Api/earthquake';
-import CustomZoom from '../customZoom/CustomZoom';
-import Earthquake from '../earthquake/Earthquake';
+import { useLazyGetEarthquakesQuery } from '../../../Services/Api/earthquake';
+import CustomZoom from '../../../Views/customZoom/CustomZoom';
+import Earthquake from '../../../Views/earthquake/Earthquake';
 
-import { useLazyGetGeolocationByLatLngQuery } from '../../Services/Api/geolocation';
+import { useLazyGetGeolocationByLatLngQuery } from '../../../Services/Api/geolocation';
 import { EarthquakeFeature, Props, Details } from './Types/Types';
-import Loading from '../loading';
+import Loading from '../../../Views/loading';
 
 const createFlightIcon = (fillColor: string, size = 38) =>
   new L.DivIcon({
@@ -66,9 +66,9 @@ const Body = ({
   setAlert,
   visible,
   setVisible,
-
+  setFlyToTarget,
   flyToTarget,
-  
+
   setFly,
 }: Props) => {
   const dispatch = useDispatch();
@@ -90,8 +90,10 @@ const Body = ({
   const [triggerGeolocation, { data: geolocation }] =
     useLazyGetGeolocationByLatLngQuery();
 
-  const { data: liveflight, isLoading: loadingFlights } =
-    useGetAllFlightsQuery(null,);
+  const { data: liveflight, isLoading: loadingFlights } = useGetAllFlightsQuery(
+    null,
+    { pollingInterval: 60000 }
+  );
 
   const FlightDetails = liveflight?.states || null;
 
@@ -116,7 +118,6 @@ const Body = ({
   // console.log('selected angle is', selectedLocation?.angle);
 
   const MapClickHandler = () => {
-  
     useMapEvents({
       click(e) {
         const newLat = e.latlng.lat;
@@ -136,8 +137,6 @@ const Body = ({
       triggerGeolocation({ lat, lng: lon });
     }
   }, [clickedLocation]);
-
-  
 
   useEffect(() => {
     if (selectedLocation && FlightDetails) {
@@ -164,12 +163,10 @@ const Body = ({
   //     setClickedLocationEarthquake(null);
   //   }
   // }, [earthquakeData]);
-  
-console.log(loadingMap)
+
+  console.log(loadingMap);
   return (
     <div className="linear-gradient-body">
- 
-    
       <MapContainer
         className="leaf1"
         center={[20.5937, 78.9629] as [number, number]}
@@ -183,9 +180,8 @@ console.log(loadingMap)
         ]}
         maxBoundsViscosity={1.0}
         whenReady={() => {
-          setLoadingMap(false); 
+          setLoadingMap(false);
         }}
-    
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -194,10 +190,10 @@ console.log(loadingMap)
 
         <MapClickHandler />
         {loadingMap && (
-        <div className="loading-overlay">
-          <Loading />
-        </div>
-      )}
+          <div className="loading-overlay">
+            <Loading />
+          </div>
+        )}
         <CustomZoom chooseOption={chooseOption} />
         <MarkerClusterGroup showCoverageOnHover={false}>
           {loadingFlights && <Loading />}
@@ -209,41 +205,40 @@ console.log(loadingMap)
 
               if (details[5] !== null && details[6] !== null) {
                 return (
-                    <Marker
-                      key={details[0]}
-                      position={[details[6], details[5]]}
-                      icon={createFlightIcon('green', 42)}
-                      rotationAngle={details[10] || 0}
-                      rotationOrigin="center center"
-                      eventHandlers={{
-                        click: () => {
-                          setSelectedLocation({
-                            id: details[0],
-                            lat: details[6],
-                            lon: details[5],
-                            angle: details[10],
-                            origin: details[2],
-                          }),
-                            setClickedLocation(null);
-                        },
-                      }}
-                    >
-                      <Tooltip>
-                        <strong>Origin:</strong>
-                        {details[2]}
-                        <br />
-                        <strong>Flight ID:</strong> {details[0]}
-                        <br />
-                      </Tooltip>
-                    </Marker>
-                  
+                  <Marker
+                    key={details[0]}
+                    position={[details[6], details[5]]}
+                    icon={createFlightIcon('green', 42)}
+                    rotationAngle={details[10] || 0}
+                    rotationOrigin="center center"
+                    eventHandlers={{
+                      click: () => {
+                        setSelectedLocation({
+                          id: details[0],
+                          lat: details[6],
+                          lon: details[5],
+                          angle: details[10],
+                          origin: details[2],
+                        }),
+                          setClickedLocation(null);
+                      },
+                    }}
+                  >
+                    <Tooltip>
+                      <strong>Origin:</strong>
+                      {details[2]}
+                      <br />
+                      <strong>Flight ID:</strong> {details[0]}
+                      <br />
+                    </Tooltip>
+                  </Marker>
                 );
               }
               return null;
             })}
         </MarkerClusterGroup>
 
-        { flyToTarget && <FlyToTarget flyToTarget={flyToTarget}/>} 
+        {flyToTarget && <FlyToTarget flyToTarget={flyToTarget} />}
 
         {flight && selectedLocation?.lat && selectedLocation?.lon && (
           <Marker
@@ -254,11 +249,9 @@ console.log(loadingMap)
             rotationAngle={selectedLocation.angle || 0}
             rotationOrigin="center center "
           >
-           
             <Tooltip permanent>
-            <strong>Origin:</strong> {selectedLocation.origin} <br />
+              <strong>Origin:</strong> {selectedLocation.origin} <br />
               <strong>Flight ID:</strong> {selectedLocation.id} <br />
-             
             </Tooltip>
           </Marker>
         )}
@@ -284,13 +277,7 @@ console.log(loadingMap)
                     ]}
                     icon={EarthquakeAlert}
                   >
-                    
-                    <Tooltip
-                      direction="top"
-                      offset={[0, -10]}
-                      opacity={1}
-                      permanent={false}
-                    >
+                    <Tooltip direction="top" offset={[0, -10]} opacity={1}>
                       <div className="earthquake-tooltip">
                         <strong>{quake.properties.place}</strong>
 
@@ -326,12 +313,10 @@ console.log(loadingMap)
           </>
         )}
         {/* {fly && flyToTarget && <FlyToTarget flyToTarget={flyToTarget} />}  */}
-      
-     
+
         {clickedLocation && (
           <Popup position={clickedLocation}>
             <div>
-               
               {weatherData && (
                 <div className="popup">
                   {geolocation?.results[0]?.annotations?.flag &&
@@ -370,7 +355,7 @@ console.log(loadingMap)
           </Popup>
         )}
         <MiniMapControl />
-     
+      </MapContainer>
 
       <Footer
         setFly={setFly}
@@ -379,26 +364,22 @@ console.log(loadingMap)
         setVisible={setVisible}
         setClickedLocation={setClickedLocation}
       />
-   
-   {visible === 'earthquake-list' && (
-  <>
-    <div className="map-click-blocker" />
-    <Earthquake
-      setStartTime={setStartTime}
-      setEndTime={setEndTime}
-      startTime={startTime}
-      endTime={endTime}
-      setAlert={setAlert}
-      setClickedLocationEarthquake={setClickedLocationEarthquake}
-      setClickedLocation={setClickedLocation}
-      setVisible={setVisible}
-      visible={visible}
-    />
-  </>
-)}
 
-  
-       </MapContainer>
+      {visible === 'earthquake-list' && (
+        <Earthquake
+          setFly={setFly}
+          setStartTime={setStartTime}
+          setEndTime={setEndTime}
+          startTime={startTime}
+          endTime={endTime}
+          setAlert={setAlert}
+          setClickedLocationEarthquake={setClickedLocationEarthquake}
+          setClickedLocation={setClickedLocation}
+          setVisible={setVisible}
+          setFlyToTarget={setFlyToTarget}
+          visible={visible}
+        />
+      )}
     </div>
   );
 };

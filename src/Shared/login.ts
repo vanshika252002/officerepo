@@ -13,18 +13,25 @@ interface ValuesLogin {
   rememberMe: boolean;
 }
 
+
+
 export const initialValues = {
-  email: localStorage.getItem('userEmail') || '', // Pre-fill email if stored in localStorage
-  password: localStorage.getItem('userPassword') || '', // Pre-fill password if stored in localStorage
-  rememberMe: false
+  email: localStorage.getItem('userEmail') || '',
+  password: localStorage.getItem('userPassword') || '',
+  rememberMe: localStorage.getItem('userEmail') && localStorage.getItem('userPassword') ? true : false,
 };
 
 export const validationSchema = Yup.object({
-  email: Yup.string().email(DATA.InvalidEmail).required(DATA.EmailRequired),
+  
+  email: Yup.string()
+        .required('Email is required')
+        .matches(
+        /^[\w-.]+@([\w-]+\.)+[a-zA-Z]{2,6}$/,
+          'Enter a valid email address'
+        ),
   password: Yup.string()
     .matches(/^\S*$/, "Password cannot contain spaces")
-    .min(6, DATA.PasswordLength)
-    .max(10, "Password cannot be more than 10 characters")
+  
     .required(DATA.PasswordRequired),
 });
 
@@ -43,13 +50,13 @@ export const onSubmit = async (
     dispatch(updateAuthTokenRedux({ token }));
     toast.success('Login successful! Welcome', { position: 'top-right' });
 
-    // Handle "Remember Me" functionality
+   
     if (values.rememberMe) {
-      localStorage.setItem('userEmail', values.email);  // Store email in localStorage
-      localStorage.setItem('userPassword', values.password);  // Store password in localStorage
+      localStorage.setItem('userEmail', values.email); 
+      localStorage.setItem('userPassword', values.password);  
     } else {
-      localStorage.removeItem('userEmail');  // Remove email from localStorage if "Remember Me" is unchecked
-      localStorage.removeItem('userPassword');  // Remove password from localStorage if "Remember Me" is unchecked
+      localStorage.removeItem('userEmail');  
+      localStorage.removeItem('userPassword');  
     }
 
     resetForm();

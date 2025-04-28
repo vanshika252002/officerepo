@@ -2,7 +2,7 @@ import { useState, useEffect,useRef } from 'react';
 import DatePicker from "react-datepicker";
 import React from 'react';
 import { useLazyGetEarthquakesQuery } from '../../Services/Api/earthquake';
-import { useDebounce } from '../debouncing/useDebounce';
+import { useDebounce } from '../../Shared/Utils';
 
 import "react-datepicker/dist/react-datepicker.css";
 import './earthquake.css';
@@ -11,7 +11,6 @@ import './earthquake.css';
 
 import { EarthquakeProps, EarthquakeFeature } from './Types/types';
 import Loading from '../loading';
-import { useMap } from 'react-leaflet';
 const CustomDatePickerInput = React.forwardRef<HTMLDivElement, { value?: string; onClick?: () => void; placeholder?: string }>(
   ({ value, onClick, placeholder }, ref) => (
     <div
@@ -38,30 +37,46 @@ const Earthquake = ({
   setEndTime,
   startTime,
   endTime,
-  setAlert, setClickedLocationEarthquake,setVisible,visible,setClickedLocation
+  setAlert, setClickedLocationEarthquake,setVisible,setFly,setFlyToTarget,visible,setClickedLocation
 }: EarthquakeProps) => {
 
-  //const [selectedEarthquake, setSelectedEarthquake] = useState<EarthquakeFeature | null>(null);
   const [dateError, setDateError] = useState(''); 
-const map=useMap();
+  const [isStartDateOpen, setIsStartDateOpen] = useState(false);
+  const [isEndDateOpen, setIsEndDateOpen] = useState(false);
+
+  
+  const preventScroll = (e:WheelEvent) => {
+    e.preventDefault();
+  };
 
 
-  // const inputRef1 = useRef<HTMLDivElement>(null);
-  //   useEffect(() => {
-  //     function handleClickOutside(event: MouseEvent) {
-  //       if (!inputRef1.current?.contains(event.target as Node) ) {
-  //         setVisible("");
+  useEffect(() => {
+    if (isStartDateOpen || isEndDateOpen) {
+      document.body.addEventListener('wheel', preventScroll, { passive: false });
+    } else {
+      document.body.removeEventListener('wheel', preventScroll);
+    }
+
+    return () => {
+      document.body.removeEventListener('wheel', preventScroll);
+    };
+  }, [isStartDateOpen, isEndDateOpen]);
+  const inputRef1 = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+      function handleClickOutside(event: MouseEvent) {
+        if (!inputRef1.current?.contains(event.target as Node) ) {
+          setVisible("");
+          setFly(false);
+          setAlert(false);
+          setClickedLocationEarthquake(null);
           
-  //         setAlert(false);
-  //         setClickedLocationEarthquake(null);
-          
-  //       }
-  //     }
-  //     document.addEventListener('mousedown', handleClickOutside);
-  //     return () => {
-  //       document.removeEventListener('mousedown', handleClickOutside);
-  //     };
-  //   }, [visible]);
+        }
+      }
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [visible]);
 
   const formatDate = (date: Date): string => {
     if (!(date instanceof Date) || isNaN(date.getTime())) return '';
@@ -117,16 +132,14 @@ const map=useMap();
 
   return (
     
-      <div className="earthquake-wrapper" onClick={(e) => e.stopPropagation()}>
+      <div className="earthquake-wrapper" ref={inputRef1} onClick={(e)=>e.stopPropagation()}>
       <div className="earthquake-header">
         <button
           onClick={() => {
            setVisible("");
             setAlert(false);
             setClickedLocationEarthquake(null);
-            
-
-           
+            setFly(false);
           }}
         >
           x
@@ -155,6 +168,12 @@ const map=useMap();
                 setEndTime('');
               }
             }}
+            onCalendarOpen={() => {
+              setIsStartDateOpen(true);
+            }}
+            onCalendarClose={() => {
+              setIsStartDateOpen(false);
+            }}
             minDate={new Date('1960-01-01')}
   maxDate={new Date('2030-12-31')}
   showMonthDropdown
@@ -173,7 +192,12 @@ const map=useMap();
             onChange={(date: Date | null) => {
               setEndTime(date ? formatDate(date) : '');
             }}
-        
+            onCalendarOpen={() => {
+              setIsEndDateOpen(true);
+            }}
+            onCalendarClose={() => {
+              setIsEndDateOpen(false);
+            }}
             minDate={new Date('1960-01-01')}
             maxDate={new Date('2030-12-31')}
             showMonthDropdown
@@ -214,10 +238,9 @@ const map=useMap();
             className="earthquake-click-option"
             onClick={() => {
               // setSelectedEarthquake(item);
-              
+              setFly(true);
               setClickedLocation(null);
-              map.flyTo([item?.geometry?.coordinates[1],item?.geometry?.coordinates[0]], 8, { duration: 1 });
-              
+              setFlyToTarget([item?.geometry?.coordinates[1],item?.geometry?.coordinates[0]])
               setClickedLocationEarthquake([item?.geometry?.coordinates[1],item?.geometry?.coordinates[0],item.properties.place,item.properties.mag])
             }}
           >
@@ -241,6 +264,16 @@ const map=useMap();
 
 
 
+      {/* {selectedEarthquake && (
+        <EarthquakeDetails
+          setSelectedEarthquake={setSelectedEarthquake}
+          place={selectedEarthquake.properties.place}
+          time={Timestamp(selectedEarthquake.properties.time)}
+          lat={selectedEarthquake.geometry.coordinates[1]}
+          lon={selectedEarthquake.geometry.coordinates[0]}
+          depth={selectedEarthquake.geometry.coordinates[2]}
+        />
+      )} */}
     </div>
   
   );

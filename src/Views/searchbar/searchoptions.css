@@ -1,25 +1,22 @@
-
 .searchbar-wrapper {
   position: absolute;
   top: 75px;
-  right:170px;
-  width: 260px; 
-  height: auto; 
+  right: 170px;
+  width: 260px;
+  height: auto;
   background-color: rgb(209, 208, 208);
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
   padding: 10px;
   font-family: Arial, sans-serif;
   z-index: 1000;
-  box-shadow: 5px 5px  10px  black;
+  box-shadow: 5px 5px 10px black;
 }
-
 
 .search_shortcuts {
   background-color: rgb(209, 208, 208);
   padding: 5px;
 }
-
 
 .search_shortcuts h2 {
   font-size: 14px;
@@ -30,13 +27,11 @@
   margin-bottom: 10px;
 }
 
-
 .searchbar-options ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-
 
 .searchbar-options ul li {
   margin-bottom: 5px;
@@ -51,11 +46,9 @@
   background-color: rgb(255, 255, 255);
 }
 
-
 .searchbar-options ul li:hover {
   background-color: rgb(248, 192, 35);
 }
-
 
 .searchbar-options ul li img {
   width: 20px;
@@ -63,33 +56,30 @@
   margin-right: 10px;
 }
 
-
 .weather-overlay {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 260px;
-    min-height: 100px;
-    max-height: 90vh;  
-    background-color: rgb(209, 208, 208);
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-    padding: 10px;
-    padding-top:55px;
-    font-family: Arial, sans-serif;
-    z-index: 2000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow-y: auto;  
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 260px;
+  min-height: 100px;
+  max-height: 90vh;
+  background-color: rgb(209, 208, 208);
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  padding-top: 55px;
+  font-family: Arial, sans-serif;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
 }
 
-
-@media (max-width:545px) {
-  .searchbar-wrapper{
-     right:15%;
-     width: 200px;
-     
+@media (max-width: 545px) {
+  .searchbar-wrapper {
+    right: 15%;
+    width: 200px;
   }
 }

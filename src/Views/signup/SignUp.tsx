@@ -28,7 +28,9 @@ const SignUp: React.FC = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, actions) => handleSignUpSubmit(values, actions, navigate)}
+          onSubmit={(values, actions) =>
+            handleSignUpSubmit(values, actions, navigate)
+          }
         >
           {({ isSubmitting, setFieldValue, values }) => (
             <Form className={DATA.Form}>
@@ -40,10 +42,10 @@ const SignUp: React.FC = () => {
                 label="Email"
                 value={values.email}
                 onChange={(e) => {
-                  const noStartingSpaces = e.target.value.replace(/^\s+/,'');
-                  setFieldValue('email', noStartingSpaces);
+                  const trimmedValue = e.target.value.trim();
+                  console.log('trimmed', trimmedValue);
+                  setFieldValue('email', trimmedValue);
                 }}
-                
               />
 
               <FormInput
@@ -96,7 +98,7 @@ const SignUp: React.FC = () => {
                   onClick={() => navigate(ROUTES.LOGIN)}
                   style={{ color: '#007bff' }}
                 >
-                  {DATA.Login}
+                  Sign in
                 </button>
               </p>
             </Form>

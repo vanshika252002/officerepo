@@ -1,41 +1,43 @@
-
-import { useState } from "react";
- import Body from "../body/Body";
+import { useState } from 'react';
+import Body from '../../Components/Layouts/body/Body';
 
 import './Dashboard.css';
-import ToCheck from "../tocheck/ToCheck";
-
+import Header from '../../Components/Layouts/header/Header';
 
 export default function Dashboard() {
-  const [selectedLocation, setSelectedLocation] = useState<{ id: string; lat: number | null; lon: number | null;angle:number|null ;origin:string|null} | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<{
+    id: string;
+    lat: number | null;
+    lon: number | null;
+    angle: number | null;
+    origin: string | null;
+  } | null>(null);
 
   const [clickedLocation, setClickedLocation] = useState<
-  [number, number] | null
->(null);
-  
+    [number, number] | null
+  >(null);
+
   const [flight, setFlight] = useState<boolean>(true);
-   const [alert, setAlert] = useState<boolean>(false);
-   const [visible,setVisible]=useState<string>("");
+  const [alert, setAlert] = useState<boolean>(false);
+  const [visible, setVisible] = useState<string>('');
 
-   const [flyToTarget, setFlyToTarget] = useState<[number, number] | null>(null);
-const [fly,setFly]=useState<boolean>(false);
+  const [flyToTarget, setFlyToTarget] = useState<[number, number] | null>(null);
+  const [fly, setFly] = useState<boolean>(false);
 
-
-
-   return (
+  return (
     <div className="dashboard-wrapper">
-      <ToCheck
+      <Header
         selectedLocation={selectedLocation}
         setSelectedLocation={setSelectedLocation}
         setClickedLocation={setClickedLocation}
         setFlight={setFlight}
         setAlert={setAlert}
         setVisible={setVisible}
-          visible={visible}
-          flyToTarget={flyToTarget}
-          setFlyToTarget={setFlyToTarget}
-          clickedLocation={clickedLocation}
-          setFly={setFly}
+        visible={visible}
+        flyToTarget={flyToTarget}
+        setFlyToTarget={setFlyToTarget}
+        clickedLocation={clickedLocation}
+        setFly={setFly}
       />
       <div className="body-wrapper">
         <Body
@@ -48,14 +50,12 @@ const [fly,setFly]=useState<boolean>(false);
           alert={alert}
           setAlert={setAlert}
           setVisible={setVisible}
-
           visible={visible}
-             fly={fly}
-             setFly={setFly}
-             flyToTarget={flyToTarget}
-             setFlyToTarget={setFlyToTarget}
-
-/>
+          fly={fly}
+          setFly={setFly}
+          flyToTarget={flyToTarget}
+          setFlyToTarget={setFlyToTarget}
+        />
       </div>
     </div>
   );

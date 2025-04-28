@@ -1,8 +1,8 @@
 import { useGetAllFlightsQuery } from '../../Services/Api/liveflight';
-import { Props,Details } from './Types/types';
+import { Props, Details } from './Types/types';
 import './searching.css';
 
-const Searching = ({ chooseOption }:Props) => {
+const Searching = ({ chooseOption }: Props) => {
   const { searching } = chooseOption;
   const { searchedData, setSearchingVisible } = searching;
   const place = searchedData.trim().toLowerCase();
@@ -11,7 +11,7 @@ const Searching = ({ chooseOption }:Props) => {
   const { data: flightData } = useGetAllFlightsQuery(null);
   console.log('flight data is', flightData);
 
-  const matchingFlights = flightData?.states?.filter((details:Details) =>
+  const matchingFlights = flightData?.states?.filter((details: Details) =>
     details[2]?.toLowerCase().includes(place)
   );
 

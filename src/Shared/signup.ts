@@ -18,9 +18,12 @@ interface SignUpFormValues {
 export const initialValues = { email: '', password: '', confirmPassword: '' };
 export const validationSchema = Yup.object({
   email: Yup.string()
-  .email(DATA.InvalidEmail)
-  .required(DATA.EmailRequired),
-  
+  .required('Email is required')
+  .matches(
+   /^[\w-.]+@([\w-]+\.)+[a-zA-Z]{2,6}$/,
+
+    'Enter a valid email address'
+  ),
   password: Yup.string()
   .required("Required")
   .matches(/^\S*$/, "Password cannot contain spaces")

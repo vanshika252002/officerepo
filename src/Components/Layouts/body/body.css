@@ -6,41 +6,38 @@
 } */
 
 /* Make the MapContainer fill the screen */
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
-.map-view{
-   
-    
-   
-
-    
+.map-view {
 }
 .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
-  bottom:1px;
+  bottom: 1px;
   touch-action: none;
-  height:100%;
+  height: 100%;
 }
-.earthquake-tooltip strong{
+.earthquake-tooltip strong {
   font-size: 1rem;
-  padding:0;
+  padding: 0;
 }
-.earthquake-tooltip p{
- color:red
+.earthquake-tooltip p {
+  color: red;
 }
 .leaf1 {
-    height: 100vh !important;
-    width: 100vw !important;
-    position:relative;
-    z-index:1;
+  height: 100vh !important;
+  width: 100vw !important;
+  position: relative;
+  z-index: 1;
 }
 .leaf1-control-zoom-in,
 .leaf1-control-zoom-out {
-    top:10px;
-  background-color: #2c2f33; 
+  top: 10px;
+  background-color: #2c2f33;
   color: #f9d342;
   font-size: 22px;
   border-radius: 8px;
@@ -68,34 +65,32 @@ html, body, #root {
   gap: 5px !important;
 }
 
-.popup  {
+.popup {
   margin: 0 !important;
   padding: 0 !important;
   line-height: 1 !important;
 }
-.popup h2{
-  margin:2px;
+.popup h2 {
+  margin: 2px;
   padding: 2px;
-  color:green;
+  color: green;
   font-size: 1.2rem;
   line-height: 1.2;
   margin-top: 16px;
 }
 .leaflet-container a.leaflet-popup-close-button {
   font-size: 1.5rem;
-  color:#121212;
- 
+  color: #121212;
 }
-  .popup span {
-    display: inline;
-    font-size: 14px;
-    line-height: 1.4;
-    white-space: nowrap; /* Optional: prevents line break if space is tight */
-  }
-.linear-gradient-body{
-  padding:0;
-  margin:0;
-
+.popup span {
+  display: inline;
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: nowrap; /* Optional: prevents line break if space is tight */
+}
+.linear-gradient-body {
+  padding: 0;
+  margin: 0;
 }
 
 @keyframes moveMarker {
@@ -120,20 +115,17 @@ html, body, #root {
   pointer-events: all !important;
 }
 
-
 .my-custom-marker-class {
-  position: absolute; 
-  animation: moveMarker 1s ease-in-out forwards; 
+  position: absolute;
+  animation: moveMarker 1s ease-in-out forwards;
   will-change: left, top;
   /* transition: 60s ease !important; */
 }
 
- 
 /* 
 
 
 */
-
 
 .flight-wrapper {
   transition: 60s ease !important;

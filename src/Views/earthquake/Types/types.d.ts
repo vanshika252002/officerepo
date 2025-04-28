@@ -7,8 +7,8 @@ export interface EarthquakeProps {
     setAlert:(value:boolean)=>void;
    setClickedLocationEarthquake:(value:[number,number,string,number]|null)=>void;
    setVisible:(value:string)=>void;
-   setFly?:(value:boolean)=>void;
-   setFlyToTarget?:(value:[number,number]|null)=>void;
+   setFly:(value:boolean)=>void;
+   setFlyToTarget:(value:[number,number]|null)=>void;
    visible:string;
    setClickedLocation:(value:[number,number]|null)=>void;
     

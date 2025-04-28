@@ -2,39 +2,71 @@ import { SearchbarProps } from './Types/types';
 import './searchoptions.css';
 import { ICONS } from '../../assets';
 
-function SearchBar({setVisible,setSelectedLocation,setFlight,setClickedLocation}:SearchbarProps) {
- 
-
+function SearchBar({
+  setVisible,
+  setSelectedLocation,
+  setFlight,
+  setClickedLocation,
+}: SearchbarProps) {
   return (
     <div className="searchbar-wrapper">
       <div className="search_shortcuts">
         <h2>SHORTCUTS TO FIND</h2>
       </div>
       <div className="searchbar-options">
-        <ul onClick={(e) => {e.stopPropagation()}}>
-          <li onClick={() => { console.log("weather searchbar");setVisible("weather") ;setSelectedLocation(null),setClickedLocation(null);setFlight(false)}}>
+        <ul
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          <li
+            onClick={() => {
+              console.log('weather searchbar');
+              setVisible('weather');
+              setSelectedLocation(null), setClickedLocation(null);
+              setFlight(false);
+            }}
+          >
             <img src={ICONS.weather} />
             Weather
           </li>
-          <li onClick={() =>{setVisible("flight-by-route");setClickedLocation(null)}}>
+          <li
+            onClick={() => {
+              setVisible('flight-by-route');
+              setClickedLocation(null);
+            }}
+          >
             <img src={ICONS.flightroute} />
             Flight by route
           </li>
-          <li onClick={()=>{ setVisible("live-flight");setClickedLocation(null)}}>
+          <li
+            onClick={() => {
+              setVisible('live-flight');
+              setClickedLocation(null);
+            }}
+          >
             <img src={ICONS.liveairplane} />
             LIVE flight by airplane
           </li>
-          <li onClick={()=>{setVisible("airports");setClickedLocation(null)}}>
+          <li
+            onClick={() => {
+              setVisible('airports');
+              setClickedLocation(null);
+            }}
+          >
             <img src={ICONS.airports} /> Airports
           </li>
-          <li onClick={()=>{setVisible("nearby");setClickedLocation(null)}}>
+          <li
+            onClick={() => {
+              setVisible('nearby');
+              setClickedLocation(null);
+            }}
+          >
             <img src={ICONS.nearby} /> Nearby
           </li>
         </ul>
       </div>
-     
     </div>
-    
   );
 }
 export default SearchBar;

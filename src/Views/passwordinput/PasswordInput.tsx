@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Field, ErrorMessage } from "formik";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useState } from 'react';
+import { Field, ErrorMessage } from 'formik';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 interface PasswordInputProps {
   name: string;
@@ -17,7 +17,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ name, label }) => {
         <Field
           id={name}
           name={name}
-          type={showPassword ? "text" : "password"}
+          type={showPassword ? 'text' : 'password'}
           className="password-input-field"
         />
         <span
@@ -27,7 +27,6 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ name, label }) => {
           {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
         </span>
       </div>
-      {/* Important - show error message */}
       <ErrorMessage name={name}>
         {(msg) => <div className="error-message">{msg}</div>}
       </ErrorMessage>

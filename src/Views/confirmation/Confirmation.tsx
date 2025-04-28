@@ -2,7 +2,7 @@ import { updateAuthTokenRedux } from '../../Store/Common';
 import { signOut } from 'firebase/auth';  
 import { auth } from '../../Components/firebase';
 import { useDispatch } from 'react-redux';
-import './Confirmation.css';
+import './confirmation.css';
 
 interface Props{
   setLogout:(value:boolean)=>void;
