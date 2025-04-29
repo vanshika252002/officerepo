@@ -27,7 +27,7 @@ const Confirmation=({setLogout}:Props)=>{
         dispatch(updateAuthTokenRedux({ token: null }));}}
        className="place-order-btn1"
      >
-       Sign out 
+      Confirm
      </button>
      <button
     
