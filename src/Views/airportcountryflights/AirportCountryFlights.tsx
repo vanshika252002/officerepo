@@ -7,6 +7,7 @@ import { ICONS } from '../../assets';
 import './airportCountryFlights.css';
 
 const AirportCountryFlights = ({
+  setClickedLocation,
   origin,
   setVisible,
   setSelectedLocation,
@@ -27,7 +28,7 @@ const AirportCountryFlights = ({
   );
 
   return (
-    <div className="country-flight-wrappper">
+    <div className="country-flight-wrappper"  onClick={(e) => e.stopPropagation()}>
       {isLoading && <Loading />}
 
       <div className="country-flight-header">
@@ -37,6 +38,7 @@ const AirportCountryFlights = ({
               setVisible('airports');
               setFlight(false);
               setSelectedLocation(null);
+              setClickedLocation(null);
             }}
           >
             <img src={ICONS.arrow} />
@@ -45,6 +47,7 @@ const AirportCountryFlights = ({
         <div className="country-flight-f2">
           <span>Country Flights</span>
         </div>
+        <div className="near-by-f1" ><button onClick={()=> {setVisible('');setFlight(false);setSelectedLocation(null); setClickedLocation(null)}}>x</button></div>
       </div>
 
       {flightData?.states == null && (
@@ -96,6 +99,7 @@ const AirportCountryFlights = ({
                       <div className="acc-btn">
                         <button
                           onClick={() => {
+                            setClickedLocation(null);
                             if (latitude !== null && longitude !== null) {
                               setSelectedLocation({
                                 lat: latitude,

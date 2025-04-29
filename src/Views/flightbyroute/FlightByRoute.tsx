@@ -21,12 +21,12 @@ const FlightByRoute = ({ setVisible,setOrigin}: RouteProps) => {
   };
 
   return (
-    <div className="flight-by-route-wrappper">
+    <div className="flight-by-route-wrappper"  onClick={(e) => e.stopPropagation()}>
       <div className="flight-by-route-header">
         <div
           className="f1"
           onClick={() => {
-            setVisible("searchbar")
+            setVisible('searchbar');
             
           }}
         >
@@ -35,6 +35,7 @@ const FlightByRoute = ({ setVisible,setOrigin}: RouteProps) => {
         <div className="f2">
           <span>Flight by route</span>
         </div>
+        <div className="near-by-f1" ><button onClick={()=> setVisible('')}>x</button></div>
       </div>
       <div className="flight-by-route">
         <div className="flight-by-route-origin">

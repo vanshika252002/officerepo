@@ -41,7 +41,7 @@ z-index: 5000;
   flex-direction:row;
   align-items:center;
   justify-content:center;
-  padding:5px;
+  padding:4px;
 }
 .mini-map-option2 button{
   background-color:  rgb(57 57 57);
@@ -50,8 +50,8 @@ z-index: 5000;
   flex-direction: column;
 }
 .mini-map-option2 img{
-  width:2vw;
-  height:5vh;
+  width: 44px;
+  height: 47px;
   align-self: center;
 }
 .mini-map-option2 span{

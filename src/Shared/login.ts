@@ -61,11 +61,8 @@ export const onSubmit = async (
 
     resetForm();
   } catch (error: any) {
-    console.error('Firebase Auth Error:', error);
-    if (error.code === 'auth/invalid-credential') {
-      toast.error('Incorrect password. Please try again.', { position: 'top-right' });
-    } else {
-      toast.error(`Login failed: ${error.message}`, { position: 'top-right' });
-    }
+    toast.error("Invalid Credential");
+
+    
   }
 };

@@ -14,6 +14,7 @@ const Nearby = ({
   setFlight,
   setFly,
   setFlyToTarget,
+  setClickedLocation
 }: NearbyProps) => {
   const [lat, setLat] = useState<number | null>(null);
   const [lon, setLon] = useState<number | null>(null);
@@ -82,14 +83,15 @@ const Nearby = ({
 
   if (errorMsg) {
     return (
-      <div className="near-by-wrappper">
-        <div className="near-by-header">
+      <div className="near-by-wrappper"  >
+        <div className="near-by-header" >
           <div className="near-by-f1">
             <button
               onClick={() => {
                 setVisible('searchbar');
                 setFlight(false);
                 setSelectedLocation(null);
+                setClickedLocation(null);
               }}
             >
               x
@@ -106,7 +108,7 @@ const Nearby = ({
     );
   }
   return (
-    <div className="near-by-wrappper">
+    <div className="near-by-wrappper"  onClick={(e) => e.stopPropagation()}>
       <div className="near-by-header">
         {flightLoading && <Loading />}
         <div className="near-by-f1">
@@ -115,6 +117,7 @@ const Nearby = ({
               setVisible('searchbar');
               setFlight(false);
               setSelectedLocation(null);
+              setClickedLocation(null);
             }}
           >
             <img src={ICONS.arrow} />
@@ -123,6 +126,7 @@ const Nearby = ({
         <div className="near-by-f2">
           <span>Nearby</span>
         </div>
+        <div className="near-by-f1" ><button onClick={()=> { setClickedLocation(null);setVisible('');setFlight(false);setSelectedLocation(null)}}>x</button></div>
       </div>
 
       {liveflight?.states === null && (
@@ -184,6 +188,7 @@ const Nearby = ({
               <div className="acc-btn">
                 <button
                   onClick={() => {
+                    setClickedLocation(null);
                     setSelectedLocation({
                       lat: details[6],
                       lon: details[5],
@@ -194,6 +199,7 @@ const Nearby = ({
                     setFlight(true);
                     setFly(true);
                     setFlyToTarget([details[6], details[5]]);
+                
                   }}
                 >
                   <img src={ICONS.showonmap} />

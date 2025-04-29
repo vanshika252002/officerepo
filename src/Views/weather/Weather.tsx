@@ -64,6 +64,7 @@ function Weather({
         <div className="w1">
           <span>Weather</span>
         </div>
+        <div className="near-by-f1" ><button onClick={()=> {setVisible('');setClickedLocation(null)}}>x</button></div>
       </div>
 
       <div className="w2">

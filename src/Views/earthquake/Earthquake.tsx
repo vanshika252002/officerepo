@@ -175,7 +175,7 @@ const Earthquake = ({
               setIsStartDateOpen(false);
             }}
             minDate={new Date('1960-01-01')}
-  maxDate={new Date('2030-12-31')}
+  maxDate={new Date()}
   showMonthDropdown
   showYearDropdown
   scrollableYearDropdown
@@ -199,7 +199,7 @@ const Earthquake = ({
               setIsEndDateOpen(false);
             }}
             minDate={new Date('1960-01-01')}
-            maxDate={new Date('2030-12-31')}
+            maxDate={new Date()}
             showMonthDropdown
             showYearDropdown
             scrollableYearDropdown

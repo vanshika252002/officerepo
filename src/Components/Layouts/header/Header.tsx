@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'; //third-party
+import { useState } from 'react'; //third-party
 //import { useLazyGetWeatherByCoordsQuery } from '../../Services/Api/weather';
 
 import SearchBar from '../../../Views/searchbar/SearchOptions';
@@ -39,26 +39,26 @@ const Header = ({
     setLogout(true);
   };
 
-  const inputRef = useRef<HTMLDivElement>(null);
-  const inputRef1 = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        !inputRef.current?.contains(event.target as Node) &&
-        visible != 'earthquake-list'
-      ) {
-        setVisible('');
-        setFly(false);
-        setSelectedLocation(null);
+  // const inputRef = useRef<HTMLDivElement>(null);
+  // const inputRef1 = useRef<HTMLDivElement>(null);
+  // useEffect(() => {
+  //   function handleClickOutside(event: MouseEvent) {
+  //     if (
+  //       !inputRef.current?.contains(event.target as Node) &&
+  //       visible != 'earthquake-list'
+  //     ) {
+  //       setVisible('');
+  //       setFly(false);
+  //       setSelectedLocation(null);
 
-        setClickedLocation(null);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [visible]);
+  //       setClickedLocation(null);
+  //     }
+  //   }
+  //   document.addEventListener('click', handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener('click', handleClickOutside);
+  //   };
+  // }, [visible]);
 
   return (
     <div className="h1">
@@ -66,7 +66,7 @@ const Header = ({
         <img src={ICONS.trackitlive} alt="Header Logo" />
       </div>
       <div className="h5">
-        <div className="refrence-to-options" ref={inputRef}>
+        <div className="refrence-to-options" >
           <div
             className="h7"
             onClick={() => {
@@ -74,7 +74,7 @@ const Header = ({
             }}
           >
             {
-              <div className="h3" ref={inputRef1}>
+              <div className="h3">
                 <img src={ICONS.searching} alt="Search Icon" />
                 {/* <span>Search</span> */}
               </div>
@@ -109,6 +109,7 @@ const Header = ({
               setVisible={setVisible}
               setFlight={setFlight}
               setSelectedLocation={setSelectedLocation}
+              setClickedLocation={setClickedLocation}
             />
           )}
           {visible == 'nearby' && (
@@ -116,6 +117,7 @@ const Header = ({
               setFly={setFly}
               setFlyToTarget={setFlyToTarget}
               setSelectedLocation={setSelectedLocation}
+              setClickedLocation={setClickedLocation}
               setFlight={setFlight}
               setVisible={setVisible}
             />
@@ -131,6 +133,7 @@ const Header = ({
               setFlight={setFlight}
               setFly={setFly}
               setFlyToTarget={setFlyToTarget}
+              setClickedLocation={setClickedLocation}
             />
           )}
 
@@ -138,6 +141,7 @@ const Header = ({
             <Live
               setVisible={setVisible}
               setSelectedLocation={setSelectedLocation}
+              setClickedLocation={setClickedLocation}
               setFlight={setFlight}
               setFly={setFly}
               setFlyToTarget={setFlyToTarget}

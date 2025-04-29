@@ -11,8 +11,10 @@ function SearchBar({
   return (
     <div className="searchbar-wrapper">
       <div className="search_shortcuts">
-        <h2>SHORTCUTS TO FIND</h2>
+        <div className='search-shortcut-span'><span>SHORTCUTS TO FIND</span></div>
+        <div className='search-shortcut-btn'><button onClick={()=>{ setVisible('')}}>x</button></div>
       </div>
+      
       <div className="searchbar-options">
         <ul
           onClick={(e) => {

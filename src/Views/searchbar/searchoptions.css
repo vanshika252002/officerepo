@@ -13,11 +13,47 @@
   box-shadow: 5px 5px 10px black;
 }
 
-.search_shortcuts {
+/* .search_shortcuts {
   background-color: rgb(209, 208, 208);
   padding: 5px;
-}
+  background-color: rgb(209, 208, 208);
+  padding: 5px;
+  display: flex
+;
+  align-items: center;
+  justify-content: space-between; */
+/* } */
 
+  .search_shortcuts button {
+    border: none;
+    font-size: 1rem;
+    height: 28px;
+    width: 29px;
+  border:none;
+  font-size: 1.5rem;;
+  text-align: center;
+  background-color: rgb(209, 208, 208);
+}
+.search_shortcuts{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  
+  margin-bottom: 10px;;
+}
+.search-shortcut-span{
+  
+  font-weight: 600;
+    color: #333;
+}
+.search-shortcut-btn{
+  display:flex ;
+  justify-content:center ;
+  align-items: center;
+}
+.search-shortcut-btn button{
+  background-color: rgb(209, 208, 208)
+}
 .search_shortcuts h2 {
   font-size: 14px;
   font-weight: bold;
@@ -25,6 +61,7 @@
   padding-bottom: 8px;
   border-bottom: 1px solid #ddd;
   margin-bottom: 10px;
+  margin:0px;
 }
 
 .searchbar-options ul {

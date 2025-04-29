@@ -32,4 +32,5 @@ export interface NearbyProps {
   ) => void;
   setFly: (value: boolean) => void;
   setFlyToTarget: (value: [number, number] | null) => void;
+  setClickedLocation: (location: [number, number] | null) => void;
 }

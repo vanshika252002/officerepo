@@ -5,8 +5,8 @@ import { FlightInformationProps,FlightDetail } from './Types/types';
 import { ICONS } from '../../assets';
 import './flightInformation.css';
 
-const FlightInformation = ({origin, setVisible ,setFlight,setSelectedLocation,setFly,setFlyToTarget}: FlightInformationProps) => {
-  const { data: liveflight, isLoading, error } = useGetAllFlightsQuery(null);
+const FlightInformation = ({origin, setVisible ,setFlight,setSelectedLocation,setFly,setFlyToTarget,setClickedLocation}: FlightInformationProps) => {
+  const { data: liveflight, isLoading} = useGetAllFlightsQuery(null);
 
   const FlightDetails: FlightDetail[] =
     liveflight?.states?.map((tuple: any) => ({
@@ -30,17 +30,18 @@ const FlightInformation = ({origin, setVisible ,setFlight,setSelectedLocation,se
   console.log("filtered flights",filteredFlights);
 
   return (
-    <div className="flightInformation-wrapper">
+    <div className="flightInformation-wrapper"  onClick={(e) => e.stopPropagation()}>
       <div className="flightInformation-header">
         <div className="fi1">
-          <button onClick={() => {setVisible("flight-by-route");setFlight(false);setSelectedLocation(null) }} aria-label="Close Flight Information"><img src={ICONS.arrow}/></button>
+          <button onClick={() => {setVisible("flight-by-route");setFlight(false);setSelectedLocation(null);setClickedLocation(null) }} aria-label="Close Flight Information"><img src={ICONS.arrow}/></button>
         </div>
         <div className="fi2">
           <span>Flights</span>
         </div>
+        <div className="near-by-f1" ><button onClick={()=> {setVisible('');setSelectedLocation(null);setFlight(false);setClickedLocation(null)}}>x</button></div>
       </div>
       {isLoading && <Loading />}
-      {error && <div className="fi-error">Error fetching flights. Please try again.</div>}
+    
       {liveflight?.states!=null &&  filteredFlights.length === 0 && !isLoading && (
         <div className="fi-no-results">No flights found for the specified origin.</div>
       )}
@@ -52,6 +53,7 @@ const FlightInformation = ({origin, setVisible ,setFlight,setSelectedLocation,se
             <div key={flight.icao24} className="wrapper-for-flight-information">
               <div className='acc-btn'>
                 <button onClick={() => {
+                  setClickedLocation(null)
               setSelectedLocation({ lat: flight.latitude, lon:flight.longitude, id:flight.icao24 ,angle:flight.angle,origin:flight.originCountry});
               setFlight(true);
               setFly(true);setFlyToTarget([flight.latitude,flight.longitude])

@@ -10,9 +10,10 @@
   transition: box-shadow 0.3s ease;
 
   h2 {
-    margin-bottom: 1rem;
+  
     font-size: 1.5rem;
     color: #333;
+  
   }
 
   .connect-button,
@@ -125,28 +126,34 @@
 
 .place-order {
   background-color:white;
-  padding: 2rem 2.5rem;
+  padding: 1.5rem 2.5rem;
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
-  h2 {
-    color:black
-    margin-bottom: 0.5rem;
-  }
+.place-order img{
+  height:50px;
+  width:50px;
+}
+.place-order h2{
+  margin-top:4px;
+  margin-bottom: 5%;
+  font-weight: 700;
+   font-size: 2rem;
+}
+.place-order-span{
+  color:grey;
+  line-height: 1.6;
+}
 
-  p {
-    margin-bottom: 1.5rem;
-    color: #333;
-  }
-
-  .place-order-btn {
+  .place-order-btn1 {
+    margin-top:20px;
     color:White;
     border:none;
    border-radius: 5px;
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
-    margin-right:25px;
+    
     border: none;
     font-weight: 600;
     cursor: pointer;
@@ -157,10 +164,25 @@
 &:hover {
   background-color: darken(#4e44ce, 10%);
 }
+.place-order-btn2 {
+  margin-top:8px;
+  color:White;
+  border:none;
+ border-radius: 5px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-bottom: 1%;
+  background-color:lightgray;
+}
   
 
 .confirm{
   width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
 }

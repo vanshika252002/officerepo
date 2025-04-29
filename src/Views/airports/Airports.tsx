@@ -15,7 +15,7 @@ const Airports = ({ setVisible, setOrigin }: Airport) => {
   ).sort((a, b) => a.components.country.localeCompare(b.components.country));
 
   return (
-    <div className="airport-wrappper">
+    <div className="airport-wrappper"  onClick={(e) => e.stopPropagation()}>
       {isLoading && <Loading />}
       <div className="airport-header">
         <div className="airport-f1">
@@ -30,6 +30,7 @@ const Airports = ({ setVisible, setOrigin }: Airport) => {
         <div className="airport-f2">
           <span>Airport By Country</span>
         </div>
+        <div className="near-by-f1" ><button onClick={()=> setVisible('')}>x</button></div>
       </div>
       <div className="airport-list-wrapper">
         {uniqueSortedCountries.map((item) => (

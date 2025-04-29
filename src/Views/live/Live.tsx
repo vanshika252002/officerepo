@@ -5,7 +5,7 @@ import { FlightData,Props} from './Types/types';
 import { ICONS } from '../../assets';
 import './live.css';
 
-const Live = ({ setVisible,setFlight,setSelectedLocation ,setFly,setFlyToTarget}: Props) => {
+const Live = ({ setVisible,setFlight,setSelectedLocation ,setFly,setFlyToTarget,setClickedLocation}: Props) => {
   const { data: LiveFlights } = useGetAllFlightsQuery(null);
   const [expandedIcao, setExpandedIcao] = useState<string | null>(null);
 
@@ -58,15 +58,17 @@ const Live = ({ setVisible,setFlight,setSelectedLocation ,setFly,setFlyToTarget}
   }, [LiveFlights]);
 
   return (
-    <div className='airport-wrappper-l1'>
+    <div className='airport-wrappper-l1'  onClick={(e) => e.stopPropagation()}>
       <div className="airport-header-l1">
         <div className='airport-f1-l1'>
-          <button onClick={() => { setVisible("searchbar"); setFlight(false);
+          <button onClick={() => {  setVisible('searchbar'); setFlight(false);
+          setClickedLocation(null);
               setSelectedLocation(null); }}><img src={ICONS.arrow} /></button>
         </div>
         <div className='airport-f2-l1'>
           <span>Live Flights</span>
         </div>
+        <div className="near-by-f1" ><button onClick={()=> {setVisible(''); setClickedLocation(null),setSelectedLocation(null);setFlight(false);}}>x</button></div>
       </div>
 
       {LiveFlights?.states == null && <div className="fi-no-results"> Data is not Available right now </div>}
@@ -94,10 +96,12 @@ const Live = ({ setVisible,setFlight,setSelectedLocation ,setFly,setFlyToTarget}
         <div className="accordion-content-l1">
           
           <div className='acc-btn'><button onClick={() => {
+            setClickedLocation(null)
               setSelectedLocation({ lat: lat, lon:lon, id:icao,angle:angle,origin:originCountry });
               setFlight(true);
               setFly(true);
-              setFlyToTarget([lat,lon])
+              setFlyToTarget([lat,lon]);
+          
             }}><img src={ICONS.showonmap}/><span>Show on Map</span></button></div>
 
           <p><strong>ICAO Code:</strong> {icao}</p>

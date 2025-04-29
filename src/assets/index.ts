@@ -26,8 +26,10 @@ import search1 from './icons/search1.svg';
 import flightbyroute from './icons/flightbyroute.svg';
 import flightbyroute1 from './icons/flightbyroute1.svg';
 import s from './icons/s.svg';
+import powerbtn from './icons/powerbtn.png';
 import searching from './icons/searching.png';
 export const ICONS = {
+  powerbtn,
   searching,
   s,
   flightbyroute1,
